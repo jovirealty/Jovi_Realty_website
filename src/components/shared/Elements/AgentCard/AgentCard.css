@@ -1,0 +1,39 @@
+.agent-card {
+    aspect-ratio: 0.933;
+    border-radius: 15px;
+    overflow: hidden;
+    padding: 10px 18px;
+    text-decoration: none;
+    color: inherit;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1);
+}
+
+.agent-image {
+    object-fit: cover;
+    object-position: top center;
+}
+
+.agent-details {
+    padding: 26px 15px;
+    z-index: 1;
+    border-radius: 10px;
+}
+
+.agent-name {
+    font-size: 20px;
+}
+
+.agent-designation {
+    font-size: 15px;
+    color: #0d1835d9;
+}
+
+
+/* =============================================
+   Responsive
+   ============================================= */
+@media (max-width:767px) {
+    .agent-card {
+        padding: 18px;
+    }
+}

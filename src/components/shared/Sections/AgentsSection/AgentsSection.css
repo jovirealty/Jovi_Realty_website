@@ -1,0 +1,63 @@
+.agents-section {
+    padding: 120px 0px;
+}
+
+.agents-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px 20px;
+}
+
+.search-box {
+    max-width: 690px;
+    margin: auto;
+}
+
+.search-input {
+    border-radius: 28px;
+    background: #FFF;
+    border: 0px;
+    padding: 16px 70px 16px 30px !important;
+    box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.04) !important;
+}
+
+.search-icon {
+    width: 42px;
+    aspect-ratio: 1;
+    padding: 10px;
+    top: 0px;
+    bottom: 0;
+    right: 7px;
+    margin: auto;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+}
+
+/* =============================================
+   Responsive
+   ============================================= */
+@media (max-width:1199px) {
+    .agents-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width:991px) {
+    .agents-section {
+        padding: 90px 0px;
+    }
+
+    .agents-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width:767px) {
+    .agents-section {
+        padding: 60px 0px;
+    }
+
+    .agents-grid {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}

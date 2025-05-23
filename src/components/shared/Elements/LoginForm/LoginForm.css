@@ -1,0 +1,240 @@
+.LoginForm {
+  max-width: 542px;
+  /* height: 100%; */
+  padding: 60px 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.155);
+}
+
+.jovi-form {
+  max-width: 473px;
+  background: white;
+  text-align: center;
+}
+
+.jovi-logo {
+  width:269px;
+  height: 60px;
+  margin-bottom: 70px;
+}
+
+.jovi-heading {
+  font-size: 28px;
+  font-weight: 800;
+  margin-bottom: 10px;
+  color: #0D1835;
+}
+
+.jovi-subtext {
+  font-size: 14px;
+  font-weight: 400;
+  color: #0D1835;
+  margin-bottom: 70px;
+}
+
+.jovi-subtext a {
+  color: #0244C0;
+  text-decoration: none;
+}
+
+.form-group {
+  text-align: left;
+  margin-bottom: 23px;
+}
+
+.form-group label {
+  font-size: 14px;
+  display: block;
+  font-weight: 500;
+  margin-bottom: 6px;
+  color: #0D1835;
+}
+
+.form-group input {
+  height: 46px;
+  width: 100%;
+  padding: 10px 14px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.forgot-password {
+  text-align: right;
+  margin-top: 5px;
+  text-underline-offset: 2px;
+}
+
+.forgot-password a {
+  font-size: 12px;
+  font-weight: 500;
+  color: #0D1835;
+  letter-spacing: 1.1;
+}
+.forgot-password a:hover{
+  color: #26418a;
+}
+
+.separator {
+  display: flex;
+  align-items: center;
+  margin: 50px 0;
+  gap: 5px;
+}
+
+.separator hr {
+  flex: 1;
+  border: none;
+  border-top: 1px solid #0244C0; 
+  height: 1px;
+  opacity: 0.3;
+}
+
+.separator span {
+  font-size: 16px;
+  font-weight: 500;
+  color: #0244C0; 
+  white-space: nowrap;
+}
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+
+.social-icons button {
+  background:none;
+  border: none;
+  cursor: pointer;
+}
+
+.social-icons img {
+  width: 50px;
+  height: 50px;
+}
+.social-icons img:hover {
+  transform: scale(1.2);
+  filter: brightness(1.2);
+}
+
+.social-separator {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 24px;
+  margin-top: 60px;
+}
+
+.social-separator hr {
+  width: 100%;
+  border: none;
+  border-top: 1px solid #0244C0;
+  margin: 0;
+  opacity: 0.3;
+}
+
+.continue-btn {
+cursor: pointer;
+}
+
+
+
+/* ------------------------------
+   📱 Responsive Styles - Mobile 
+   ------------------------------ */
+@media (max-width: 576px) {
+  .LoginForm {
+    padding: 20px;
+  }
+
+  .jovi-logo {
+    width: 180px;
+    height: auto;
+    margin-bottom: 40px;
+  }
+
+  .jovi-heading {
+    font-size: 22px;
+  }
+
+  .jovi-subtext {
+    font-size: 12px;
+    margin-bottom: 40px;
+  }
+
+  .form-group input {
+    height: 40px;
+    font-size: 13px;
+  }
+
+  .separator {
+    margin: 40px 0;
+  }
+
+  .separator span {
+    font-size: 14px;
+  }
+
+  .social-icons {
+    gap: 15px;
+  }
+
+  .social-icons img {
+    width: 45px;
+    height: 45px;
+  }
+
+  .social-separator {
+  margin-top: 40px;
+  }
+
+  .continue-btn {
+    font-size: 14px;
+    padding: 10px;
+  }
+}
+
+/* -----------------------------------
+   📱💻 Responsive Styles - Tablets 
+   ----------------------------------- */
+@media (min-width: 577px) and (max-width: 992px) {
+  .LoginForm {
+    padding: 30px;
+  }
+
+  .jovi-logo {
+    width: 220px;
+    margin-bottom: 50px;
+  }
+
+  .jovi-heading {
+    font-size: 24px;
+  }
+
+  .jovi-subtext {
+    font-size: 13px;
+    margin-bottom: 50px;
+  }
+
+  .separator {
+    margin: 50px 0;
+  }
+
+  .separator span {
+    font-size: 15px;
+  }
+
+  .social-icons img {
+    width: 45px;
+    height: 45px;
+  }
+
+  .continue-btn {
+    font-size: 15px;
+    padding: 12px;
+  }
+}

@@ -1,0 +1,24 @@
+.banner {
+    background-size: cover;
+    background-position: center;
+    min-height: 280px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.banner-content {
+    text-align: center;
+    color: white;
+    z-index: 1;
+}
+
+/* =============================================
+   Responsive
+   ============================================= */
+@media (max-width: 767px) {
+    .banner {
+        min-height: 250px;
+    }
+}

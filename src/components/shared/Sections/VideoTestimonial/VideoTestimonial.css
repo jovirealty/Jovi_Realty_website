@@ -1,0 +1,101 @@
+.video-testimonial-sec {
+    padding: 120px 0;
+}
+
+.video-testimonial-swiper {
+    position: relative;
+}
+
+.video-testimonial-card {
+    position: relative;
+    cursor: pointer;
+    border-radius: 30px;
+    overflow: hidden;
+    aspect-ratio: 276/491;
+}
+
+.video-testimonial-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.video-testimonial-card .play-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70px;
+    aspect-ratio: 1;
+    background: rgb(255 255 255 / 40%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.video-testimonial-card:hover .play-button {
+    background: var(--accent-color);
+}
+
+.video-testimonials-navigation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+    margin-top: 50px;
+    z-index: 10;
+}
+
+.video-lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.video-lightbox-content {
+    width: 90%;
+    max-width: 1200px;
+    max-height: 90vh;
+}
+
+.video-lightbox-content video {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+}
+
+.video-lightbox .close-button {
+    position: absolute;
+    top: 30px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 30px;
+    line-height: 0;
+    cursor: pointer;
+}
+
+/* =============================================
+   Responsive
+   ============================================= */
+@media (max-width: 991px) {
+    .video-testimonial-sec {
+        padding: 90px 0;
+    }
+}
+
+@media (max-width: 767px) {
+    .video-testimonial-sec {
+        padding: 60px 0;
+    }
+}

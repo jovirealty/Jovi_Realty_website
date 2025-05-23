@@ -1,0 +1,290 @@
+.details-box {
+    margin: 120px 0px;
+    padding: 50px 40px 45px;
+    border-radius: 10px;
+    background: #FFF;
+    box-shadow: 0px 0px 20px 11px rgba(0, 0, 0, 0.04);
+}
+
+.property-address-line-1,
+.property-price {
+    font-weight: 600;
+}
+
+.property-address-line-2 {
+    font-size: 20px;
+    opacity: 0.5;
+}
+
+.details-box hr {
+    background-color: #0d183580;
+    height: 1px;
+    border: 0;
+    margin: 0;
+}
+
+.property-type-row {
+    max-width: 850px;
+    column-gap: 100px;
+}
+
+.detail-num {
+    font-size: 18px;
+    font-weight: 500;
+    margin-right: 5px;
+}
+
+.share-btn {
+    background-color: var(--primary-color);
+    display: flex;
+    padding: 9px 20px;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 60px;
+    font-weight: 600;
+    min-width: max-content;
+}
+
+.property-sticky-col {
+    top: 80px;
+    z-index: 1;
+}
+
+.agent-box {
+    border-radius: 10px;
+    background: #FFF;
+    padding: 25px;
+    box-shadow: 0px 0px 11px 2px rgba(0, 0, 0, 0.13);
+}
+
+.agent-box .agent-name {
+    font-size: 18px;
+}
+
+.agent-box .agent-designation {
+    font-size: 12px;
+    color: var(--secondary-font);
+}
+
+.agent-social {
+    grid-template-columns: 1fr 1fr;
+}
+
+.agent-social a {
+    padding: 8px 30px;
+    border-radius: 5px;
+    font-size: 18px;
+    text-decoration: none;
+    background-color: var(--primary-color);
+}
+
+.info-table {
+    max-width: 380px;
+    width: 100%;
+}
+
+.info-table tr>* {
+    padding: 10px 0 !important;
+    width: 50%;
+    background-color: #fff0;
+}
+
+.info-table.table tbody tr {
+    font-size: 18px;
+    border-bottom: 1px solid #6c757d !important;
+    /* Fallback color for testing */
+}
+
+.info-table th {
+    font-weight: 400;
+}
+
+.info-table td {
+    font-weight: 500;
+}
+
+.agent-form-box {
+    padding: 32px 25px;
+    border-radius: 10px;
+    background: var(--primary-color);
+    box-shadow: 0px 0px 11px 2px rgba(0, 0, 0, 0.13);
+}
+
+.agent-form-box h5 {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.agent-form-box p,
+.agent-inquiry-form label {
+    font-size: 12px;
+}
+
+.agent-inquiry-form {
+    row-gap: 20px;
+}
+
+.agent-inquiry-form .form-control {
+    font-size: 12px;
+    padding: .5rem .7rem;
+    margin: 0px;
+}
+
+.agent-inquiry-form .btn {
+    font-size: 12px;
+    padding: 12px 30px;
+}
+
+/* Share Popup Styling */
+.property-share-popup {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 99;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.property-share-popup .popup-content {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  position: relative;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.property-share-popup .close-btn {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  font-size: 24px;
+  cursor: pointer;
+  color: #333;
+}
+
+.share-options {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.share-options a,
+.share-options button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+  background-color: #f3f3f3;
+  padding: 0.6rem 1rem;
+  border: none;
+  border-radius: 8px;
+  color: #333;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.share-options button:hover,
+.share-options a:hover {
+  background-color: #e0e0e0;
+}
+
+@keyframes fadeIn {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+
+/* =============================================
+   Responsive
+   ============================================= */
+@media (max-width:991px) {
+    .details-box {
+        margin: 80px 0px;
+        padding: 50px 35px 45px;
+    }
+
+    .info-table.table tbody tr {
+        font-size: 16px;
+    }
+}
+
+@media (max-width:767px) {
+    .details-box {
+        margin: 70px 0px;
+        padding: 40px 30px;
+    }
+
+    .detail-num {
+        font-size: 16px;
+    }
+
+    .agent-social a {
+        font-size: 14px;
+    }
+
+    .detail-box-header {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+
+  .property-info-strip {
+    flex-direction: column !important;
+    gap: 30px !important;
+  }
+
+  .property-type-row {
+    flex-direction: column !important;
+    gap: 20px;
+  }
+
+  .details-info {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .popup-content {
+    padding: 1.2rem;
+  }
+
+  .popup-content h4 {
+    font-size: 18px;
+  }
+
+  .share-options {
+    gap: 10px;
+  }
+
+  .share-options a,
+  .share-options button {
+    font-size: 14px;
+    padding: 0.5rem 0.8rem;
+  }
+
+  .close-btn {
+    top: 10px;
+    right: 12px;
+    font-size: 20px;
+  }
+}
+
+@media (max-width:575px) {
+    .details-info {
+        grid-template-columns: 1fr 1fr;
+    }
+}

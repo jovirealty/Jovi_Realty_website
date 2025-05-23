@@ -1,0 +1,18 @@
+.empty-section {
+    padding: 120px 0px;
+}
+
+/* =============================================
+   Responsive
+   ============================================= */
+@media (max-width: 991px) {
+    .empty-section {
+        padding: 90px 0px;
+    }
+}
+
+@media (max-width: 767px) {
+    .empty-section {
+        padding: 60px 0px;
+    }
+}

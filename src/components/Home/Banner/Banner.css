@@ -1,0 +1,22 @@
+.home-banner-section {
+    background: url('../../../assets/Images/home-banner.png') center center/cover no-repeat;
+    height: 100vh;
+    padding: 100px 0 200px;
+}
+
+/* =============================================
+    Responsive
+    ============================================= */
+@media (max-width: 991px) {
+    .home-banner-section {
+        height: auto;
+        padding: 100px 0 450px;
+    }
+}
+
+@media (max-width: 767px) {
+    .home-banner-section {
+        height: auto;
+        padding: 70px 0 600px;
+    }
+}

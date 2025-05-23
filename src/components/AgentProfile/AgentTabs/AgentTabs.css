@@ -1,0 +1,74 @@
+.agent-tabs-section {
+    padding: 65px 0px 50px;
+}
+
+.agent-tabs-content {
+    padding: 100px 40px;
+    background-size: cover;
+    background-position: center;
+    background-image: url("../../../assets/Images/agent-tabs-bg.png");
+}
+
+.agent-tabs-content .container {
+    border-radius: 20px;
+    background: #FFF;
+    min-height: 560px;
+    padding: 70px 60px;
+}
+.active-listing-content .swiper-initialized {
+    padding: 15px;
+    margin: -15px;
+}
+
+@media (min-width:1200px) {
+    .agent-tabs-content .container {
+        max-width: 1050px;
+    }
+}
+
+.about-me-content {
+    max-width: 730px;
+    margin: auto;
+}
+
+.property-button-prev {
+    left: 0px;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+.property-button-next {
+    right: 0px;
+    top: 50%;
+    transform: translate(50%, -50%);
+}
+
+/* =============================================
+    Responsive
+    ============================================= */
+@media (max-width: 991px) {
+    .agent-tabs-content .container {
+        padding: 70px 40px;
+    }
+    .agent-tabs-content {
+        padding: 70px 40px;
+    }
+}
+@media (max-width: 767px) {
+    .agent-tabs-content .container {
+        padding: 50px 25px;
+        min-height: 0px;
+    }
+    .agent-tabs-content {
+        padding: 50px 20px;
+    }
+    .property-button-prev, .property-button-next {
+        zoom: 0.95;
+    }
+
+    .property-button-prev {
+        left: 5px;
+    }
+    .property-button-next {
+        right: 5px;
+    }
+}

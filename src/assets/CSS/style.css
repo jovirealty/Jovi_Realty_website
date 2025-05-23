@@ -1,0 +1,368 @@
+
+/* =============================================
+    Font Imports
+    ============================================= */
+@import url('https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* =============================================
+    Base Styles
+    ============================================= */
+:root {
+    --primary-color: #0D1835;
+    --accent-color: #0244C0;
+    --primary-font: 'DM Sans', sans-serif;
+    --secondary-font: "Urbanist", sans-serif;
+}
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    font-family: var(--primary-font);
+    line-height: 1.4;
+    font-size: 18px;
+    background-color: #fafafa;
+    color: var(--primary-color);
+}
+
+#root {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+img {
+    max-width: 100%;
+}
+
+.logo {
+    display: inline-block;
+}
+
+/* =============================================
+    Gap Utilities
+    ============================================= */
+/* Row Gap */
+.row-gap-10 {
+    row-gap: 10px;
+}
+
+.row-gap-15 {
+    row-gap: 15px;
+}
+
+.row-gap-20 {
+    row-gap: 20px;
+}
+
+.row-gap-25 {
+    row-gap: 25px;
+}
+
+.row-gap-30 {
+    row-gap: 30px;
+}
+
+.row-gap-35 {
+    row-gap: 35px;
+}
+
+.row-gap-40 {
+    row-gap: 40px;
+}
+
+.row-gap-45 {
+    row-gap: 45px;
+}
+
+.row-gap-50 {
+    row-gap: 50px;
+}
+
+/* Column Gap */
+.column-gap-10 {
+    column-gap: 10px;
+}
+
+.column-gap-15 {
+    column-gap: 15px;
+}
+
+.column-gap-20 {
+    column-gap: 20px;
+}
+
+.column-gap-25 {
+    column-gap: 25px;
+}
+
+.column-gap-30 {
+    column-gap: 30px;
+}
+
+.column-gap-35 {
+    column-gap: 35px;
+}
+
+.column-gap-40 {
+    column-gap: 40px;
+}
+
+.column-gap-45 {
+    column-gap: 45px;
+}
+
+.column-gap-50 {
+    column-gap: 50px;
+}
+
+/* General Gap */
+.gap-10 {
+    gap: 10px;
+}
+
+.gap-15 {
+    gap: 15px;
+}
+
+.gap-20 {
+    gap: 20px;
+}
+
+.gap-25 {
+    gap: 25px;
+}
+
+.gap-30 {
+    gap: 30px;
+}
+
+.gap-35 {
+    gap: 35px;
+}
+
+.gap-40 {
+    gap: 40px;
+}
+
+.gap-45 {
+    gap: 45px;
+}
+
+.gap-50 {
+    gap: 50px;
+}
+
+/* =============================================
+    Typography
+    ============================================= */
+.main-h1 {
+    font-family: var(--secondary-font);
+    font-size: 50px;
+    font-weight: 500;
+    margin: 0px;
+}
+
+.banner-subtitle {
+    font-size: 18px;
+    font-weight: 500;
+    color: #eee;
+    margin: 0 auto;
+    margin-top: 15px;
+}
+
+.main-h2 {
+    font-family: var(--secondary-font);
+    font-weight: 500;
+    font-size: 50px;
+}
+
+.secondary-h2 {
+    font-family: var(--secondary-font);
+    font-size: 40px;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+.section-subtitle {
+    font-size: 18px;
+    font-weight: 500;
+    max-width: 650px;
+}
+
+.sub-heading {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.main-h3 {
+    font-family: var(--secondary-font);
+    font-weight: 500;
+    font-size: 35px;
+}
+
+.main-h4 {
+    font-family: var(--secondary-font);
+    font-weight: 500;
+    font-size: 26px;
+}
+
+/* =============================================
+    Slider Arrow
+    ============================================= */
+.slider-arrow {
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: transparent;
+}
+
+.slider-arrow svg {
+    transition: all 0.2s ease;
+}
+
+.slider-arrow:hover svg circle {
+    fill: #0244C0;
+    transition: all 0.2s ease;
+}
+
+.slider-arrow:hover svg path {
+    fill: white;
+    transition: all 0.2s ease;
+}
+
+/* =============================================
+    Buttons
+    ============================================= */
+.btn {
+    text-decoration: none;
+    border-radius: 99px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    transition: all 0.3s ease;
+}
+
+.btn i {
+    transition: all 0.3s ease;
+}
+
+.btn:hover i {
+    transform: translateX(5px);
+}
+
+.btn-primary {
+    background-color: var(--accent-color);
+    color: white;
+    padding: 9px 32px;
+    border: none;
+}
+
+.btn-primary:hover,
+.btn-primary.active {
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--accent-color);
+    padding: 7px 30px;
+    border: 2px solid var(--accent-color);
+}
+
+.btn-secondary:hover,
+.btn-secondary.active {
+    color: #fff;
+    background-color: var(--accent-color);
+    border: 2px solid var(--accent-color);
+}
+
+.btn-tertiary {
+    background-color: #fff;
+    color: var(--primary-color);
+    padding: 7px 30px;
+    border: 2px solid #fff;
+}
+
+.btn-tertiary:hover,
+.btn-tertiary.active {
+    color: var(--primary-color);
+    background-color: #ffffffe7;
+    border: 2px solid #fff;
+}
+
+.btn-forth {
+    background-color: var(--primary-color);
+    color: #fff;
+    padding: 7px 30px;
+    border: 2px solid var(--primary-color);
+}
+
+.btn-forth:hover,
+.btn-forth.active {
+    color: var(--primary-color);
+    background-color: #fff;
+    border: 2px solid var(--primary-color);
+}
+
+.btn-fifth {
+    background-color: #fff0;
+    color: #fff;
+    padding: 8px 31px;
+    border: 1px solid #fff;
+}
+
+.btn-fifth:hover,
+.btn-fifth.active {
+    color: var(--primary-color);
+    background-color: #fff;
+    border: 1px solid #fff;
+}
+
+
+/* =============================================
+    Pagination
+    ============================================= */
+ul.pagination {
+    gap: 12px;
+}
+
+.page-item .page-link {
+    width: 43px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 1px solid var(--accent-color);
+    color: var(--primary-color);
+}
+
+.page-item.active .page-link {
+    background-color: var(--accent-color);
+    color: #fff;
+}
+
+.page-arr .page-link {
+    background-color: #fff0 !important;
+    border: 0px;
+}
+
+.page-arr .page-link i:before {
+    font-weight: 700 !important;
+}
+
+.page-item.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}

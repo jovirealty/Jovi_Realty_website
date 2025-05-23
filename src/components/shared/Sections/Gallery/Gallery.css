@@ -1,0 +1,40 @@
+.see-all-photo-overlay {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.more-photos-count {
+    width: 80px;
+    aspect-ratio: 1;
+    background-color: #fff;
+    color: #1e1e1e;
+    border-radius: 50%;
+    font-size: 24px;
+}
+.lightbox-icon {
+    background-color: #fff0;
+    border: 0px;
+    box-shadow: none;
+    color: #fff;
+}
+.more-photos-count {
+    background-color: #fff;
+    width: 90px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    color: var(--primary-color);
+}
+
+/* =============================================
+   Responsive
+   ============================================= */
+@media (max-width: 991px) {
+    .see-all-photo-overlay {
+        font-size: 18px;
+    }
+
+    .more-photos-count {
+        width: 55px;
+        font-size: 20px;
+    }
+}

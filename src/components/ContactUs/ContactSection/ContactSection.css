@@ -1,0 +1,145 @@
+.contact-section {
+    padding: 120px 10px 150px;
+    background-size: cover;
+    background-position: center;
+}
+
+.contact-section h2 {
+    font-size: 45px;
+}
+
+.contact-section h5 {
+    font-size: 20px;
+}
+
+.contact-section p {
+    font-size: 18px;
+    max-width: 520px;
+    letter-spacing: 0.9px;
+}
+
+.contact-section .row {
+    padding: 50px 0px 0px 40px;
+}
+
+.contact-section .row:before {
+    content: "";
+    position: absolute;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    border-radius: 10px;
+    width: calc(100% - 110px);
+    background-color: var(--primary-color);
+}
+
+.contact-details-frame {
+    column-gap: 60px;
+    grid-template-columns: 1fr 1fr;
+}
+
+.contact-section .col {
+    z-index: 1;
+}
+
+.cont-map-col {
+    padding-bottom: 30px;
+}
+
+.contact-section iframe {
+    border-radius: 10px;
+}
+
+.cont-details-col {
+    border-radius: 10px;
+    background: #FFF;
+    transform: translatey(30px);
+    padding: 70px 45px;
+    box-shadow: 0px 9px 10px 0px rgba(0, 0, 0, 0.05);
+}
+
+.cont-info-box {
+    font-size: 20px;
+    line-height: 1.2em;
+}
+
+.cont-info-box h5 {
+    font-weight: 600;
+}
+
+.cont-info-box a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.cont-icon {
+    min-width: max-content;
+}
+
+.cont-icon img {
+    width: 50px;
+}
+
+/* =============================================
+    Responsive
+    ============================================= */
+@media (max-width: 991px) {
+    .contact-section {
+        padding: 80px 10px 100px;
+    }
+
+    .contact-section .row {
+        padding-left: 30px;
+    }
+
+    .contact-section h5 {
+        font-size: 18px;
+    }
+
+    .contact-section h2 {
+        font-size: 35px;
+    }
+
+    .contact-section p {
+        font-size: 16px;
+    }
+
+    .cont-details-col {
+        padding: 70px 35px;
+    }
+
+    .contact-details-frame {
+        column-gap: 40px;
+    }
+
+    .cont-info-box {
+        font-size: 16px;
+        line-height: 1.2em;
+    }
+
+    .cont-icon img {
+        width: 40px;
+    }
+}
+
+@media (max-width: 767px) {
+    .contact-section {
+        padding: 70px 10px 90px;
+    }
+
+    .contact-details-frame {
+        grid-template-columns: 100%;
+    }
+
+    .contact-section .row {
+        padding: 50px 25px 0px;
+    }
+
+    .contact-section .row:before {
+        width: 100%;
+    }
+
+    .cont-details-col {
+        padding: 40px 30px;
+    }
+}

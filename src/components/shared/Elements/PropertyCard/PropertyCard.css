@@ -1,0 +1,119 @@
+.property-card {
+    border-radius: 21px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0px 0px 14.945px 8.22px rgba(0, 0, 0, 0.04);
+    transition: all 0.3s ease;
+}
+
+.property-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.property-card-img {
+    border-radius: 17px;
+    overflow: hidden;
+    margin: 5px;
+}
+
+.property-card-img img {
+    width: 100%;
+    height: auto;
+}
+
+.property-card .badge {
+    position: absolute;
+    transform: translate(10px, 10px);
+    background-color: #ffffff;
+    color: #0D1835;
+    font-weight: 500;
+    font-size: 12px;
+    padding: 4px 7px;
+    border-radius: 6px;
+}
+
+.property-card-body {
+    padding: 10px 10px 52px;
+    text-align: left;
+}
+
+.property-card .property-price {
+    font-family: var(--secondary-font);
+    font-weight: 600;
+    font-size: 20px;
+    color: #0D1835;
+}
+
+.property-card .property-name {
+    display: flex;
+    justify-content: space-between;
+    color: #212529bf;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.property-card .location {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.property-card .location>img {
+    width: 10px;
+}
+
+.property-card .location>p {
+    font-size: 15px;
+    font-weight: 500;
+    color: #0D1835;
+    margin-bottom: 0;
+}
+
+.property-card .details {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    text-align: center;
+    justify-content: center;
+}
+
+.property-card .details span {
+    font-size: 12px;
+    line-height: 12px;
+    font-weight: 500;
+}
+
+.property-card .details .specs {
+    margin: 8px 0px;
+    padding: 0px 10px;
+}
+
+.property-card .details .specs .border-end {
+    border-right: 1px solid #e0e0e0 !important;
+}
+
+.property-card .details .specific-specs {
+    display: flex;
+    flex-direction: row;
+    gap: 7px;
+    justify-content: center;
+    align-items: center;
+}
+
+.property-card .details .specific-specs img {
+    width: 15px;
+    height: auto;
+}
+
+.property-card .offered {
+    font-size: 11px;
+    font-weight: 400;
+}
+
+.property-card .btn-primary {
+    width: calc(100% - 20px);
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+}

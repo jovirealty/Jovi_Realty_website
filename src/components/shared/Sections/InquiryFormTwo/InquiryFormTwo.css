@@ -1,0 +1,161 @@
+.inquiry-sec {
+    color: #ffffff;
+    background: var(--primary-color);
+}
+
+.inquiry-sec-image {
+    width: 45%;
+    height: 100%;
+    left: 0px;
+    top: 0px;
+    object-fit: cover;
+}
+
+.inquiry-sec-image-mob {
+    border-radius: 10px;
+}
+
+.inquiry-sec-form-2 {
+    padding: 70px 0px;
+}
+
+.inquiry-sec-form-2 p {
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 0;
+}
+
+.inquiry-sec-form-2 .form-label {
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 16px;
+    margin-bottom: 12px;
+}
+
+.inquiry-form {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.inquiry-form .field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 35px;
+}
+
+.inquiry-sec-form-2 .form-control::placeholder {
+    color: var(--primary-color);
+    font-size: 16px;
+    font-weight: 400;
+    opacity: 0.6;
+}
+
+.inquiry-sec-form-2 .form-control:focus::placeholder {
+    opacity: 0.3;
+}
+
+.inquiry-sec-form-2 .form-control {
+    padding: 8px 16px;
+    font-size: 16px;
+    line-height: 1.5;
+    width: 100%;
+    color: var(--primary-color);
+    background-color: #ffffff;
+    border-radius: 8px !important;
+}
+
+.form-select {
+    --bs-form-select-bg-img: url(data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e);
+    font-weight: 400;
+    background-color: #ffffff;
+    border-radius: 10px !important;
+}
+
+.form-control:focus {
+    box-shadow: unset;
+}
+
+.form-select:focus {
+    color: #0D1835;
+    font-weight: 600;
+    box-shadow: unset;
+}
+
+/* =============================================
+   Responsive
+   ============================================= */
+@media (max-width:991px) {
+    .inquiry-sec {
+        padding: 70px 0px;
+    }
+
+    .inquiry-sec-form-2 {
+        padding: 10px 0px;
+    }
+
+    .inquiry-sec-form-2>h3 {
+        font-size: 26px;
+    }
+
+    .inquiry-sec-form-2>p {
+        font-size: 15px;
+    }
+
+    .inquiry-form .field-row {
+        gap: 25px;
+    }
+
+    .form-label {
+        font-size: 15px;
+    }
+
+    .form-control,
+    .form-select {
+        font-size: 15px;
+        padding: .35rem .7rem;
+    }
+}
+
+@media (max-width:767px) {
+    .inquiry-sec {
+        padding: 60px 0;
+    }
+
+    .inquiry-sec-form-2 {
+        padding: 10px;
+    }
+
+    .inquiry-form {
+        gap: 15px;
+    }
+
+    .inquiry-form .field-row {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .inquiry-sec-form>h3 {
+        font-size: 24px;
+    }
+
+    .inquiry-sec-form>p {
+        font-size: 14px;
+    }
+
+    .form-label {
+        font-size: 14px;
+        margin-bottom: 10px;
+    }
+
+    .form-control,
+    .form-select {
+        font-size: 14px;
+        padding: .3rem .6rem;
+        margin-bottom: 15px;
+    }
+
+    .form-control::placeholder {
+        font-size: 14px;
+    }
+}

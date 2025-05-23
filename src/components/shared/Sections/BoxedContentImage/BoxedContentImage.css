@@ -1,0 +1,58 @@
+/* =============================================
+   Content Image Section
+   ============================================= */
+.content-image-section {
+    padding: 120px 0;
+}
+
+.content-image-section .content-wrapper {
+    background-color: var(--primary-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 10px;
+    padding: 80px 45px;
+    height: 100%;
+}
+
+.content-image-section .description {
+    font-weight: 400;
+    line-height: 1.6;
+    margin-bottom: 0;
+}
+
+.content-image-section .image-wrapper {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.content-image-section .image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* =============================================
+   Responsive
+   ============================================= */
+@media (max-width: 991px) {
+    .content-image-section {
+        padding: 50px 0;
+    }
+
+    .content-image-section .content-wrapper {
+        padding: 35px;
+    }
+}
+
+@media (max-width: 767px) {
+    .content-image-section {
+        padding: 60px 0;
+    }
+
+    .content-image-section .content-wrapper {
+        padding: 40px 25px;
+    }
+}

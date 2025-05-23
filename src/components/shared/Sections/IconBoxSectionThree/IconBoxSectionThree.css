@@ -1,0 +1,44 @@
+.icon-box-section-three {
+    padding: 120px 0;
+    overflow-x: hidden;
+    background-color: var(--primary-color);
+}
+
+.icon-box-three .icon-box-img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+}
+
+.icon-box-three h4 {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.2em;
+    text-align: left;
+}
+
+.icon-box-three p {
+    font-size: 16px;
+    line-height: 1.5;
+    opacity: 0.9;
+    text-align: left;
+}
+
+/* =============================================
+   Responsive
+   ============================================= */
+@media (max-width: 991px) {
+    .icon-box-section-three {
+        padding: 90px 0;
+    }
+}
+
+@media (max-width: 767px) {
+    .icon-box-section-three {
+        padding: 60px 0;
+    }
+    
+    .icon-box-three {
+        padding: 20px 15px;
+    }
+}

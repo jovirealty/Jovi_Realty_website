@@ -1,0 +1,70 @@
+.stats-right-col-section {
+	background-color: var(--accent-color);
+	padding: 100px 0px;
+	color: white;
+}
+
+.jovi-text {
+	font-size: 18px;
+	font-weight: 400;
+}
+
+.jovi-stat h2 {
+	font-size: 65px;
+	font-weight: 600;
+	margin-bottom: 5px;
+	line-height: 1em;
+	letter-spacing: 1.5px;
+}
+
+.jovi-stat p {
+	font-size: 24px;
+	margin: 0;
+	font-weight: 600;
+}
+
+/* =============================================
+   Responsive
+   ============================================= */
+@media (max-width: 1399px) {
+	.jovi-stat h2 {
+		font-size: 55px;
+		margin-bottom: 20px !important;
+	}
+	.jovi-stat p {
+		font-size: 20px;
+		margin: 0;
+		font-weight: 600;
+	}
+}
+@media (max-width: 991px) {
+	.stats-row {
+		grid-template-columns: 1fr 1fr;
+		row-gap: 70px;
+	}
+
+	.stats-row img {
+		margin: auto;
+	}
+}
+@media (max-width: 767px) {
+	.stats-right-col-section {
+		padding: 60px 0px;
+	}
+
+	.stats-row {
+		grid-template-columns: 100%;
+		row-gap: 60px;
+	}
+
+	.stats-row img {
+		max-width: 250px;
+	}
+	.jovi-stat h2 {
+		font-size: 50px;
+		margin-bottom: 15px !important;
+	}
+	.jovi-stat p {
+		font-size: 18px;
+	}
+}

@@ -1,0 +1,50 @@
+.keyword-search-sec {
+    padding: 120px 0;
+}
+
+.keywords-con {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 25px 17px;
+}
+
+.keywords-con .btn-secondary {
+    padding: 13px 24px;
+    border: 1px solid #0244C0;
+    line-height: 1em;
+}
+
+/* =============================================
+   Responsive
+   ============================================= */
+@media (max-width: 991px) {
+    .keyword-search-sec {
+        padding: 90px 0;
+    }
+
+    .keywords-con {
+        justify-content: center;
+        gap: 0.5rem;
+    }
+
+    .keywords-con .btn-secondary {
+        padding: 10px 19px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 767px) {
+    .keyword-search-sec {
+        padding: 60px 0;
+    }
+
+    .keywords-con {
+        gap: 10px;
+    }
+
+    .keywords-con .btn-secondary {
+        padding: 10px 14px;
+        font-size: 13px;
+    }
+}

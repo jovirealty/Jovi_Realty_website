@@ -1,0 +1,83 @@
+/* =============================================
+   Responsive Styles
+   ============================================= */
+
+/* =============================================
+   Laptop View (max-width: 1199px)
+   ============================================= */
+@media (max-width: 1399px) and (min-width: 1200px) {
+    .container {
+        max-width: 1180px;
+    }
+}
+
+/* =============================================
+   Tablet View (max-width: 991px)
+   ============================================= */
+@media (max-width: 991px) {
+    body {
+        font-size: 16px;
+    }
+
+    /* =============================================
+       Typography
+       ============================================= */
+    .main-h1 {
+        font-size: 40px;
+    }
+
+    .banner-subtitle {
+        font-size: 16px;
+    }
+
+    .main-h2 {
+        font-size: 40px;
+    }
+
+    .secondary-h2 {
+        font-size: 32px;
+    }
+
+    .section-subtitle {
+        font-size: 16px;
+    }
+
+    /* =============================================
+       Buttons
+       ============================================= */
+    .btn {
+        font-size: 14px;
+    }
+}
+
+/* =============================================
+   Mobile View (max-width: 767px)
+   ============================================= */
+@media (max-width: 767px) {
+    body {
+        font-size: 14px;
+    }
+
+    /* =============================================
+       Typography
+       ============================================= */
+    .main-h1 {
+        font-size: 35px;
+    }
+
+    .banner-subtitle {
+        font-size: 14px;
+    }
+
+    .main-h2 {
+        font-size: 32px;
+    }
+
+    .secondary-h2 {
+        font-size: 28px;
+    }
+
+    .section-subtitle {
+        font-size: 14px;
+    }
+}

@@ -1,0 +1,56 @@
+.resources-sec {
+    padding: 120px 0;
+}
+
+.resources-card {
+    background: #0D1835;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 0px 5px;
+}
+
+.resources-card .card-title {
+    text-align: center;
+    font-size: 20px;
+    font-weight: 600;
+    color: #ffffff;
+    padding: 0px 25px;
+    margin: 25px 0;
+}
+
+.resources-card .img {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.resources-card .img>img {
+    width: 100%;
+}
+
+.resources-card .add-btn {
+    width: 45px;
+    position: absolute;
+    z-index: 999;
+    bottom: 12px;
+    right: 12px;
+}
+
+.resources-card .add-btn>img {
+    width: 100%;
+}
+
+/* =============================================
+   Responsive
+   ============================================= */
+@media (max-width: 991px) {
+    .resources-sec {
+        padding: 90px 0;
+    }
+}
+
+@media (max-width: 767px) {
+    .resources-sec {
+        padding: 60px 0;
+    }
+}

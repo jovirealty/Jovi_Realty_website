@@ -1,0 +1,48 @@
+.banner-two {
+    background-size: cover;
+    background-position: center;
+    min-height: 550px;
+    display: flex;
+    padding: 120px 0;
+    align-items: center;
+    position: relative;
+}
+.banner-two::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(270deg, rgba(0, 0, 0, 0.00) 0%, rgba(0, 0, 0, 0.80) 60%);
+}
+
+.banner-two-content {
+    z-index: 1;
+}
+.banner-text {
+    line-height: 1.6em;
+    max-width: 600px;
+}
+
+/* =============================================
+   Responsive
+   ============================================= */
+@media (max-width: 991px) {
+    .banner-two {
+        min-height: 400px;
+        padding: 80px 0;
+    }
+    .banner-two .row-gap-40 {
+        row-gap: 30px;
+    }
+}
+@media (max-width: 767px) {
+    .banner-two {
+        min-height: 370px;
+        padding: 60px 0;
+    }
+    .banner-two .row-gap-40 {
+        row-gap: 25px;
+    }
+}
