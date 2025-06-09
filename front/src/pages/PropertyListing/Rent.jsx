@@ -16,22 +16,9 @@ const Rent = () => {
   const [filteredProperties, setFilteredProperties] = useState([]);
   const status = "For Rent";
 
-  const handleFilterChange = (filtered, filterStatus) => {
-    console.log("Rent Filtered Input:", filtered);
-    const enrichedProperties = filtered.map((filteredProp) => {
-      const fullProp = PropertiesData.find(
-        (p) =>
-          p.id === filteredProp.id &&
-          p.status === filterStatus &&
-          p.location === filteredProp.location &&
-          p.bedrooms === filteredProp.bedrooms &&
-          p.type === filteredProp.type &&
-          p.price === filteredProp.price
-      );
-      return fullProp || filteredProp;
-    });
-    console.log("Rent Enriched Properties:", enrichedProperties);
-    setFilteredProperties(enrichedProperties);
+  const handleFilterChange = (apiDataArray, filterStatus) => {
+    console.log("Rent Route: Received API data:", apiDataArray);
+    setFilteredProperties(apiDataArray);
   };
 
 

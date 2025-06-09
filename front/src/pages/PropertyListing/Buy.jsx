@@ -15,23 +15,16 @@ const Buy = () => {
   const [filteredProperties, setFilteredProperties] = useState([]);
   const status = "For Sale";
 
-  const handleFilterChange = (filtered, filterStatus) => {
-    console.log("Buy Filtered Input:", filtered);
-    const enrichedProperties = filtered.map((filteredProp) => {
-      const fullProp = PropertiesData.find(
-        (p) =>
-          p.id === filteredProp.id &&
-          p.status === filterStatus &&
-          p.location === filteredProp.location &&
-          p.bedrooms === filteredProp.bedrooms &&
-          p.type === filteredProp.type &&
-          p.price === filteredProp.price
-      );
-      return fullProp || filteredProp;
-    });
-    console.log("Buy Enriched Properties:", enrichedProperties);
-    setFilteredProperties(enrichedProperties);
+  const handleFilterChange = (apiDataArray, filterStatus) => {
+    // 1) “Console the entire API result” (just the array of objects)
+    console.log("Buy Route: Received API data:", apiDataArray);
+
+    // 2) If you want to “enrich” or “merge” with local data, do it here.
+    //    But the problem statement just asked us to console the raw data.
+    //    So we simply feed it straight into <PropertyGrid>.
+    setFilteredProperties(apiDataArray);
   };
+
   return (
     <div className="property-listing property-listing-buy">
       <Header />
