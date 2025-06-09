@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./SearchBar.css";
+import useBridgeApi from "../../../../hooks/useBridgeApi";
 
 const SearchBar = ({ onFilterChange = () => {}, isHomepage = false }) => {
   const location = useLocation();
@@ -61,9 +62,23 @@ const SearchBar = ({ onFilterChange = () => {}, isHomepage = false }) => {
     { id: "PROP035", status: "For Rent", location: "Shaughnessy", bedrooms: 3, type: "House", price: "$3,000/mo" },
     { id: "PROP036", status: "For Rent", location: "Kerrisdale", bedrooms: 2, type: "Apartment", price: "$2,500/mo" },
   ];
+  
+  const propertyTypeClause =
+    activeTab === "buy"
+      ? "PropertyType eq 'Residential'"
+      : "PropertyType eq 'Residential Income'";
 
-  console.log("SearchBar propertiesData:", propertiesData);
-  console.log("SearchBar Active Tab:", activeTab, "IsRentPage:", isRentPage, "IsHomepage:", isHomepage);
+  // console.log("SearchBar propertiesData:", propertiesData);
+  // console.log("SearchBar Active Tab:", activeTab, "IsRentPage:", isRentPage, "IsHomepage:", isHomepage);
+  const { data, error, loading, refetch, setQueryParams } = useBridgeApi(
+    "/Property",
+    {
+      $filter: `StandardStatus eq 'Active' and ${propertyTypeClause}`,
+      $top: 50,
+      $orderby: "ListPrice asc",
+    },
+    true
+  );
 
   const getFilterOptions = (status) => {
     if (!propertiesData || !Array.isArray(propertiesData)) {
@@ -174,59 +189,187 @@ const SearchBar = ({ onFilterChange = () => {}, isHomepage = false }) => {
     return { filtered, status };
   };
 
+  // const handleSearch = () => {
+  //   const { filtered, status } = filterProperties();
+  //   if (isHomepage) {
+  //     const queryParams = new URLSearchParams({
+  //       ...(selectedLocation && { location: selectedLocation }),
+  //       ...(selectedBedrooms && { bedrooms: selectedBedrooms }),
+  //       ...(selectedType && { type: selectedType }),
+  //       ...(selectedPriceRange && { priceRange: selectedPriceRange }),
+  //     }).toString();
+  //     const path = activeTab === "buy" ? `/property-listing/buy?${queryParams}` : `/property-listing/rent?${queryParams}`;
+  //     navigate(path);
+  //   } else {
+  //     onFilterChange(filtered, status);
+  //   }
+  // };
+
   const handleSearch = () => {
-    const { filtered, status } = filterProperties();
+    const clauses = [
+      "StandardStatus eq 'Active'",
+      propertyTypeClause,
+    ];
+
+    if (selectedLocation) {
+      clauses.push(`City eq '${selectedLocation}'`);
+    }
+    if (selectedBedrooms) {
+      clauses.push(`BedroomsTotal ge ${selectedBedrooms}`);
+      clauses.push(`BedroomsTotal le ${selectedBedrooms}`);
+    }
+    if (selectedType) {
+      clauses.push(`PropertySubType eq '${selectedType}'`);
+    }
+    if (selectedPriceRange) {
+      const [min, max] = selectedPriceRange.split("-");
+      clauses.push(`ListPrice ge ${min}`);
+      clauses.push(`ListPrice le ${max}`);
+    }
+
+    const filterString = clauses.join(" and ");
+    setQueryParams({
+      $filter: filterString,
+      $top: 50,
+      $orderby: "ListPrice asc",
+    });
+    refetch();
+
+    // If we’re on the homepage, navigate → /property-listing/buy?…  or /rent?…
     if (isHomepage) {
-      const queryParams = new URLSearchParams({
+      const qs = new URLSearchParams({
         ...(selectedLocation && { location: selectedLocation }),
         ...(selectedBedrooms && { bedrooms: selectedBedrooms }),
         ...(selectedType && { type: selectedType }),
         ...(selectedPriceRange && { priceRange: selectedPriceRange }),
       }).toString();
-      const path = activeTab === "buy" ? `/property-listing/buy?${queryParams}` : `/property-listing/rent?${queryParams}`;
+
+      const path = activeTab === "buy"
+        ? `/property-listing/buy?${qs}`
+        : `/property-listing/rent?${qs}`;
+
       navigate(path);
-    } else {
-      onFilterChange(filtered, status);
     }
   };
 
+  // const handleTabClick = (tab, path) => {
+  //   setActiveTab(tab);
+  //   if (!isHomepage && isNavigationPage) {
+  //     navigate(path);
+  //     const tabElement = document.querySelector(`[data-bs-target="#${tab}-tab"]`);
+  //     if (tabElement) {
+  //       const bsTab = new window.bootstrap.Tab(tabElement);
+  //       bsTab.show();
+  //     }
+  //   }
+  //   setSelectedLocation("");
+  //   setSelectedBedrooms("");
+  //   setSelectedType("");
+  //   setSelectedPriceRange("");
+  //   if (!isHomepage) {
+  //     const { filtered, status } = filterProperties();
+  //     onFilterChange(filtered, status);
+  //   }
+  // };
+
+  // Sync activeTab with route on mount for non-homepage
+  // useEffect(() => {
+  //   if (!isHomepage) {
+  //     if (isRentPage && activeTab !== "rent") {
+  //       setActiveTab("rent");
+  //     } else if (isBuyPage && activeTab !== "buy") {
+  //       setActiveTab("buy");
+  //     }
+  //     // Apply filters from query params on page load
+  //     const { filtered, status } = filterProperties();
+  //     onFilterChange(filtered, status);
+  //   }
+  // }, [isRentPage, isBuyPage, isHomepage]);
+
   const handleTabClick = (tab, path) => {
     setActiveTab(tab);
-    if (!isHomepage && isNavigationPage) {
-      navigate(path);
-      const tabElement = document.querySelector(`[data-bs-target="#${tab}-tab"]`);
-      if (tabElement) {
-        const bsTab = new window.bootstrap.Tab(tabElement);
-        bsTab.show();
-      }
-    }
     setSelectedLocation("");
     setSelectedBedrooms("");
     setSelectedType("");
     setSelectedPriceRange("");
-    if (!isHomepage) {
-      const { filtered, status } = filterProperties();
-      onFilterChange(filtered, status);
+
+    if (!isHomepage && isNavigationPage) {
+      // When you switch tabs on the listing page, immediately refetch unfiltered for new propertyType
+      navigate(path);
+
+      const baseClauses = [
+        "StandardStatus eq 'Active'",
+        tab === "buy"
+          ? "PropertyType eq 'Residential'"
+          : "PropertyType eq 'Residential Income'",
+      ];
+      const baseFilter = baseClauses.join(" and ");
+
+      setQueryParams({
+        $filter: baseFilter,
+        $top: 50,
+        $orderby: "ListPrice asc",
+      });
+      refetch();
     }
   };
 
-  // Sync activeTab with route on mount for non-homepage
+  useEffect(() => {
+    if (data && Array.isArray(data.value)) {
+      // Log the entire API response array for debugging:
+      console.log(
+        `SearchBar fetched ${data.value.length} items (${activeTab}).`,
+        data.value
+      );
+      // Notify parent (Buy.jsx or Rent.jsx)
+      onFilterChange(data.value, activeTab === "buy" ? "For Sale" : "For Rent");
+    }
+  }, [data, activeTab, onFilterChange]);
+
   useEffect(() => {
     if (!isHomepage) {
-      if (isRentPage && activeTab !== "rent") {
-        setActiveTab("rent");
-      } else if (isBuyPage && activeTab !== "buy") {
-        setActiveTab("buy");
-      }
-      // Apply filters from query params on page load
-      const { filtered, status } = filterProperties();
-      onFilterChange(filtered, status);
-    }
-  }, [isRentPage, isBuyPage, isHomepage]);
+      const clauses = ["StandardStatus eq 'Active'", propertyTypeClause];
 
-  const { locations, bedrooms, types, priceRanges } = getFilterOptions(
-    activeTab === "buy" ? "For Sale" : "For Rent"
-  );
+      if (initialLocation) {
+        clauses.push(`City eq '${initialLocation}'`);
+      }
+      if (initialBedrooms) {
+        // Bridge’s field is “BedroomsTotal”
+        clauses.push(`BedroomsTotal ge ${initialBedrooms}`);
+        clauses.push(`BedroomsTotal le ${initialBedrooms}`);
+      }
+      if (initialType) {
+        clauses.push(`PropertySubType eq '${initialType}'`);
+      }
+      if (initialPriceRange) {
+        const [min, max] = initialPriceRange.split("-");
+        clauses.push(`ListPrice ge ${min}`);
+        clauses.push(`ListPrice le ${max}`);
+      }
+
+      const filterString = clauses.join(" and ");
+      setQueryParams({
+        $filter: filterString,
+        $top: 50,
+        $orderby: "ListPrice asc",
+      });
+      refetch();
+    }
+  }, []);
+
+  // const { locations, bedrooms, types, priceRanges } = getFilterOptions(
+  //   activeTab === "buy" ? "For Sale" : "For Rent"
+  // );
+
+  const locations = ["Surrey", "Vancouver", "Burnaby", "Richmond", "Coquitlam"];
+  const bedrooms = [1, 2, 3];
+  const types = ["Condo", "Townhouse", "House", "Apartment"];
+  const priceRanges = [
+    { label: "$0 – $500,000", min: 0, max: 500000 },
+    { label: "$500,000 – $1,000,000", min: 500000, max: 1000000 },
+    { label: "$1,000,000 – $1,500,000", min: 1000000, max: 1500000 },
+    { label: "$1,500,000 – $2,000,000", min: 1500000, max: 2000000 },
+  ];
 
   const buyTabActive = isHomepage ? activeTab === "buy" : isNavigationPage ? isBuyPage : activeTab === "buy";
   const rentTabActive = isHomepage ? activeTab === "rent" : isNavigationPage ? isRentPage : activeTab === "rent";
