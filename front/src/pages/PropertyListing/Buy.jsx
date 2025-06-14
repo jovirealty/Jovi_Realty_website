@@ -1,4 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+
+import useBridgeApi from "../../hooks/useBridgeApi";
+
 import Header from "../../components/shared/Sections/Header/header";
 import Footer from "../../components/shared/Sections/Footer/footer";
 import Banner from "../../components/shared/Sections/Banner/Banner";
@@ -7,23 +11,49 @@ import SearchBar from "../../components/shared/Elements/SearchBar/SearchBar";
 import PropertyGrid from "../../components/shared/Sections/PropertyGrid/PropertyGrid";
 import CTASection from "../../components/shared/Sections/CTASection/CTASection";
 import propertyBannerImg from "./../../assets/Images/property-banner.png";
-import PropertiesData from "../../components/Data/PropertiesData";
-import { useLocation } from "react-router-dom";
 
 const Buy = () => {
-  const location = useLocation();
-  const [filteredProperties, setFilteredProperties] = useState([]);
+  const [filter, setFilter] = useState("StandardStatus eq 'Active' and PropertyType eq 'Residential'");
+  const [items, setItems] = useState([]);
+  const [totalItems, setTotalItems] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 200;
+  
   const status = "For Sale";
 
-  const handleFilterChange = (apiDataArray, filterStatus) => {
-    // 1) “Console the entire API result” (just the array of objects)
-    console.log("Buy Route: Received API data:", apiDataArray);
+  const {data, loading, error, refetch, setQueryParams} = useBridgeApi(
+    '/Property',
+    {
+      $filter: filter,
+      $top: itemsPerPage,
+      $skip: (currentPage - 1) * itemsPerPage,
+      $orderby: "ListPrice asc",
+    },
+    false
+  );
 
-    // 2) If you want to “enrich” or “merge” with local data, do it here.
-    //    But the problem statement just asked us to console the raw data.
-    //    So we simply feed it straight into <PropertyGrid>.
-    setFilteredProperties(apiDataArray);
+  const handleFilterChange = (newFilter) => {
+    setFilter(newFilter);
+    setCurrentPage(1);
   };
+
+  useEffect(() => {
+    setQueryParams({
+      $filter: filter,
+      $top: itemsPerPage,
+      $skip: (currentPage - 1) * itemsPerPage,
+      $orderby: "ListPrice asc"
+    });
+    refetch();
+    // eslint-disable-next-line
+  }, [filter, currentPage]);
+
+  useEffect(() => {
+    if (data) {
+      setItems(data.value || []);
+      setTotalItems(data["@odata.count"] || 0);
+    }
+  }, [data]);
 
   return (
     <div className="property-listing property-listing-buy">
@@ -34,9 +64,15 @@ const Buy = () => {
       </EmptySection>
       <PropertyGrid
         title="Luxury Homes for Sale"
-        properties={filteredProperties}
+        properties={items}
         status={status}
+        currentPage={currentPage}
+        itemsPerPage={itemsPerPage}
+        totalItems={totalItems}
+        onPageChange={setCurrentPage}
       />
+      {loading && <p>Loading properties...</p>}
+      {error && <p>Error loading properties.</p>}
       <CTASection />
       <Footer />
     </div>
