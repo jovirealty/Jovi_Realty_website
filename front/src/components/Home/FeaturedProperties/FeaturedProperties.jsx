@@ -1,18 +1,44 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import './FeaturedProperties.css';
 import PropertyCard from "../../shared/Elements/PropertyCard/PropertyCard";
 import PropertiesData from "../../Data/PropertiesData";
+import useBridgeApi from "../../../hooks/useBridgeApi";
 
 const FeaturedProperties = () => {
   const [activeTab, setActiveTab] = useState("buy");
 
-  // Filter properties by status and limit to 4
-  const filteredProperties = PropertiesData
-    .filter(property =>
-      activeTab === "buy" ? property.status === "For Sale" : property.status === "For Rent"
-    )
-    .slice(0, 4);
+  const getQueryParams = () => {
+    if(activeTab === "buy") {
+      return {
+        $filter: "StandardStatus eq 'Active' and PropertyType eq 'Residential'",
+        $top: 4,
+        $orderby: "ListPrice desc",
+      };
+    } else {
+      return {
+        $filter: "StandardStatus eq 'Active' and PropertyType eq 'Residential Income'",
+        $top: 4,
+        $orderby: "ListPrice desc",
+      };
+    }
+  };
 
+  // setup data lazy fetch
+  const {data, error, loading, refetch, setQueryParams } = useBridgeApi(
+    "/Property",
+    getQueryParams(),
+    true,
+  );
+
+  // Refetch properties when the tab changes
+  useEffect(() => {
+    setQueryParams(getQueryParams());
+    refetch();
+    // eslint-disable-next-line
+  }, [activeTab]);
+
+  // Get just the first 4 properties from API response
+  const filteredProperties = (data && data.value) ? data.value.slice(0, 4) : [];
   return (
     <section className="featured-properties text-center">
       <div className="container">
@@ -42,7 +68,7 @@ const FeaturedProperties = () => {
             <div className="property-card-row d-grid">
               {filteredProperties.length > 0 ? (
                 filteredProperties.map((property, index) => (
-                  <PropertyCard key={property.id} property={property} />
+                  <PropertyCard property={property} />
                 ))
               ) : (
                 <p>No properties available for this category.</p>
