@@ -7,47 +7,70 @@ import bathroomIcon from "./../../../../assets/Images/bathroom-icon.png";
 import squareFeetIcon from "./../../../../assets/Images/square-ft-icon.png";
 
 const PropertyCard = ({ property }) => {
+  
+  const buildAddress = (property) => {
+    const sanitize = (value) => {
+      return typeof value === 'string' ? value.replace(/\s+/g, '') : value;
+    };
+
+    const parts = [
+      sanitize(property.UnitNumber),
+      property.StreetNumber,
+      property.StreetName,
+      property.StreetSuffix,
+      property.City,
+      property.Province,
+      sanitize(property.PostalCode)
+    ];
+
+    const filteredParts = parts.filter(part => part != null && part !== '');
+
+    return filteredParts.join('-');
+  };
+
+  const address = buildAddress(property);
+  
   return (
     <div className="property-card position-relative">
       <div className="property-card-img">
-        <span className="badge">{property.status}</span>
-        <img src={property.image} alt="Property Image" />
+        <span className="badge">{property.StandardStatus}</span>
+        <img src={Object.keys(property) ? (property?.Media ? property?.Media[0]?.MediaURL : property?.image) : property?.image} alt="Property Image" />
       </div>
       <div className="property-card-body">
-        <h4 className="property-price">{property.price}</h4>
+        <h4 className="property-price">${property.ListPrice}</h4>
         <div className="property-name mb-2">
-          <span>{property.location}</span>
-          <span>{property.id}</span>
+          <span>{property.City}</span>
+          <span>MLS® ID#{property.ListingId}</span>
         </div>
         <div className="location mb-2">
           <img src={mapPin} alt="map-icon" />
-          <p>{property.address}</p>
+          <p>{property.UnparsedAddress}</p>
         </div>
         <div className="details">
           <div className="specs border-end">
             <div className="specific-specs">
-              <span>{property.bedrooms}</span>
+              <span>{property.BedroomsTotal}</span>
               <img src={bedroomIcon} alt="bedroom" />
             </div>
             <span>Bedrooms</span>
           </div>
           <div className="specs border-end">
             <div className="specific-specs">
-              <span>{property.bathrooms}</span>
+              <span>{property.BathroomsFull}</span>
               <img src={bathroomIcon} alt="bathroom" />
             </div>
             <span>Bathrooms</span>
           </div>
           <div className="specs">
             <div className="specific-specs">
-              <span>{property.squareFeet}</span>
+              <span>{property.BCRES_MainFloorFinishedArea}</span>
               <img src={squareFeetIcon} alt="square feet" />
             </div>
             <span>Square Ft</span>
           </div>
         </div>
-        <p className="offered">Offered By: {property.agent}</p>
-        <Link to="/property-listing/property-inner" className="btn btn-primary position-absolute">
+        <p className="offered">Offered By: Brokerage Detail</p>
+        <Link to={`/property-listing/property-inner/${address}/${property.ListingKey}`} className="btn btn-primary position-absolute">
           View Details <i className="bi bi-arrow-right-short"></i>
         </Link>
       </div>
