@@ -10,7 +10,7 @@ import mailIcon from "./../../../../assets/Images/mail-icon-sl.svg";
 import callIcon from "./../../../../assets/Images/call-icon-sl.svg";
 import { RxCross2 } from "react-icons/rx";
 
-const PropertyDetails = () => {
+const PropertyDetails = ({ propertyInfo }) => {
     const [showSharePopup, setShowSharePopup] = useState(false);
     const popupRef = useRef(null);
     // Define the dynamic details data
@@ -68,18 +68,18 @@ const PropertyDetails = () => {
       <div className="details-box d-flex flex-column row-gap-40">
         <div className="detail-box-header d-flex flex-md-row flex-column align-items-md-center justify-content-between gap-30">
           <div>
-            <h2 className="property-address-line-1 secondary-h2 mb-1">1503 Atlas Lane</h2>
-            <p className="property-address-line-2 mb-0">Vancouver West, Granville</p>
+            <h2 className="property-address-line-1 secondary-h3 mb-1">{propertyInfo.UnitNumber} {propertyInfo.StreetNumber} {propertyInfo.StreetName} {propertyInfo.StreetSuffix}</h2>
+            <p className="property-address-line-2 mb-0">{propertyInfo.City === "No City Value" ? "" : `${propertyInfo.City}, `}{propertyInfo.StateOrProvince}</p>
           </div>
           <div>
-            <h2 className="property-price main-h2">$1,928,888</h2>
+            <h2 className="property-price main-h2">${propertyInfo.ListPrice}</h2>
           </div>
         </div>
         <hr />
         <div className="property-info-strip d-flex justify-content-between align-items-sm-center align-items-start flex-md-row flex-column gap-50">
           <div className="property-type-row d-flex align-items-lg-center justify-content-between flex-lg-row flex-column gap-30 w-100">
             <div>
-              <h5 className="mb-0" style={{ fontSize: "22px", fontWeight: "400" }}>Apartment</h5>
+              <h5 className="mb-0" style={{ fontSize: "22px", fontWeight: "400" }}>{propertyInfo.PropertySubType}</h5>
               <p className="mb-0" style={{ fontSize: "13px" }}>Property Type</p>
             </div>
             <div className="details-info d-sm-flex d-grid justify-content-between align-items-sm-center flex-wrap w-100 gap-30 flex-sm-row flex-column">
@@ -130,24 +130,23 @@ const PropertyDetails = () => {
                 </div>
                 <div className="row g-5 m-0 row-gap-50">
                     <div className="col-lg-7 mt-0 d-flex flex-column row-gap-40">
-                        <h2 className="property-title secondary-h2 mb-0">2 BHK Apartment, Sea view</h2>
+                        {/* <h2 className="property-title secondary-h2 mb-0">2 BHK Apartment, Sea view</h2> */}
                         <h4 className="main-h4 mb-0">Property Description</h4>
-                        <p>Situated in the prestigious Shannon Wall Centre Kerrisdale, this elegant 3-bedroom townhouse rests on a gated 10-acre heritage estate in South Granville. This stunning residence offers a unique blend of modern luxury and classic charm, making it an exceptional opportunity for homeowners seeking both comfort and exclusivity.
-                            Upgraded with designer touches, the interior boasts a sophisticated ambiance. A breathtaking feature wall adds character and warmth, while tempered glass accents and wood strip panels elevate the aesthetic appeal. The home is adorned with Hunter Douglas Pirouette window shadings, allowing natural light to filter in beautifully. LED ceiling panels provide a contemporary touch, enhancing the overall atmosphere. Custom closets offer ample storage space, ensuring functionality meets style. Additional upgrades include a brand-new dryer and a fresh coat of paint, giving the home a pristine and inviting feel.</p>
+                        <p>{propertyInfo.PublicRemarks}</p>
                         <h4 className="main-h4 mb-0">Property Information</h4>
                         <table className="info-table table mb-2">
                             <tbody>
-                                <tr>
+                                {/* <tr>
                                     <th scope="row">Type</th>
                                     <td>Townhouse</td>
-                                </tr>
-                                <tr>
+                                </tr> */}
+                                {/* <tr>
                                     <th scope="row">Purpose</th>
                                     <td>For Rent</td>
-                                </tr>
+                                </tr> */}
                                 <tr>
                                     <th scope="row">MLS® Number</th>
-                                    <td>R2970307</td>
+                                    <td>{propertyInfo.ListAgentMlsId}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -193,10 +192,10 @@ const PropertyDetails = () => {
                                         <p className="agent-designation mb-0">Personal Real Estate Corporation</p>
                                     </div>
                                 </div>
-                                <div className="agent-social d-grid gap-20">
+                                {/* <div className="agent-social d-grid gap-20">
                                     <a href="mailto:hello@jovirealty.com" className="d-flex align-items-center justify-content-center column-gap-10 text-white"><img src={mailIcon} alt="mail icon" />Email</a>
                                     <a href="tel:6042022929" className="d-flex align-items-center justify-content-center column-gap-10 text-white"><img src={callIcon} alt="call icon" />Call</a>
-                                </div>
+                                </div> */}
                             </div>
                             <div className="agent-form-box text-white">
                                 <h5 className="mb-3">Inquiry Form</h5>

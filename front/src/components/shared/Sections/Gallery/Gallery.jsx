@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import './Gallery.css'
 
-const GallerySection = ({ media }) => {
+const GallerySection = ({ propertyMedia }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [photoIndex, setPhotoIndex] = useState(0);
   const lightboxRef = useRef(null);
@@ -14,10 +14,10 @@ const GallerySection = ({ media }) => {
   const closeLightbox = () => setIsOpen(false);
 
   const prevMedia = () =>
-    setPhotoIndex((prev) => (prev - 1 + media.length) % media.length);
+    setPhotoIndex((prev) => (prev - 1 + propertyMedia.length) % propertyMedia.length);
 
   const nextMedia = () =>
-    setPhotoIndex((prev) => (prev + 1) % media.length);
+    setPhotoIndex((prev) => (prev + 1) % propertyMedia.length);
 
   // Close lightbox when clicking outside content
   const handleBackdropClick = (e) => {
@@ -42,26 +42,26 @@ const GallerySection = ({ media }) => {
     <div className="gallery-section">
       <div className="row g-1 mx-0">
         <div className="col-md-6">
-          {media[0] && (
+          {propertyMedia[0] && (
             <div className="position-relative" onClick={() => openLightbox(0)}>
-              <img src={media[0]} className="img-fluid w-100" alt="media-0" />
+              <img src={propertyMedia[0].MediaURL} className="img-fluid w-100" alt="propertyMedia-0" />
             </div>
           )}
         </div>
         <div className="col-md-6">
           <div className="row g-1">
-            {media.slice(1, 5).map((url, i) => (
+            {propertyMedia.slice(1, 5).map((url, i) => (
               <div className="col-6" key={i + 1}>
                 <div className="position-relative" onClick={() => openLightbox(i + 1)}>
-                  <img src={url} className="img-fluid" alt={`media-${i + 1}`} />
-                  {i === 3 && media.length > 5 && (
+                  <img src={url.MediaURL} className="img-fluid" alt={`propertyMedia-${i + 1}`} />
+                  {i === 3 && propertyMedia.length > 5 && (
                     <div
                       className="see-all-photo-overlay position-absolute top-0 start-0 w-100 h-100 bg-black bg-opacity-75 d-flex flex-column justify-content-center align-items-center text-white"
                       onClick={() => openLightbox(0)}
                       style={{ cursor: "pointer" }}
                     >
                       <p>See All Photos</p>
-                      <h4 className="more-photos-count mb-0 d-flex justify-content-center align-items-center">+{media.length - 5}</h4>
+                      <h4 className="more-photos-count mb-0 d-flex justify-content-center align-items-center">+{propertyMedia.length - 5}</h4>
                     </div>
                   )}
                 </div>
@@ -91,10 +91,10 @@ const GallerySection = ({ media }) => {
             >
               <i className="bi bi-chevron-left fs-5"></i>
             </button>
-            <div className="media-wrapper text-center">
+            <div className="propertyMedia-wrapper text-center">
               <img
-                src={media[photoIndex]}
-                alt={`media-${photoIndex}`}
+                src={propertyMedia[photoIndex].MediaURL}
+                alt={`propertyMedia-${photoIndex}`}
                 className="img-fluid"
               />
             </div>
