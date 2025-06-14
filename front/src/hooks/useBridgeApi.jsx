@@ -24,6 +24,7 @@ const useBridgeApi = (endpoint, queryParams = {}, lazy = false) => {
         try {
             const response = await axiosClient.get(endpoint, {
                 params: queryParamsInternal,
+                $count: true
             });
             setData(response.data);
         } catch(err) {
