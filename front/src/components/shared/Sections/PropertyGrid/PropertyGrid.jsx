@@ -12,14 +12,12 @@ const PropertyGrid = ({ title, properties = [], status, currentPage, itemsPerPag
         <div className="row">
           <div className="col-12">
             <h2 className="main-h2 mb-5 text-center">{title}</h2>
-            {properties.length > 0 ? (
+            {properties.length > 0 && (
               <div className="properties-grid">
                 {properties.map((property) => (
-                  <PropertyCard key={property.MLNumber || property.id} property={property} />
+                  <PropertyCard property={property} />
                 ))}
               </div>
-            ) : (
-              <p className="text-center">No properties available for this category.</p>
             )}
           </div>
         </div>
@@ -77,7 +75,6 @@ const PropertyGrid = ({ title, properties = [], status, currentPage, itemsPerPag
           </nav>
         )}
       </div>
-      <div className="bg-red-500 text-white p-4">Tailwind test</div>
     </section>
   );
 };
