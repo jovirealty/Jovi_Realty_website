@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, BrowserRouter } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './assets/CSS/style.css';
 import './assets/CSS/responsive.css';
 import ScrollToTop from './components/ScrollToTop/ScrollToTop';
