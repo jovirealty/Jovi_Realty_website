@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import useBridgeApi from "../../hooks/useBridgeApi";
+import PropertyCardSkeleton from "../../components/shared/Elements/PropertyCard/PropertyCardSkeleton";
 
 import Header from "../../components/shared/Sections/Header/header";
 import Footer from "../../components/shared/Sections/Footer/footer";
@@ -13,7 +14,7 @@ import propertyBannerImg from './../../assets/Images/property-banner.png';
 const Rent = () => {
   const status = "For Rent";
 
-  const [filter, setFilter] = useState("StandardStatus eq 'Active' and PropertyType eq 'Residential Income'");
+  const [filter, setFilter] = useState("StandardStatus eq 'Active' and PropertyType eq 'Residential Lease'");
   const [items, setItems] = useState([]);
   const [totalItems, setTotalItems] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
@@ -63,16 +64,27 @@ const Rent = () => {
       <EmptySection className="search-bar-dark">
         <SearchBar onFilterChange={handleFilterChange}/>
       </EmptySection>
-      <PropertyGrid
-        title="Luxury Homes for Rent"
-        properties={items}
-        status={status}
-        currentPage={currentPage}
-        itemsPerPage={itemsPerPage}
-        totalItems={totalItems}
-        onPageChange={setCurrentPage}
-      />
-      {loading && <p>Loading properties...</p>}
+      {loading ? (
+        <div className="property-grid-section">
+          <div className="container">
+            <div className="properties-grid">
+              {Array.from({ length: 20 }).map((_, idx) => (
+                <PropertyCardSkeleton key={idx} />
+              ))}
+            </div>
+          </div>
+        </div>
+      ) : (
+        <PropertyGrid
+          title="Luxury Homes for Rent"
+          properties={items}
+          status={status}
+          currentPage={currentPage}
+          itemsPerPage={itemsPerPage}
+          totalItems={totalItems}
+          onPageChange={setCurrentPage}
+        />
+      )}
       {error && <p>Error loading properties.</p>}
       <CTASection />
       <Footer />
