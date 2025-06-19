@@ -72,7 +72,7 @@ const PropertyDetails = ({ propertyInfo }) => {
             <p className="property-address-line-2 mb-0">{propertyInfo.City === "No City Value" ? "" : `${propertyInfo.City}, `}{propertyInfo.StateOrProvince}</p>
           </div>
           <div>
-            <h2 className="property-price main-h2">${propertyInfo.ListPrice}</h2>
+            <h2 className="property-price main-h2">${propertyInfo.ListPrice?.toLocaleString()}</h2>
           </div>
         </div>
         <hr />
@@ -83,12 +83,42 @@ const PropertyDetails = ({ propertyInfo }) => {
               <p className="mb-0" style={{ fontSize: "13px" }}>Property Type</p>
             </div>
             <div className="details-info d-sm-flex d-grid justify-content-between align-items-sm-center flex-wrap w-100 gap-30 flex-sm-row flex-column">
-              {details.map((detail, index) => (
-                <div key={index} className="detail-info d-flex align-items-center gap-10">
-                  <p className="mb-0 detail-num" dangerouslySetInnerHTML={{ __html: detail.value }} />
-                  <img src={detail.icon} alt={detail.alt} />
+              {propertyInfo.BedroomsTotal && (
+                <div className="">
+                  <div className="detail-info d-flex align-items-center gap-10">
+                    <p className="mb-0 detail-num">{propertyInfo.BedroomsTotal}</p>
+                    <img src={bedIcon} alt={"bed Icon"} />
+                  </div>
+                  <p>Bedroom</p>
                 </div>
-              ))}
+              )}
+              {propertyInfo.BathroomsTotalInteger && (
+                <div className="">
+                  <div className="detail-info d-flex align-items-center gap-10">
+                    <p className="mb-0 detail-num">{propertyInfo.BathroomsTotalInteger}</p>
+                    <img src={tubIcon} alt={"tub Icon"} />
+                  </div>
+                  <p>Bathroom</p>
+                </div>
+              )}
+              {propertyInfo.BuildingAreaTotal && (
+                <div className="">
+                  <div className="detail-info d-flex align-items-center gap-10">
+                    <p className="mb-0 detail-num">{propertyInfo.BuildingAreaTotal?.toLocaleString()}</p>
+                    <img src={frameIcon} alt={"frame Icon"} />
+                  </div>
+                  <p>Square Area</p>
+                </div>
+              )}
+              {propertyInfo.ParkingTotal && (
+                <div className="">
+                  <div className="detail-info d-flex align-items-center gap-10">
+                    <p className="mb-0 detail-num">{propertyInfo.ParkingTotal}</p>
+                    <img src={carIcon} alt={"car Icon"} />
+                  </div>
+                  <p>Parking</p>
+                </div>
+              )}
             </div>
           </div>
 
@@ -116,9 +146,9 @@ const PropertyDetails = ({ propertyInfo }) => {
               <a href={`mailto:?subject=Check this property&body=${window.location.href}`} target="_blank" rel="noopener noreferrer">
                 <i className="bi bi-envelope"></i> Email
               </a>
-              <a href={`sms:?body=Check out this property: ${window.location.href}`} target="_blank" rel="noopener noreferrer">
+              {/* <a href={`sms:?body=Check out this property: ${window.location.href}`} target="_blank" rel="noopener noreferrer">
                 <i className="bi bi-chat-dots"></i> SMS
-              </a>
+              </a> */}
               <button onClick={handleCopyLink}>
                 <i className="bi bi-clipboard"></i> Copy Link
               </button>
