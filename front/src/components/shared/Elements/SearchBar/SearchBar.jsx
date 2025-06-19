@@ -15,7 +15,7 @@ const SearchBar = ({ onFilterChange = () => {}, isHomepage = false }) => {
   const propertyTypeClause =
     activeTab === "buy"
       ? "PropertyType eq 'Residential'"
-      : "PropertyType eq 'Residential Income'";
+      : "PropertyType eq 'Residential Lease'";
 
   const handleSearch = () => {
     const clauses = [
