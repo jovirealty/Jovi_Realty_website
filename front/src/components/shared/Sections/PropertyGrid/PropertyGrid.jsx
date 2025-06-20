@@ -15,7 +15,7 @@ const PropertyGrid = ({ title, properties = [], status, currentPage, itemsPerPag
             {properties.length > 0 && (
               <div className="properties-grid">
                 {properties.map((property) => (
-                  <PropertyCard property={property} />
+                  <PropertyCard property={property} status={status} />
                 ))}
               </div>
             )}

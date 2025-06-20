@@ -17,10 +17,6 @@ const PropertyInner = () => {
     {},
     false,
   );
-
-  if(property) {
-    console.log("property Inner values: ", property);
-  }
   
   return (
     <div className="property-listing property-listing-rent">

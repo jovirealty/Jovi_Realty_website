@@ -45,7 +45,7 @@ const Buy = () => {
     if(filterObj.priceRange) {
       const [min, max] = filterObj.priceRange.split("-");
       clause.push(`ListPrice ge ${min}`);
-      clause.push(`ListPrice ge ${max}`);
+      clause.push(`ListPrice le ${max}`);
     }
     return clause.join(" and ");
   }
@@ -63,8 +63,6 @@ const Buy = () => {
     },
     false
   );
-
-  console.log("buy data: ", data);
 
   const handleFilterChange = (filterObj) => {
     setFilter(filterObj);

@@ -13,13 +13,6 @@ import { RxCross2 } from "react-icons/rx";
 const PropertyDetails = ({ propertyInfo }) => {
     const [showSharePopup, setShowSharePopup] = useState(false);
     const popupRef = useRef(null);
-    // Define the dynamic details data
-    const details = [
-        { value: "3", icon: bedIcon, alt: "bed-icon" },
-        { value: "2", icon: tubIcon, alt: "bathtub-icon" },
-        { value: "1420m<sup>2</sup>", icon: frameIcon, alt: "frame-icon" },
-        { value: "2", icon: carIcon, alt: "car-icon" },
-    ];
 
   const handleShareClick = (e) => {
     e.preventDefault();
@@ -83,7 +76,7 @@ const PropertyDetails = ({ propertyInfo }) => {
               <p className="mb-0" style={{ fontSize: "13px" }}>Property Type</p>
             </div>
             <div className="details-info d-sm-flex d-grid justify-content-between align-items-sm-center flex-wrap w-100 gap-30 flex-sm-row flex-column">
-              {propertyInfo.BedroomsTotal && (
+              {propertyInfo.BedroomsTotal !== "" && (
                 <div className="">
                   <div className="detail-info d-flex align-items-center gap-10">
                     <p className="mb-0 detail-num">{propertyInfo.BedroomsTotal}</p>
@@ -92,7 +85,7 @@ const PropertyDetails = ({ propertyInfo }) => {
                   <p>Bedroom</p>
                 </div>
               )}
-              {propertyInfo.BathroomsTotalInteger && (
+              {propertyInfo.BathroomsTotalInteger !== "" && (
                 <div className="">
                   <div className="detail-info d-flex align-items-center gap-10">
                     <p className="mb-0 detail-num">{propertyInfo.BathroomsTotalInteger}</p>
@@ -101,7 +94,7 @@ const PropertyDetails = ({ propertyInfo }) => {
                   <p>Bathroom</p>
                 </div>
               )}
-              {propertyInfo.BuildingAreaTotal && (
+              {propertyInfo.BuildingAreaTotal !== "" && (
                 <div className="">
                   <div className="detail-info d-flex align-items-center gap-10">
                     <p className="mb-0 detail-num">{propertyInfo.BuildingAreaTotal?.toLocaleString()}</p>
@@ -110,7 +103,7 @@ const PropertyDetails = ({ propertyInfo }) => {
                   <p>Square Area</p>
                 </div>
               )}
-              {propertyInfo.ParkingTotal && (
+              {propertyInfo.ParkingTotal !== "" && (
                 <div className="">
                   <div className="detail-info d-flex align-items-center gap-10">
                     <p className="mb-0 detail-num">{propertyInfo.ParkingTotal}</p>

@@ -7,7 +7,7 @@ import bedroomIcon from "./../../../../assets/Images/bedroom-icon.png";
 import bathroomIcon from "./../../../../assets/Images/bathroom-icon.png";
 import squareFeetIcon from "./../../../../assets/Images/square-ft-icon.png";
 
-const PropertyCard = ({ property }) => {
+const PropertyCard = ({ property, status }) => {
   const officeMlsId = property.ListOfficeMlsId;
   const officeName = useOfficeNameCached(officeMlsId);
 
@@ -36,7 +36,7 @@ const PropertyCard = ({ property }) => {
   return (
     <div className="property-card position-relative">
       <div className="property-card-img">
-        <span className="badge">{property.StandardStatus}</span>
+        <span className="badge">{status}</span>
         <img src={Object.keys(property) ? (property?.Media ? property?.Media[0]?.MediaURL : property?.image) : property?.image} alt="Property Image" />
       </div>
       <div className="property-card-body">

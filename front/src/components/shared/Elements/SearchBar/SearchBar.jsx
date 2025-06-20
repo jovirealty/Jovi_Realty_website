@@ -81,10 +81,10 @@ const SearchBar = ({
       navigate(path);
     }
   };
-  
+
   const locations = ["Surrey", "Vancouver", "Burnaby", "Richmond", "Coquitlam"];
   const bedrooms = [1, 2, 3, 4, 5];
-  const types = ["Condo", "Townhouse", "House", "Apartment"];
+  const types = ["Single Family Residence", "Apartment/Condo", "Townhouse", "Duplex", "Half Duplex", "Manufactured Home", "Manufactured On Land", "Other", "Recreational", "Quadruplex"];
   const priceRanges = [
     { label: "$0 – $500,000", min: 0, max: 500000 },
     { label: "$500,000 – $1,000,000", min: 500000, max: 1000000 },
