@@ -3,53 +3,76 @@ import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./SearchBar.css";
 
-const SearchBar = ({ onFilterChange = () => {}, isHomepage = false }) => {
+const SearchBar = ({ 
+  onFilterChange = () => {}, 
+  isHomepage = false,
+  defaultLocation = "",
+  defaultBedrooms = "",
+  defaultType = "",
+  defaultPriceRange = "",
+  activeTab: controlledTab,
+  onTabChange,
+}) => {
   const navigate = useNavigate();
-
-  const [activeTab, setActiveTab] = useState("buy");
-  const [selectedLocation, setSelectedLocation] = useState("");
-  const [selectedBedrooms, setSelectedBedrooms] = useState("");
-  const [selectedType, setSelectedType] = useState("");
-  const [selectedPriceRange, setSelectedPriceRange] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [selectedLocation, setSelectedLocation] = useState(() => defaultLocation);
+  const [selectedBedrooms, setSelectedBedrooms] = useState(() => defaultBedrooms);
+  const [selectedType, setSelectedType] = useState(() => defaultType);
+  const [selectedPriceRange, setSelectedPriceRange] = useState(() => defaultPriceRange);
   
-  const propertyTypeClause =
-    activeTab === "buy"
-      ? "PropertyType eq 'Residential'"
-      : "PropertyType eq 'Residential Lease'";
+  const [internalTab, setInternalTab] = useState("buy");
+  const activeTab = controlledTab !== undefined ? controlledTab : internalTab;
 
-  const handleSearch = () => {
-    const clauses = [
-      "StandardStatus eq 'Active'",
-      propertyTypeClause,
-    ];
+  // const propertyTypeClause =
+  //   activeTab === "buy"
+  //     ? "PropertyType eq 'Residential'"
+  //     : "PropertyType eq 'Residential Lease'";
+  
+  // If defaultX props change, update state (for navigation between buy/rent)
+  useEffect(() => { setSelectedLocation(defaultLocation); }, [defaultLocation]);
+  useEffect(() => { setSelectedBedrooms(defaultBedrooms); }, [defaultBedrooms]);
+  useEffect(() => { setSelectedType(defaultType); }, [defaultType]);
+  useEffect(() => { setSelectedPriceRange(defaultPriceRange); }, [defaultPriceRange]);
 
-    if (selectedLocation) {
-      clauses.push(`City eq '${selectedLocation}'`);
+  // If controlledTab prop changes (e.g. switching /buy <-> /rent), reset tab-specific state
+  useEffect(() => {
+    if (controlledTab !== undefined) {
+      // Optionally clear filters here if desired when switching tabs
+      // setSelectedLocation(""); setSelectedBedrooms(""); ...
     }
-    if (selectedBedrooms) {
-      clauses.push(`BedroomsTotal ge ${selectedBedrooms}`);
-      clauses.push(`BedroomsTotal le ${selectedBedrooms}`);
-    }
-    if (selectedType) {
-      clauses.push(`PropertySubType eq '${selectedType}'`);
-    }
-    if (selectedPriceRange) {
-      const [min, max] = selectedPriceRange.split("-");
-      clauses.push(`ListPrice ge ${min}`);
-      clauses.push(`ListPrice le ${max}`);
-    }
-    const filterString = clauses.join(" and ");
-    onFilterChange(filterString)
-    // If we’re on the homepage, navigate → /property-listing/buy?…  or /rent?…
+  }, [controlledTab]);
+
+  const handleSearch = async () => {
+    setLoading(true);
+
+    const filterObj = {
+      location: selectedLocation,
+      bedrooms: selectedBedrooms,
+      type: selectedType,
+      priceRange: selectedPriceRange,
+    };
+
     if (isHomepage) {
+      const queryParams = new URLSearchParams(
+        Object.entries(filterObj).filter(([_, v]) => v)
+      ).toString();
       navigate(
-        activeTab === "buy" ? "/property-listing/buy" : "/property-listing/rent"
+        (activeTab === "buy" ? "/property-listing/buy" : "/property-listing/rent") +
+        (queryParams ? `?${queryParams}` : "")
       );
+      setLoading(false);
+    } else {
+      await Promise.resolve(onFilterChange(filterObj));
+      setLoading(false);
     }
   };
 
   const handleTabClick = (tab, path) => {
-    setActiveTab(tab);
+    if (controlledTab !== undefined && onTabChange) {
+      onTabChange(tab);
+    } else {
+      setInternalTab(tab);
+    }
     setSelectedLocation("");
     setSelectedBedrooms("");
     setSelectedType("");
@@ -58,6 +81,7 @@ const SearchBar = ({ onFilterChange = () => {}, isHomepage = false }) => {
       navigate(path);
     }
   };
+  
   const locations = ["Surrey", "Vancouver", "Burnaby", "Richmond", "Coquitlam"];
   const bedrooms = [1, 2, 3, 4, 5];
   const types = ["Condo", "Townhouse", "House", "Apartment"];
@@ -176,8 +200,8 @@ const SearchBar = ({ onFilterChange = () => {}, isHomepage = false }) => {
                 </div>
               </div>
               <div className="search-btn">
-                <button className="btn btn-primary" onClick={handleSearch}>
-                  Search
+                <button className="btn btn-primary" onClick={handleSearch} disabled={loading}>
+                  {loading ? "Searching..." : "Search"}
                 </button>
               </div>
             </div>
@@ -257,8 +281,8 @@ const SearchBar = ({ onFilterChange = () => {}, isHomepage = false }) => {
                 </div>
               </div>
               <div className="search-btn">
-                <button className="btn btn-primary" onClick={handleSearch}>
-                  Search
+                <button className="btn btn-primary" onClick={handleSearch} disabled={loading}>
+                  {loading ? "Searching..." : "Search"}
                 </button>
               </div>
             </div>

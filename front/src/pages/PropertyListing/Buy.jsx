@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { useLocation } from "react-router-dom";
 
 import useBridgeApi from "../../hooks/useBridgeApi";
@@ -14,7 +14,16 @@ import CTASection from "../../components/shared/Sections/CTASection/CTASection";
 import propertyBannerImg from "./../../assets/Images/property-banner.png";
 
 const Buy = () => {
-  const [filter, setFilter] = useState("StandardStatus eq 'Active' and PropertyType eq 'Residential'");
+  const location = useLocation();
+  const query = useMemo(() => new URLSearchParams(location.search), [location.search]);
+  
+  const [activeTab, setActiveTab] = useState("buy");
+  const [filter, setFilter] = useState({
+    location: query.get("location") || "",
+    bedrooms: query.get("bedrooms") || "",
+    type: query.get("type") || "",
+    priceRange: query.get("priceRange") || "",
+  });
   const [items, setItems] = useState([]);
   const [totalItems, setTotalItems] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
@@ -22,10 +31,32 @@ const Buy = () => {
   
   const status = "For Sale";
 
+  const buildApiFilter = (filterObj) => {
+    const clause = [
+      "StandardStatus eq 'Active'",
+      "PropertyType eq 'Residential'"
+    ];
+    if(filterObj.location) clause.push(`City eq '${filterObj.location}'`);
+    if(filterObj.bedrooms) {
+      clause.push(`BedroomsTotal eq ${filterObj.bedrooms}`);
+      // clause.push(`BedroomsTotal le ${filterObj.bedrooms}`);
+    }
+    if(filterObj.type) clause.push(`PropertySubType eq '${filterObj.type}'`);
+    if(filterObj.priceRange) {
+      const [min, max] = filterObj.priceRange.split("-");
+      clause.push(`ListPrice ge ${min}`);
+      clause.push(`ListPrice ge ${max}`);
+    }
+    return clause.join(" and ");
+  }
+
+  // Odata filter for API
+  const filterString = useMemo(() => buildApiFilter(filter), [filter]);
+
   const {data, loading, error, refetch, setQueryParams} = useBridgeApi(
     '/Property',
     {
-      $filter: filter,
+      $filter: filterString,
       $top: itemsPerPage,
       $skip: (currentPage - 1) * itemsPerPage,
       $orderby: "ListPrice asc",
@@ -33,21 +64,23 @@ const Buy = () => {
     false
   );
 
-  const handleFilterChange = (newFilter) => {
-    setFilter(newFilter);
+  console.log("buy data: ", data);
+
+  const handleFilterChange = (filterObj) => {
+    setFilter(filterObj);
     setCurrentPage(1);
   };
 
   useEffect(() => {
     setQueryParams({
-      $filter: filter,
+      $filter: filterString,
       $top: itemsPerPage,
       $skip: (currentPage - 1) * itemsPerPage,
       $orderby: "ListPrice asc"
     });
     refetch();
     // eslint-disable-next-line
-  }, [filter, currentPage]);
+  }, [filterString, currentPage]);
 
   useEffect(() => {
     if (data) {
@@ -66,12 +99,28 @@ const Buy = () => {
   }
   }, [data]);
 
+  useEffect(() => {
+    setActiveTab(location.pathname.includes("/rent") ? "rent" : "buy");
+  }, [location.pathname]);
+
   return (
     <div className="property-listing property-listing-buy">
       <Header />
       <Banner backgroundImage={propertyBannerImg} title="Property Listing" />
       <EmptySection className="search-bar-dark">
-        <SearchBar onFilterChange={handleFilterChange} />
+        <SearchBar 
+          onFilterChange={handleFilterChange}
+          isHomepage={false}
+          defaultLocation={filter.location}
+          defaultBedrooms={filter.bedrooms}
+          defaultType={filter.type}
+          defaultPriceRange={filter.priceRange}
+          activeTab={activeTab}
+          onTabChange={(tab) => {
+            setActiveTab(tab);
+            setFilter({ location: "", bedrooms: "", type: "", priceRange: "" });
+            setCurrentPage(1);}}
+        />
       </EmptySection>
       {loading ? 
       (
