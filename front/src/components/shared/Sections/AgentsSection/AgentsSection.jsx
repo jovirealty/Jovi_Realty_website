@@ -21,6 +21,15 @@ const AgentsSection = ({
 
   // Compose OData Filter
   let filter = `OfficeMlsId eq '${officeMlsId}'`;
+  if(searchQuery && searchQuery.trim().length > 0) {
+    // split search into words
+    const terms = searchQuery.trim().split(/\s+/);
+    if(terms.length === 1) {
+      filter += ` and (contains(MemberFirstName, '${terms[0]}') or contains(MemberLastName, '${terms[0]}'))`;
+    } else if(terms.length > 1) {
+      filter += ` and (contains(MemberFirstName, '${terms[0]}') or contains(MemberLastName, '${terms.slice(1).join(" ")}'))`;
+    }
+  }
 
   const {data, loading, error, refetch, setQueryParams} = useBridgeApi(
     '/Members',
@@ -28,9 +37,9 @@ const AgentsSection = ({
       $filter: filter,
       $top: itemsPerPage,
       // $skip: (currentPage - 1) * itemsPerPage,
-      // $orderby: "LastName asc"
+      $orderby: "MemberLastName  asc"
     },
-    false
+    false,
   );
   
   // Update queryParams when relevant state changes
@@ -39,11 +48,12 @@ const AgentsSection = ({
       $filter: filter,
       $top: itemsPerPage,
       // $skip: (currentPage - 1) * itemsPerPage,
-      // $orderby: "LastName asc"
+      $orderby: "MemberLastName  asc"
     });
+    refetch();
   }, [filter, currentPage, itemsPerPage, setQueryParams]);
 
-  // Map Api data (with safety for nulls)
+  // Map API data (with safety for nulls)
   const agents = data?.value || [];
   const count = data?.["@data.count"] || 0;
   const calculatedTotalPages = Math.ceil(count / itemsPerPage);
