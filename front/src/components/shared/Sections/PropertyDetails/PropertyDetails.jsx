@@ -13,6 +13,7 @@ import { RxCross2 } from "react-icons/rx";
 const PropertyDetails = ({ propertyInfo }) => {
     const [showSharePopup, setShowSharePopup] = useState(false);
     const popupRef = useRef(null);
+    console.log("property Information: ", propertyInfo);
 
   const handleShareClick = (e) => {
     e.preventDefault();
@@ -103,7 +104,7 @@ const PropertyDetails = ({ propertyInfo }) => {
                   <p>Square Area</p>
                 </div>
               )}
-              {propertyInfo.ParkingTotal !== "" && (
+              {propertyInfo.ParkingTotal !== null && (
                 <div className="">
                   <div className="detail-info d-flex align-items-center gap-10">
                     <p className="mb-0 detail-num">{propertyInfo.ParkingTotal}</p>

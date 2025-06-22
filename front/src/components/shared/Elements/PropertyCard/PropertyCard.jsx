@@ -82,14 +82,14 @@ const PropertyCard = ({ property, status }) => {
           </div>
           <div className="specs border-end">
             <div className="specific-specs">
-              <span>{property.BathroomsFull}</span>
+              <span>{property.BathroomsTotalInteger}</span>
               <img src={bathroomIcon} alt="bathroom" />
             </div>
             <span>Bathrooms</span>
           </div>
           <div className="specs">
             <div className="specific-specs">
-              <span>{property.BCRES_MainFloorFinishedArea}</span>
+              <span>{property.BuildingAreaTotal?.toLocaleString()}</span>
               <img src={squareFeetIcon} alt="square feet" />
             </div>
             <span>Square Ft</span>
