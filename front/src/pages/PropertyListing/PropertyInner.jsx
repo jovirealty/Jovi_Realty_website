@@ -17,13 +17,13 @@ const PropertyInner = () => {
     {},
     false,
   );
-  
+  console.log("property value: ", property);
   return (
     <div className="property-listing property-listing-rent">
       <Header />
       {property ? (
         <>
-          <GallerySection propertyMedia={property.Media} />
+          <GallerySection propertyMedia={property.Media} PhotosCount={property.PhotosCount} />
           <PropertyDetails propertyInfo={property} />
           <PropertyGrid statusFilter="For Sale" title="Explore Similar Property" totalItems={4} />
           <CTASection />
