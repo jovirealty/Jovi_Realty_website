@@ -27,7 +27,7 @@ const Rent = () => {
   const [items, setItems] = useState([]);
   const [totalItems, setTotalItems] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 20;
+  const itemsPerPage = 200;
 
   const buildApiFilter = (filterObj) => {
     const clause = [
