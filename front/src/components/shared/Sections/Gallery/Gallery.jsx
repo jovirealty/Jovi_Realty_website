@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import './Gallery.css';
+import StatusBadge from "../../../../utils/StatusBadge ";
 
-const GallerySection = ({ propertyMedia = [], PhotosCount }) => {
+const GallerySection = ({ propertyMedia = [], PhotosCount, PropertyStatus }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [photoIndex, setPhotoIndex] = useState(0);
   const lightboxRef = useRef(null);
@@ -42,7 +43,7 @@ const GallerySection = ({ propertyMedia = [], PhotosCount }) => {
   if (!PhotosCount) {
     return (
       <div className="gallery-section d-flex align-items-center justify-content-center" style={{ minHeight: 200 }}>
-        <p className="text-center m-0">No image property found</p>
+        <p className="text-center m-0">No property image found</p>
       </div>
     );
   }
@@ -50,6 +51,7 @@ const GallerySection = ({ propertyMedia = [], PhotosCount }) => {
   if (PhotosCount === 1) {
     return (
       <div className="gallery-section single-image">
+        <StatusBadge status={PropertyStatus} />
         <div className="row g-1 mx-0" style={{ boxShadow: "0 0 5px rgba(0, 0, 0, 0.2)" }}>
           <div className="col-12">
             <div className="position-relative" onClick={() => openLightbox(0)}>
@@ -155,6 +157,7 @@ const GallerySection = ({ propertyMedia = [], PhotosCount }) => {
     }
     return (
       <div className="gallery-section">
+        <StatusBadge status={PropertyStatus} />
         {layout}
         {isOpen && (
           <div
@@ -212,6 +215,7 @@ const GallerySection = ({ propertyMedia = [], PhotosCount }) => {
   // 5 or more images: use original layout with overlay for "See All"
   return (
     <div className="gallery-section">
+      <StatusBadge status={PropertyStatus} />
       <div className="row g-1 mx-0" style={{ boxShadow: "0 0 5px rgba(0, 0, 0, 0.2)" }}>
         <div className="col-md-6">
           {propertyMedia[0] && (
