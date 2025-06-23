@@ -1,19 +1,36 @@
 import React, { useEffect, useRef, useState } from "react";
-import "./PropertyDetails.css"
+import useBridgeApi from "../../../../hooks/useBridgeApi";
+import "./PropertyDetails.css";
 
 import bedIcon from "./../../../../assets/Images/bed-icon.svg";
 import tubIcon from "./../../../../assets/Images/bathtub-icon.svg";
 import frameIcon from "./../../../../assets/Images/frame-icon.svg";
 import carIcon from "./../../../../assets/Images/car-icon.svg";
 import agentImage from "./../../../../assets/Images/agent-image.png";
-import mailIcon from "./../../../../assets/Images/mail-icon-sl.svg";
-import callIcon from "./../../../../assets/Images/call-icon-sl.svg";
+// import mailIcon from "./../../../../assets/Images/mail-icon-sl.svg";
+// import callIcon from "./../../../../assets/Images/call-icon-sl.svg";
 import { RxCross2 } from "react-icons/rx";
 
 const PropertyDetails = ({ propertyInfo }) => {
-    const [showSharePopup, setShowSharePopup] = useState(false);
-    const popupRef = useRef(null);
-    console.log("property Information: ", propertyInfo);
+  const [showSharePopup, setShowSharePopup] = useState(false);
+  const popupRef = useRef(null);
+  const agentKey = propertyInfo?.ListAgentKey;
+
+  const listingDate = new Date(propertyInfo.ListingContractDate);
+  const today = new Date();
+  listingDate.setHours(0, 0, 0, 0);
+  today.setHours(0, 0, 0, 0);
+  const timeDiff = today - listingDate;
+  const totalDays = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+
+  // Fetch agent details using the OData entity key syntax
+  const {
+    data: agentData,
+    loading: agentLoading,
+    error: agentError,
+  } = useBridgeApi(agentKey ? `/Member(${agentKey})` : null, {}, false);
+
+  console.log("agentData: ", agentData);
 
   const handleShareClick = (e) => {
     e.preventDefault();
@@ -40,7 +57,11 @@ const PropertyDetails = ({ propertyInfo }) => {
       }
 
       // Close on outside click
-      if (e.type === "mousedown" && popupRef.current && !popupRef.current.contains(e.target)) {
+      if (
+        e.type === "mousedown" &&
+        popupRef.current &&
+        !popupRef.current.contains(e.target)
+      ) {
         handleClosePopup();
       }
     };
@@ -54,207 +75,390 @@ const PropertyDetails = ({ propertyInfo }) => {
     };
   }, [showSharePopup]);
 
-    return (
-        <div className="property-details">
-            <div className="container px-0">
-                <div className="row m-0">
-                    <div className="col-12">
-      <div className="details-box d-flex flex-column row-gap-40">
-        <div className="detail-box-header d-flex flex-md-row flex-column align-items-md-center justify-content-between gap-30">
-          <div>
-            <h2 className="property-address-line-1 secondary-h3 mb-1">{propertyInfo.UnitNumber} {propertyInfo.StreetNumber} {propertyInfo.StreetName} {propertyInfo.StreetSuffix}</h2>
-            <p className="property-address-line-2 mb-0">{propertyInfo.City === "No City Value" ? "" : `${propertyInfo.City}, `}{propertyInfo.StateOrProvince}</p>
-          </div>
-          <div>
-            <h2 className="property-price main-h2">${propertyInfo.ListPrice?.toLocaleString()}</h2>
-          </div>
-        </div>
-        <hr />
-        <div className="property-info-strip d-flex justify-content-between align-items-sm-center align-items-start flex-md-row flex-column gap-50">
-          <div className="property-type-row d-flex align-items-lg-center justify-content-between flex-lg-row flex-column gap-30 w-100">
-            <div>
-              <h5 className="mb-0" style={{ fontSize: "22px", fontWeight: "400" }}>{propertyInfo.PropertySubType}</h5>
-              <p className="mb-0" style={{ fontSize: "13px" }}>Property Type</p>
-            </div>
-            <div className="details-info d-sm-flex d-grid justify-content-between align-items-sm-center flex-wrap w-100 gap-30 flex-sm-row flex-column">
-              {propertyInfo.BedroomsTotal !== "" && (
-                <div className="">
-                  <div className="detail-info d-flex align-items-center gap-10">
-                    <p className="mb-0 detail-num">{propertyInfo.BedroomsTotal}</p>
-                    <img src={bedIcon} alt={"bed Icon"} />
-                  </div>
-                  <p>Bedroom</p>
+  return (
+    <div className="property-details">
+      <div className="container px-0">
+        <div className="row m-0">
+          <div className="col-12">
+            <div className="details-box d-flex flex-column row-gap-40">
+              <div className="detail-box-header d-flex flex-md-row flex-column align-items-md-center justify-content-between gap-30">
+                <div>
+                  <p className="property_status">{propertyInfo.StandardStatus}</p>
+                  <h2 className="property-address-line-1 secondary-h3 mb-1">
+                    {propertyInfo.UnitNumber} {propertyInfo.StreetNumber}{" "}
+                    {propertyInfo.StreetName} {propertyInfo.StreetSuffix}
+                  </h2>
+                  <p className="property-address-line-2 mb-0">
+                    {propertyInfo.City === "No City Value"
+                      ? ""
+                      : `${propertyInfo.City}, `}
+                    {propertyInfo.StateOrProvince}
+                  </p>
                 </div>
-              )}
-              {propertyInfo.BathroomsTotalInteger !== "" && (
-                <div className="">
-                  <div className="detail-info d-flex align-items-center gap-10">
-                    <p className="mb-0 detail-num">{propertyInfo.BathroomsTotalInteger}</p>
-                    <img src={tubIcon} alt={"tub Icon"} />
-                  </div>
-                  <p>Bathroom</p>
+                <div>
+                  <h2 className="property-price main-h2">
+                    ${propertyInfo.ListPrice?.toLocaleString()}
+                  </h2>
                 </div>
-              )}
-              {propertyInfo.BuildingAreaTotal !== "" && (
-                <div className="">
-                  <div className="detail-info d-flex align-items-center gap-10">
-                    <p className="mb-0 detail-num">{propertyInfo.BuildingAreaTotal?.toLocaleString()}</p>
-                    <img src={frameIcon} alt={"frame Icon"} />
+              </div>
+              <hr />
+              <div className="property-info-strip d-flex justify-content-between align-items-sm-center align-items-start flex-md-row flex-column gap-50">
+                <div className="property-type-row d-flex align-items-lg-center justify-content-between flex-lg-row flex-column gap-30 w-100">
+                  <div>
+                    <h5
+                      className="mb-0"
+                      style={{ fontSize: "22px", fontWeight: "400" }}
+                    >
+                      {propertyInfo.PropertySubType}
+                    </h5>
+                    <p className="mb-0" style={{ fontSize: "13px" }}>
+                      Property Type
+                    </p>
                   </div>
-                  <p>Square Area</p>
-                </div>
-              )}
-              {propertyInfo.ParkingTotal !== null && (
-                <div className="">
-                  <div className="detail-info d-flex align-items-center gap-10">
-                    <p className="mb-0 detail-num">{propertyInfo.ParkingTotal}</p>
-                    <img src={carIcon} alt={"car Icon"} />
+                  <div className="details-info d-sm-flex d-grid justify-content-between align-items-sm-center flex-wrap w-100 gap-30 flex-sm-row flex-column">
+                    {propertyInfo.BedroomsTotal !== "" && (
+                      <div className="">
+                        <div className="detail-info d-flex align-items-center gap-10">
+                          <p className="mb-0 detail-num">
+                            {propertyInfo.BedroomsTotal}
+                          </p>
+                          <img src={bedIcon} alt={"bed Icon"} />
+                        </div>
+                        <p>Bedroom</p>
+                      </div>
+                    )}
+                    {propertyInfo.BathroomsTotalInteger !== "" && (
+                      <div className="">
+                        <div className="detail-info d-flex align-items-center gap-10">
+                          <p className="mb-0 detail-num">
+                            {propertyInfo.BathroomsTotalInteger}
+                          </p>
+                          <img src={tubIcon} alt={"tub Icon"} />
+                        </div>
+                        <p>Bathroom</p>
+                      </div>
+                    )}
+                    {propertyInfo.BuildingAreaTotal !== "" && (
+                      <div className="">
+                        <div className="detail-info d-flex align-items-center gap-10">
+                          <p className="mb-0 detail-num">
+                            {propertyInfo.BuildingAreaTotal?.toLocaleString()}
+                          </p>
+                          <img src={frameIcon} alt={"frame Icon"} />
+                        </div>
+                        <p>Square Area</p>
+                      </div>
+                    )}
+                    {propertyInfo.ParkingTotal !== null && (
+                      <div className="">
+                        <div className="detail-info d-flex align-items-center gap-10">
+                          <p className="mb-0 detail-num">
+                            {propertyInfo.ParkingTotal}
+                          </p>
+                          <img src={carIcon} alt={"car Icon"} />
+                        </div>
+                        <p>Parking</p>
+                      </div>
+                    )}
                   </div>
-                  <p>Parking</p>
                 </div>
-              )}
-            </div>
-          </div>
 
-          <a href="#" className="share-btn column-gap-10 align-items-center d-flex" onClick={handleShareClick}>
-            Share
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
-              <path d="M20.5 4L3.5 9.5L10 12.5L17 7.5L12 14.5L15 21L20.5 4Z" stroke="white" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </a>
-        </div>
-      </div>
+                <a
+                  href="#"
+                  className="share-btn column-gap-10 align-items-center d-flex"
+                  onClick={handleShareClick}
+                >
+                  Share
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="25"
+                    viewBox="0 0 24 25"
+                    fill="none"
+                  >
+                    <path
+                      d="M20.5 4L3.5 9.5L10 12.5L17 7.5L12 14.5L15 21L20.5 4Z"
+                      stroke="white"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </a>
+              </div>
+            </div>
 
-      {/* Share Popup */}
-     {showSharePopup && (
-        <div className="property-share-popup w-100 h-100 bg-black bg-opacity-75 position-fixed top-0 start-0 d-flex justify-content-center align-items-center" style={{ zIndex: 999 }}>
-          <div className="popup-content bg-white p-4 rounded" ref={popupRef}>
-            <span className="close-btn" onClick={handleClosePopup}>
-              <RxCross2 className="fs-4 fw-bold" />
-            </span>
-            <h4>Share this listing</h4>
-            <div className="share-options d-flex flex-column gap-2 mt-3">
-              <a href={`https://wa.me/?text=${window.location.href}`} target="_blank" rel="noopener noreferrer">
-                <i className="bi bi-whatsapp"></i> WhatsApp
-              </a>
-              <a href={`mailto:?subject=Check this property&body=${window.location.href}`} target="_blank" rel="noopener noreferrer">
-                <i className="bi bi-envelope"></i> Email
-              </a>
-              {/* <a href={`sms:?body=Check out this property: ${window.location.href}`} target="_blank" rel="noopener noreferrer">
+            {/* Share Popup */}
+            {showSharePopup && (
+              <div
+                className="property-share-popup w-100 h-100 bg-black bg-opacity-75 position-fixed top-0 start-0 d-flex justify-content-center align-items-center"
+                style={{ zIndex: 999 }}
+              >
+                <div
+                  className="popup-content bg-white p-4 rounded"
+                  ref={popupRef}
+                >
+                  <span className="close-btn" onClick={handleClosePopup}>
+                    <RxCross2 className="fs-4 fw-bold" />
+                  </span>
+                  <h4>Share this listing</h4>
+                  <div className="share-options d-flex flex-column gap-2 mt-3">
+                    <a
+                      href={`https://wa.me/?text=${window.location.href}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <i className="bi bi-whatsapp"></i> WhatsApp
+                    </a>
+                    <a
+                      href={`mailto:?subject=Check this property&body=${window.location.href}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <i className="bi bi-envelope"></i> Email
+                    </a>
+                    {/* <a href={`sms:?body=Check out this property: ${window.location.href}`} target="_blank" rel="noopener noreferrer">
                 <i className="bi bi-chat-dots"></i> SMS
               </a> */}
-              <button onClick={handleCopyLink}>
-                <i className="bi bi-clipboard"></i> Copy Link
-              </button>
-            </div>
+                    <button onClick={handleCopyLink}>
+                      <i className="bi bi-clipboard"></i> Copy Link
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         </div>
-      )}
-    </div>
+        <div className="row g-5 m-0 row-gap-50">
+          <div className="col-lg-7 mt-0 d-flex flex-column row-gap-40">
+            {/* <h2 className="property-title secondary-h2 mb-0">2 BHK Apartment, Sea view</h2> */}
+            <h4 className="main-h4 mb-0">Property Description</h4>
+            <p>{propertyInfo.PublicRemarks}</p>
+            <h4 className="main-h4 mb-0">Property Information</h4>
+            <table className="info-table table mb-2">
+              <tbody>
+                <tr>
+                  <th scope="row">MLS® Number</th>
+                  <td>{propertyInfo.ListAgentMlsId}</td>
+                </tr>
+                <tr>
+                  <th scope="row">Listing Date</th>
+                  <td>{propertyInfo.ListingContractDate}</td>
+                </tr>
+
+                <tr>
+                  <th scope="row">Days on Market</th>
+                  <td>{totalDays}</td>
+                </tr>
+                <tr>
+                  <th scope="row">Property Type</th>
+                  <td>{propertyInfo.PropertyType}</td>
+                </tr>
+                <tr>
+                  <th scope="row">Property Sub Type</th>
+                  <td>{propertyInfo.PropertySubType}</td>
+                </tr>
+                <tr>
+                  <th scope="row">Year Built</th>
+                  <td>{propertyInfo.YearBuilt}</td>
+                </tr>
+              </tbody>
+            </table>
+            <h4 className="main-h4 mb-0">Location Information</h4>
+            <div className="row row-gap-40">
+              <div className="col-md-6 col-12">
+                <table className="info-table table mb-0">
+                  <tbody>
+                    <tr>
+                      <th scope="row">Unit Number</th>
+                      <td>{propertyInfo.UnitNumber}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Street Number</th>
+                      <td>{propertyInfo.StreetNumber}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">City</th>
+                      <td>{propertyInfo.City}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Postal Code</th>
+                      <td>{propertyInfo.PostalCode}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Latitude</th>
+                      <td>{propertyInfo.Latitude}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div className="col-md-6 col-12">
+                <table className="info-table table mb-0">
+                  <tbody>
+                    <tr>
+                      <th scope="row">Street Name</th>
+                      <td>{propertyInfo.StreetName}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Street Suffix</th>
+                      <td>{propertyInfo.StreetSuffix}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">State/Province</th>
+                      <td>{propertyInfo.StateOrProvince}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Sub Division</th>
+                      <td>{propertyInfo.SubdivisionName ? propertyInfo.SubdivisionName : "N/A"}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Longitude</th>
+                      <td>{propertyInfo.Longitude}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <h4 className="main-h4 mb-0">Interior Information</h4>
+            <div className="row row-gap-40">
+              <div className="col-md-6 col-12">
+                <table className="info-table table mb-0">
+                  <tbody>
+                    <tr>
+                      <th scope="row">Bedrooms</th>
+                      <td>{propertyInfo.BedroomsTotal}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Half Bath</th>
+                      <td>{propertyInfo.BathroomsHalf}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Total Bath</th>
+                      <td>{propertyInfo.BathroomsTotalInteger}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Postal Code</th>
+                      <td>{propertyInfo.PostalCode}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Latitude</th>
+                      <td>{propertyInfo.Latitude}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div className="col-md-6 col-12">
+                <table className="info-table table mb-0">
+                  <tbody>
+                    <tr>
+                      <th scope="row">Half Bath</th>
+                      <td>{propertyInfo.BathroomsHalf}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Street Suffix</th>
+                      <td>{propertyInfo.StreetSuffix}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">State/Province</th>
+                      <td>{propertyInfo.StateOrProvince}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Sub Division</th>
+                      <td>{propertyInfo.SubdivisionName ? propertyInfo.SubdivisionName : "N/A"}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Longitude</th>
+                      <td>{propertyInfo.Longitude}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div className="col-lg-5 mt-0">
+            <div className="sticky-top property-sticky-col d-flex flex-column row-gap-40">
+              <div className="agent-box">
+                <div className="agent-info d-flex align-items-center mb-3 gap-30">
+                  <img src={agentImage} alt="" />
+                  <div>
+                    <h4 className="agent-name mb-1">
+                      {agentData?.MemberFullName}
+                    </h4>
+                    <p className="agent-designation mb-0">
+                      Personal Real Estate Corporation
+                    </p>
+                  </div>
                 </div>
-                <div className="row g-5 m-0 row-gap-50">
-                    <div className="col-lg-7 mt-0 d-flex flex-column row-gap-40">
-                        {/* <h2 className="property-title secondary-h2 mb-0">2 BHK Apartment, Sea view</h2> */}
-                        <h4 className="main-h4 mb-0">Property Description</h4>
-                        <p>{propertyInfo.PublicRemarks}</p>
-                        <h4 className="main-h4 mb-0">Property Information</h4>
-                        <table className="info-table table mb-2">
-                            <tbody>
-                                {/* <tr>
-                                    <th scope="row">Type</th>
-                                    <td>Townhouse</td>
-                                </tr> */}
-                                {/* <tr>
-                                    <th scope="row">Purpose</th>
-                                    <td>For Rent</td>
-                                </tr> */}
-                                <tr>
-                                    <th scope="row">MLS® Number</th>
-                                    <td>{propertyInfo.ListAgentMlsId}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <h4 className="main-h4 mb-0">Building Information</h4>
-                        <div className="row row-gap-40">
-                            <div className="col-md-6 col-12">
-                                <table className="info-table table mb-0">
-                                    <tbody>
-                                        <tr>
-                                            <th scope="row">Building Name</th>
-                                            <td>1503 Atlas Lane</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Total Floors</th>
-                                            <td>4</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div className="col-md-6 col-12">
-                                <table className="info-table table mb-0">
-                                    <tbody>
-                                        <tr>
-                                            <th scope="row">Total Building Area</th>
-                                            <td>93,712 sqft</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">Offices</th>
-                                            <td>4</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-lg-5 mt-0">
-                        <div className="sticky-top property-sticky-col d-flex flex-column row-gap-40">
-                            <div className="agent-box">
-                                <div className="agent-info d-flex align-items-center mb-3 gap-30">
-                                    <img src={agentImage} alt="" />
-                                    <div>
-                                        <h4 className="agent-name mb-1">Peony Au</h4>
-                                        <p className="agent-designation mb-0">Personal Real Estate Corporation</p>
-                                    </div>
-                                </div>
-                                {/* <div className="agent-social d-grid gap-20">
+                {/* <div className="agent-social d-grid gap-20">
                                     <a href="mailto:hello@jovirealty.com" className="d-flex align-items-center justify-content-center column-gap-10 text-white"><img src={mailIcon} alt="mail icon" />Email</a>
                                     <a href="tel:6042022929" className="d-flex align-items-center justify-content-center column-gap-10 text-white"><img src={callIcon} alt="call icon" />Call</a>
                                 </div> */}
-                            </div>
-                            <div className="agent-form-box text-white">
-                                <h5 className="mb-3">Inquiry Form</h5>
-                                <p className="mb-3">Reach out today and let us help you find your perfect property.</p>
-                                <form>
-                                    <div className="agent-inquiry-form d-flex flex-column">
-                                        <div className="field-group">
-                                            <label className="form-label" htmlFor="name">Full Name</label>
-                                            <input type="text" className="form-control" placeholder="Enter Full Name" required />
-                                        </div>
-                                        <div className="field-group">
-                                            <label className="form-label" htmlFor="email">Mobile Number</label>
-                                            <input type="email" className="form-control" placeholder="Enter Mobile Number" required />
-                                        </div>
-                                        <div className="field-group">
-                                            <label className="form-label" htmlFor="email">Email Address</label>
-                                            <input type="email" className="form-control" placeholder="Enter Email Address" required />
-                                        </div>
-                                        <div className="field-group">
-                                            <label className="form-label" htmlFor="description">Description</label>
-                                            <textarea className="form-control" rows="4" placeholder="Enter a Brief Description"></textarea>
-                                        </div>
-
-                                        <div className="field-group">
-                                            <button type="submit" className="btn btn-primary w-100">Submit</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
+              </div>
+              <div className="agent-form-box text-white">
+                <h5 className="mb-3">Inquiry Form</h5>
+                <p className="mb-3">
+                  Reach out today and let us help you find your perfect
+                  property.
+                </p>
+                <form>
+                  <div className="agent-inquiry-form d-flex flex-column">
+                    <div className="field-group">
+                      <label className="form-label" htmlFor="name">
+                        Full Name
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="Enter Full Name"
+                        required
+                      />
                     </div>
-                </div>
+                    <div className="field-group">
+                      <label className="form-label" htmlFor="email">
+                        Mobile Number
+                      </label>
+                      <input
+                        type="email"
+                        className="form-control"
+                        placeholder="Enter Mobile Number"
+                        required
+                      />
+                    </div>
+                    <div className="field-group">
+                      <label className="form-label" htmlFor="email">
+                        Email Address
+                      </label>
+                      <input
+                        type="email"
+                        className="form-control"
+                        placeholder="Enter Email Address"
+                        required
+                      />
+                    </div>
+                    <div className="field-group">
+                      <label className="form-label" htmlFor="description">
+                        Description
+                      </label>
+                      <textarea
+                        className="form-control"
+                        rows="4"
+                        placeholder="Enter a Brief Description"
+                      ></textarea>
+                    </div>
+
+                    <div className="field-group">
+                      <button type="submit" className="btn btn-primary w-100">
+                        Submit
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
             </div>
+          </div>
         </div>
-    );
+      </div>
+    </div>
+  );
 };
 
 export default PropertyDetails;
