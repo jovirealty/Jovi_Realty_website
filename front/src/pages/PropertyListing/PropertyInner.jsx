@@ -23,7 +23,11 @@ const PropertyInner = () => {
       <Header />
       {property ? (
         <>
-          <GallerySection propertyMedia={property.Media} PhotosCount={property.PhotosCount} />
+          <GallerySection 
+            PropertyStatus={property.PropertyType}
+            propertyMedia={property.Media} 
+            PhotosCount={property.PhotosCount} 
+          />
           <PropertyDetails propertyInfo={property} />
           <PropertyGrid statusFilter="For Sale" title="Explore Similar Property" totalItems={4} />
           <CTASection />
