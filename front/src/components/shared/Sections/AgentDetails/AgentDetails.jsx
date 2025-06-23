@@ -58,7 +58,7 @@ const AgentDetails = ({ agent }) => {
                                             <div className="d-flex align-items-center gap-2">
                                                 <SlGlobe size={24} color="#000" />
                                                 <a rel="noopener noreferrer" className='text-black text-decoration-none'>
-                                                    {agent.OfficeMlsId}
+                                                    {"(604) 202-2929"}
                                                 </a>
                                             </div>
                                         </div>
