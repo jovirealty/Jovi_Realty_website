@@ -15,7 +15,7 @@ const PropertyDetails = ({ propertyInfo }) => {
   const [showSharePopup, setShowSharePopup] = useState(false);
   const popupRef = useRef(null);
   const agentKey = propertyInfo?.ListAgentKey;
-
+  const ListOfficeKey = propertyInfo?.ListOfficeKey;
   const listingDate = new Date(propertyInfo.ListingContractDate);
   const today = new Date();
   listingDate.setHours(0, 0, 0, 0);
@@ -31,6 +31,19 @@ const PropertyDetails = ({ propertyInfo }) => {
   } = useBridgeApi(agentKey ? `/Member(${agentKey})` : null, {}, false);
 
   console.log("agentData: ", agentData);
+  
+  // Office API: /Offices(<OfficeKey>)
+
+  const {
+    data: officeData,
+    loading: officeLoading,
+    error: officeError,
+  } = useBridgeApi(
+    ListOfficeKey ? `/Offices(${ListOfficeKey})` : null,
+    {},
+    false
+  );
+  console.log("office data", officeData);
 
   const handleShareClick = (e) => {
     e.preventDefault();
@@ -74,6 +87,23 @@ const PropertyDetails = ({ propertyInfo }) => {
       window.removeEventListener("mousedown", handleInteraction);
     };
   }, [showSharePopup]);
+
+  function getInitials(agent) {
+    if (agent?.MemberFirstName && agent?.MemberLastName) {
+      return (
+        agent.MemberFirstName.charAt(0).toUpperCase() +
+        agent.MemberLastName.charAt(0).toUpperCase()
+      );
+    }
+    if (agent?.MemberFullName) {
+      const parts = agent.MemberFullName.trim().split(" ");
+      return (
+        (parts[0]?.charAt(0).toUpperCase() || "") +
+        (parts[1]?.charAt(0).toUpperCase() || "")
+      );
+    }
+    return "";
+  }
 
   return (
     <div className="property-details">
@@ -230,7 +260,6 @@ const PropertyDetails = ({ propertyInfo }) => {
         </div>
         <div className="row g-5 m-0 row-gap-50">
           <div className="col-lg-7 mt-0 d-flex flex-column row-gap-40">
-            {/* <h2 className="property-title secondary-h2 mb-0">2 BHK Apartment, Sea view</h2> */}
             <h4 className="main-h4 mb-0">Property Description</h4>
             <p>{propertyInfo.PublicRemarks}</p>
             <h4 className="main-h4 mb-0">Property Information</h4>
@@ -336,12 +365,113 @@ const PropertyDetails = ({ propertyInfo }) => {
                       <td>{propertyInfo.BathroomsTotalInteger}</td>
                     </tr>
                     <tr>
-                      <th scope="row">Postal Code</th>
-                      <td>{propertyInfo.PostalCode}</td>
+                      <th scope="row">Living Area</th>
+                      <td>{propertyInfo.LivingArea.toLocaleString()} sqrft</td>
                     </tr>
                     <tr>
-                      <th scope="row">Latitude</th>
-                      <td>{propertyInfo.Latitude}</td>
+                      <th scope="row">Floor Area</th>
+                      <td>{propertyInfo.BCRES_MainFloorFinishedArea.toLocaleString()} sqrft</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Interior Features</th>
+                      <td>{propertyInfo?.InteriorFeatures.length ? (
+                        <>
+                          {propertyInfo?.InteriorFeatures?.map((InteriorFeature) => (
+                            <li style={{ listStyleType: "none" }}>{InteriorFeature}</li>
+                          ))}
+                        </>
+                      ) : "N/A"}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div className="col-md-6 col-12">
+                <table className="info-table table mb-0">
+                  <tbody>
+                    {propertyInfo.HeatingYN && (
+                      <tr>
+                        <th scope="row">Heating System</th>
+                        <td>
+                          {propertyInfo?.Heating?.map((heatingValue) => (
+                            <li style={{ listStyleType: "none" }}>{heatingValue}</li>
+                          ))}
+                        </td>
+                      </tr>
+                    )}
+                    {propertyInfo.CoolingYN && (
+                      <tr>
+                        <th scope="row">Cooling System</th>
+                        <td>
+                          {propertyInfo?.Cooling?.map((coolingValue) => (
+                            <li style={{ listStyleType: "none" }}>{coolingValue}</li>
+                          ))}
+                        </td>
+                      </tr>
+                    )}
+                    <tr>
+                      <th scope="row">Total Fire place</th>
+                      <td>{propertyInfo.FireplacesTotal > 0 ? propertyInfo.FireplacesTotal : "N/A"}</td>
+                    </tr>
+                    {propertyInfo.FireplaceYN && (
+                      <tr>
+                        <th scope="row">Fireplace Feature</th>
+                        <td>
+                          {propertyInfo?.FireplaceFeatures?.map((FireplaceFeaturesValue) => (
+                            <li style={{ listStyleType: "none" }}>{FireplaceFeaturesValue}</li>
+                          ))}
+                        </td>
+                      </tr>
+                    )}
+                    <tr>
+                      <th scope="row">Laundry Feature</th>
+                      <td>{propertyInfo.LaundryFeatures.length ? (
+                        <>
+                          {propertyInfo?.LaundryFeatures?.map((laundry) => (
+                            <li style={{ listStyleType: "none" }}>{laundry}</li>
+                          ))}
+                        </>
+                      ) : "N/A"}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Appliances</th>
+                      <td>{propertyInfo?.Appliances.length ? (
+                        <>
+                          {propertyInfo?.Appliances?.map((appliance) => (
+                            <li style={{ listStyleType: "none" }}>{appliance}</li>
+                          ))}
+                        </>
+                      ) : "N/A"}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <h4 className="main-h4 mb-0">Exterior Information</h4>
+            <div className="row row-gap-40">
+              <div className="col-md-6 col-12">
+                <table className="info-table table mb-0">
+                  <tbody>
+                    <tr>
+                      <th scope="row">Lot Size In Acre</th>
+                      <td>{propertyInfo.LotSizeAcres}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Lot Size In sqrft</th>
+                      <td>{propertyInfo.LotSizeSquareFeet}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Lot Size Dimensions</th>
+                      <td>{propertyInfo.LotSizeDimensions}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Lot Features</th>
+                      <td>{propertyInfo?.LotFeatures.length ? (
+                        <>
+                          {propertyInfo?.LotFeatures?.map((LotFeature) => (
+                            <li style={{ listStyleType: "none" }}>{LotFeature}</li>
+                          ))}
+                        </>
+                      ) : "N/A"}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -350,48 +480,139 @@ const PropertyDetails = ({ propertyInfo }) => {
                 <table className="info-table table mb-0">
                   <tbody>
                     <tr>
-                      <th scope="row">Half Bath</th>
-                      <td>{propertyInfo.BathroomsHalf}</td>
+                      <th scope="row">Open Parking</th>
+                      <td>{propertyInfo?.OpenParkingYN || "N/A"}</td>
                     </tr>
                     <tr>
-                      <th scope="row">Street Suffix</th>
-                      <td>{propertyInfo.StreetSuffix}</td>
+                      <th scope="row">Total Parking</th>
+                      <td>{propertyInfo?.ParkingTotal || "N/A"}</td>
                     </tr>
                     <tr>
-                      <th scope="row">State/Province</th>
-                      <td>{propertyInfo.StateOrProvince}</td>
+                      <th scope="row">Parking Features</th>
+                      <td>{propertyInfo?.ParkingFeatures.length ? (
+                        <>
+                          {propertyInfo?.ParkingFeatures.map((ParkingFeature) => (
+                            <li style={{ listStyleType: "none" }}>{ParkingFeature}</li>
+                          ))}
+                        </>
+                      ) : "N/A"}</td>
                     </tr>
                     <tr>
-                      <th scope="row">Sub Division</th>
-                      <td>{propertyInfo.SubdivisionName ? propertyInfo.SubdivisionName : "N/A"}</td>
+                      <th scope="row">Has View</th>
+                      <td>{propertyInfo?.ViewYN ? propertyInfo.ViewYN : "N/A"}</td>
                     </tr>
                     <tr>
-                      <th scope="row">Longitude</th>
-                      <td>{propertyInfo.Longitude}</td>
+                      <th scope="row">View Description</th>
+                      <td>{propertyInfo?.BCRES_ViewDescription ? propertyInfo?.BCRES_ViewDescription : "N/A"}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Exterior Features</th>
+                      <td>{propertyInfo?.ExteriorFeatures ? (propertyInfo?.ExteriorFeatures.map(() => (
+                        <>
+                          {propertyInfo?.ExteriorFeatures.map((ExteriorFeature) => (
+                            <li style={{ listStyleType: "none" }}>{ExteriorFeature}</li>
+                          ))}
+                        </>
+                      ))) : "N/A"}</td>
                     </tr>
                   </tbody>
                 </table>
               </div>
             </div>
+            <h4 className="main-h4 mb-0">Building & Community Information</h4>
+            <table className="info-table table mb-2">
+              <tbody>
+                <tr>
+                  <th scope="row">Strata</th>
+                  <td>{propertyInfo.Ownership}</td>
+                </tr>
+                <tr>
+                  <th scope="row">Amenities</th>
+                  <td>{propertyInfo?.AssociationAmenities.length ? (
+                    <>
+                      {propertyInfo?.AssociationAmenities?.map((AssociationAmenitie) => (
+                        <li style={{ listStyleType: "none" }}>{AssociationAmenitie}</li>
+                      ))}
+                    </>
+                  ) : "N/A"}</td>
+                </tr>
+                <tr>
+                  <th scope="row">Pet Policy</th>
+                  <td>{propertyInfo?.PetsAllowed.length ? (
+                    <>
+                      {propertyInfo?.PetsAllowed?.map((Pet) => (
+                        <li style={{ listStyleType: "none" }}>{Pet}</li>
+                      ))}
+                    </>
+                  ) : "N/A"}</td>
+                </tr>
+              </tbody>
+            </table>
+            <h4 className="main-h4 mb-0">Financial Information</h4>
+            <table className="info-table table mb-2">
+              <tbody>
+                <tr>
+                  <th scope="row">Tax Year</th>
+                  <td>{propertyInfo.TaxYear}</td>
+                </tr>
+                <tr>
+                  <th scope="row">Annual Tax Amount</th>
+                  <td>{propertyInfo?.TaxAnnualAmount}</td>
+                </tr>
+                <tr>
+                  <th scope="row">Price per Square Foot</th>
+                  <td>${(propertyInfo?.ListPrice / propertyInfo?.LotSizeArea).toFixed(3)}</td>
+                </tr>
+              </tbody>
+            </table>
+            <h4 className="main-h4 mb-0">Legal & Additional Information</h4>
+            <table className="info-table table mb-2">
+              <tbody>
+                <tr>
+                  <th scope="row">Tax Year</th>
+                  <td>{propertyInfo.TaxYear}</td>
+                </tr>
+                <tr>
+                  <th scope="row">Annual Tax Amount</th>
+                  <td>{propertyInfo?.TaxAnnualAmount}</td>
+                </tr>
+                <tr>
+                  <th scope="row">Price per Square Foot</th>
+                  <td>${(propertyInfo?.ListPrice / propertyInfo?.LotSizeArea).toFixed(3)}</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
           <div className="col-lg-5 mt-0">
             <div className="sticky-top property-sticky-col d-flex flex-column row-gap-40">
               <div className="agent-box">
                 <div className="agent-info d-flex align-items-center mb-3 gap-30">
-                  <img src={agentImage} alt="" />
+                  <div
+                    style={{
+                      width: 60,
+                      height: 60,
+                      borderRadius: "50%",
+                      background: "#0146a6",
+                      color: "#fff",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      fontWeight: "bold",
+                      fontSize: 22,
+                      textTransform: "uppercase",
+                    }}
+                  >
+                    {getInitials(agentData)}
+                  </div>
                   <div>
                     <h4 className="agent-name mb-1">
                       {agentData?.MemberFullName}
                     </h4>
                     <p className="agent-designation mb-0">
-                      Personal Real Estate Corporation
+                      {officeData?.OfficeName}
                     </p>
                   </div>
                 </div>
-                {/* <div className="agent-social d-grid gap-20">
-                                    <a href="mailto:hello@jovirealty.com" className="d-flex align-items-center justify-content-center column-gap-10 text-white"><img src={mailIcon} alt="mail icon" />Email</a>
-                                    <a href="tel:6042022929" className="d-flex align-items-center justify-content-center column-gap-10 text-white"><img src={callIcon} alt="call icon" />Call</a>
-                                </div> */}
               </div>
               <div className="agent-form-box text-white">
                 <h5 className="mb-3">Inquiry Form</h5>
