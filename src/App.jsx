@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, BrowserRouter } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './assets/CSS/style.css';
 import './assets/CSS/responsive.css';
 import ScrollToTop from './components/ScrollToTop/ScrollToTop';
@@ -21,34 +21,37 @@ import PropertyManagement from './pages/PropertyManagement/PropertyManagement';
 import NewsInnerPage from './pages/NewsAndResources/NewsInnerPage';
 import AgentDashBoard from './pages/Agent Dashboard/AgentDashBoard';
 import LoginPage from './pages/LoginPage/LoginPage';
+import { OfficeNameProvider } from './context/OfficeNameContext';
 
 const App = () => {
 	return (
 		<Router>
 			<ScrollToTop />
-			<div className="min-h-screen flex flex-col">
-				<Routes>
-					<Route path="/" element={<Home />} />
-					<Route path="/about" element={<About />} />
-					<Route path="/property-listing/buy" element={<Buy />} />
-					<Route path="/property-listing/rent" element={<Rent />} />
-					<Route path="/property-listing/property-inner" element={<PropertyInner />} />
-					<Route path="/find-an-agent" element={<FindAnAgent />} />
-					<Route path="/find-an-agent/agent-profile" element={<AgentProfile />} />
-					<Route path="/news-and-resources" element={<NewsAndResources />} />
-					<Route path="/terms-and-conditions" element={<TermsAndConditions />} />
-					<Route path="/privacy-policy" element={<PrivacyPolicy />} />
-					<Route path="/cookie-policy" element={<CookiePolicy />} />
-					<Route path="/dcma-policy" element={<DMCAPolicy />} />
-					<Route path="/contact" element={<ContactUs />} />
-					<Route path="/join-jovi" element={<JoinJovi />} />
-					<Route path="/sell" element={<SellYourProperty />} />
-					<Route path="/property-management" element={<PropertyManagement />} />
-					<Route path="/news-and-resources/news-inner-page" element={<NewsInnerPage />} />
-					<Route path="/agent-dashboard" element={<AgentDashBoard />} />
-					<Route path="/login" element={<LoginPage />} />
-				</Routes>
-			</div>
+			<OfficeNameProvider>
+				<div className="min-h-screen flex flex-col">
+					<Routes>
+						<Route path="/" element={<Home />} />
+						<Route path="/about" element={<About />} />
+						<Route path="/property-listing/buy" element={<Buy />} />
+						<Route path="/property-listing/rent" element={<Rent />} />
+						<Route path="propertydetails/:address/:listingKey" element={<PropertyInner />} />
+						<Route path="/find-an-agent" element={<FindAnAgent />} />
+						<Route path="/find-an-agent/agent-profile/:MemberKey" element={<AgentProfile />} />
+						<Route path="/news-and-resources" element={<NewsAndResources />} />
+						<Route path="/terms-and-conditions" element={<TermsAndConditions />} />
+						<Route path="/privacy-policy" element={<PrivacyPolicy />} />
+						<Route path="/cookie-policy" element={<CookiePolicy />} />
+						<Route path="/dcma-policy" element={<DMCAPolicy />} />
+						<Route path="/contact" element={<ContactUs />} />
+						<Route path="/join-jovi" element={<JoinJovi />} />
+						<Route path="/sell" element={<SellYourProperty />} />
+						<Route path="/property-management" element={<PropertyManagement />} />
+						<Route path="/news-and-resources/news-inner-page" element={<NewsInnerPage />} />
+						<Route path="/agent-dashboard" element={<AgentDashBoard />} />
+						<Route path="/login" element={<LoginPage />} />
+					</Routes>
+				</div>
+			</OfficeNameProvider>
 		</Router>
 
 	);

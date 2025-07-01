@@ -37,9 +37,9 @@ const resources = [
 const Resources = ({ className = '' }) => {
   return (
     <section className={`resources-sec ${className}`}>
-      <div className="resources-con container">
+      <div className="container">
         <h2 className="main-h2 text-center mb-5">Resources</h2>
-        <div className="row row-gap-30">
+        <div className="row row-gap-30 m-0">
           {resources.map((resource, index) => (
             <div key={index} className="col-12 col-md-6 col-lg-3 p-0">
               <div className="resources-card">

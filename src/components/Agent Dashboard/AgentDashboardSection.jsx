@@ -56,6 +56,7 @@ const AgentDashboardSection = ({ enquiryData }) => {
                                         <p className="mb-0">{item.title}</p>
                                         <p className="price mb-0">{item.price}</p>
                                     </div>
+
                                     <div className="d-flex align-items-center mt-1 gap-2 mb-4 location">
                                         <SlLocationPin />
                                         <span>{item.address}</span>
@@ -69,6 +70,7 @@ const AgentDashboardSection = ({ enquiryData }) => {
                                             </span>
                                             <span>Bedrooms</span>
                                         </span>
+
                                         <div className="custom-seprator"></div>
                                         <span className="d-flex flex-column specs-item">
                                             <span className="d-flex align-items-center gap-2">
@@ -76,6 +78,7 @@ const AgentDashboardSection = ({ enquiryData }) => {
                                             </span>
                                             <span >Bathrooms</span>
                                         </span>
+                                        
                                         <div className="custom-seprator"></div>
                                         <span className="d-flex flex-column specs-item">
                                             <span className="d-flex align-items-center gap-2">

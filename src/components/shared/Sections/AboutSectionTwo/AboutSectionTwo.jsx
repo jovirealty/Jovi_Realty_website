@@ -8,6 +8,7 @@ const AboutSectionTwo = ({ className }) => {
       <div className="container">
         <div className="row flex-column-reverse flex-lg-row align-items-center row-gap-50">
           <div className="col-lg-6 left-col">
+          
             <div className="about-con-2">
               <h4 className="main-h4 mb-lg-5 mb-3">About Jovi Realty</h4>
               <p>

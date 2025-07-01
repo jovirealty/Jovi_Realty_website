@@ -16,6 +16,7 @@ const propertiesData = [
     bathrooms: 2,
     squareFeet: 1500,
     agent: "Jane Doe",
+    type: "Condo", // Urban, mid-sized
   },
   {
     id: "PROP002",
@@ -28,6 +29,7 @@ const propertiesData = [
     bathrooms: 3,
     squareFeet: 2000,
     agent: "Emily Brown",
+    type: "Townhouse", // Larger, residential
   },
   {
     id: "PROP003",
@@ -40,6 +42,7 @@ const propertiesData = [
     bathrooms: 2,
     squareFeet: 1600,
     agent: "Sarah Wilson",
+    type: "Townhouse", // Mid-sized, residential
   },
   {
     id: "PROP004",
@@ -52,6 +55,7 @@ const propertiesData = [
     bathrooms: 4,
     squareFeet: 2500,
     agent: "Lisa Chen",
+    type: "House", // Large, high-end
   },
   {
     id: "PROP005",
@@ -64,6 +68,7 @@ const propertiesData = [
     bathrooms: 2,
     squareFeet: 1400,
     agent: "Anna Martinez",
+    type: "Condo", // Smaller, urban
   },
   {
     id: "PROP006",
@@ -76,6 +81,7 @@ const propertiesData = [
     bathrooms: 3,
     squareFeet: 2200,
     agent: "Claire Adams",
+    type: "House", // Large, suburban
   },
   {
     id: "PROP007",
@@ -88,6 +94,7 @@ const propertiesData = [
     bathrooms: 2,
     squareFeet: 1700,
     agent: "Sophie Nguyen",
+    type: "Townhouse", // Mid-sized, residential
   },
   {
     id: "PROP008",
@@ -100,6 +107,7 @@ const propertiesData = [
     bathrooms: 3,
     squareFeet: 2300,
     agent: "Olivia Parker",
+    type: "House", // Large, residential
   },
   {
     id: "PROP009",
@@ -112,6 +120,7 @@ const propertiesData = [
     bathrooms: 2,
     squareFeet: 1900,
     agent: "Mia Roberts",
+    type: "Townhouse", // Mid-sized, residential
   },
   {
     id: "PROP010",
@@ -124,6 +133,7 @@ const propertiesData = [
     bathrooms: 1,
     squareFeet: 1200,
     agent: "Ava Lee",
+    type: "Apartment", // Small, budget-friendly
   },
   {
     id: "PROP011",
@@ -136,6 +146,7 @@ const propertiesData = [
     bathrooms: 4,
     squareFeet: 2600,
     agent: "Emma White",
+    type: "House", // Large, residential
   },
   {
     id: "PROP012",
@@ -148,6 +159,7 @@ const propertiesData = [
     bathrooms: 2,
     squareFeet: 1800,
     agent: "Isabella Clark",
+    type: "Townhouse", // Mid-sized, residential
   },
   {
     id: "PROP013",
@@ -160,6 +172,7 @@ const propertiesData = [
     bathrooms: 3,
     squareFeet: 2100,
     agent: "Lucas Green",
+    type: "House", // Large, desirable area
   },
   {
     id: "PROP014",
@@ -172,6 +185,7 @@ const propertiesData = [
     bathrooms: 1,
     squareFeet: 1100,
     agent: "Noah Evans",
+    type: "Apartment", // Small, budget-friendly
   },
   {
     id: "PROP015",
@@ -184,6 +198,7 @@ const propertiesData = [
     bathrooms: 4,
     squareFeet: 2700,
     agent: "Liam Harris",
+    type: "House", // Large, high-end
   },
   {
     id: "PROP016",
@@ -196,6 +211,7 @@ const propertiesData = [
     bathrooms: 2,
     squareFeet: 1500,
     agent: "Jacob Moore",
+    type: "Condo", // Mid-sized, urban
   },
   {
     id: "PROP017",
@@ -208,6 +224,7 @@ const propertiesData = [
     bathrooms: 2,
     squareFeet: 1800,
     agent: "Alexander Young",
+    type: "Condo", // Urban, high-end
   },
   {
     id: "PROP018",
@@ -220,8 +237,9 @@ const propertiesData = [
     bathrooms: 2,
     squareFeet: 1700,
     agent: "Sophie Nguyen",
+    type: "Townhouse", // Mid-sized, residential
   },
-  // For Rent Properties (18)
+  // For Rent Properties (18) - Types already present, no changes needed
   {
     id: "PROP019",
     image: propertyImage1,
@@ -456,5 +474,6 @@ const propertiesData = [
     agent: "Sophie Nguyen",
     type: "Apartment",
   },
-]
+];
+
 export default propertiesData;

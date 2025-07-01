@@ -1,18 +1,44 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import './FeaturedProperties.css';
 import PropertyCard from "../../shared/Elements/PropertyCard/PropertyCard";
-import PropertiesData from "../../Data/PropertiesData";
+import useBridgeApi from "../../../hooks/useBridgeApi";
+import PropertyCardSkeleton from "../../shared/Elements/PropertyCard/PropertyCardSkeleton";
+
+const OFFICE_MLS_ID = "V005048";
 
 const FeaturedProperties = () => {
   const [activeTab, setActiveTab] = useState("buy");
 
-  // Filter properties by status and limit to 4
-  const filteredProperties = PropertiesData
-    .filter(property =>
-      activeTab === "buy" ? property.status === "For Sale" : property.status === "For Rent"
-    )
-    .slice(0, 4);
+  const getQueryParams = useCallback(() => {
+    if(activeTab === "buy") {
+      return {
+        $filter: `StandardStatus eq 'Active' and PropertyType eq 'Residential' and ListOfficeMlsId eq '${OFFICE_MLS_ID}'`,
+        $top: 8,
+      };
+    } else if(activeTab == "rent"){
+      return {
+        $filter: `StandardStatus eq 'Active' and PropertyType eq 'Residential Lease' and ListOfficeMlsId eq '${OFFICE_MLS_ID}'`,
+        $top: 8,
+      };
+    }
+  }, [activeTab]);
 
+  // setup data lazy fetch
+  const {data, error, loading, refetch, setQueryParams } = useBridgeApi(
+    "/Property",
+    getQueryParams(),
+    false,
+  );
+
+  // Refetch properties when the tab changes
+  useEffect(() => {
+    setQueryParams(getQueryParams());
+    refetch();
+    // eslint-disable-next-line
+  }, [activeTab]);
+
+  // Get just the first 8 properties from API response
+  const filteredProperties = (data && data.value) ? data.value.slice(0, 8) : [];
   return (
     <section className="featured-properties text-center">
       <div className="container">
@@ -39,15 +65,29 @@ const FeaturedProperties = () => {
         </div>
         <div className="row">
           <div className="col-12">
-            <div className="property-card-row d-grid">
-              {filteredProperties.length > 0 ? (
-                filteredProperties.map((property, index) => (
-                  <PropertyCard key={property.id} property={property} />
-                ))
-              ) : (
-                <p>No properties available for this category.</p>
-              )}
-            </div>
+            {loading ? (
+                <div className="property-grid-section">
+                    <div className="container">
+                        <div className="properties-grid">
+                            {Array.from({ length: 8 }).map((_, idx) => (
+                                <PropertyCardSkeleton key={idx} />
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            ) : error ? (
+                <p>Error loading featured properties.</p>
+            ) : (
+                <div className="property-card-row d-grid">
+                    {filteredProperties.length > 0 ? (
+                        filteredProperties.map((property) => (
+                            <PropertyCard key={property.ListOfficeKey} property={property} />
+                        ))
+                    ) : (
+                        <p>No properties available for this category.</p>
+                    )}
+                </div>
+            )}
           </div>
         </div>
       </div>

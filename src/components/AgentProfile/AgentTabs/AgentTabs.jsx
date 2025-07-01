@@ -1,16 +1,31 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import './AgentTabs.css';
 import PropertyCard from '../../shared/Elements/PropertyCard/PropertyCard';
-import PropertiesData from '../../Data/PropertiesData';
+// import PropertiesData from '../../Data/PropertiesData';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
+import useBridgeApi from '../../../hooks/useBridgeApi';
 
-const AgentTabs = () => {
+const AgentTabs = ({ agent }) => {
     const [activeTab, setActiveTab] = useState('about');
-    const prevRef = useRef(null);
-    const nextRef = useRef(null);
+    const agentKey = agent?.MemberKey;
+
+    // Use a stable params object
+    const propertyParams = useMemo(() => ({
+        $filter: agentKey ? `ListAgentKey eq '${agentKey}' and StandardStatus eq 'Active'` : "",
+        $top: 20,
+        $orderby: "ListPrice desc"
+    }), [agentKey]);
+
+    const {data: PropertiesData, loading, error} = useBridgeApi(
+        '/Property',
+        propertyParams,
+        false,
+    );
+
+    const agentProperties = PropertiesData?.value || [];
 
     return (
         <section>
@@ -74,7 +89,7 @@ const AgentTabs = () => {
                                             1200: { slidesPerView: 3 }, // Large Desktop
                                         }}
                                     >
-                                        {PropertiesData.map((property) => (
+                                        {agentProperties?.map((property) => (
                                             <SwiperSlide key={property.id}>
                                                 <div className="d-flex justify-content-center">
                                                     <PropertyCard property={property} />

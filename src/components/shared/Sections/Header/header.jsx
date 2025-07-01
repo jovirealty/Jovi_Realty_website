@@ -3,7 +3,7 @@ import './header.css';
 import { Link, NavLink } from "react-router-dom";
 import mailIcon from "../../../../assets/Images/mail.png";
 import callIcon from "../../../../assets/Images/call.png";
-import logo from "../../../../assets/Images/jovi-reality-logo.png";
+import logo from "../../../../assets/Images/jovi reality logo 1.svg";
 
 const navItems = [
     { to: "/", label: "Home" },
@@ -69,11 +69,6 @@ const Header = () => {
                                 </button>
                             )}
                         </NavLink>
-                        <Link to="/login">
-                            <button className="btn btn-primary">
-                                Login <i className="bi bi-arrow-right-short"></i>
-                            </button>
-                        </Link>
                     </div>
                 </div>
             </div>
@@ -82,7 +77,7 @@ const Header = () => {
             <nav className="navbar navbar-expand-xl bg-white">
                 <div className="container">
                     <Link className="navbar-brand fw-bold" to="/">
-                        <img src={logo} alt="Logo" className="me-2" />
+                        <img src={logo} alt="Logo" className="me-2 logo" />
                     </Link>
                     <button
                         className="navbar-toggler"
@@ -138,13 +133,19 @@ const Header = () => {
                                 </li>
                             ))}
                         </ul>
-                        <div className="ms-lg-3 mt-4 mt-lg-0">
+                        <div className="ms-lg-3 mt-4 mt-lg-0 d-flex gap-3 flex-wrap">
+                            <Link to="/login">
+                                <button className="btn btn-forth">
+                                    Login <i className="bi bi-arrow-right-short"></i>
+                                </button>
+                            </Link>
                             <Link to="/join-jovi" className="no-underline">
                                 <button className="btn btn-primary">
                                     Join Jovi <i className="bi bi-arrow-right-short"></i>
                                 </button>
                             </Link>
                         </div>
+
                     </div>
                 </div>
             </nav>

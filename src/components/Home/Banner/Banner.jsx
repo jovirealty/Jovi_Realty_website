@@ -12,7 +12,7 @@ const Banner = () => {
           here to help
         </p>
       </div>
-      <SearchBar />
+      <SearchBar isHomepage={true} />
     </section>
   );
 };
