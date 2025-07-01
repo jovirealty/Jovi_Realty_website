@@ -1,145 +1,213 @@
+/* Base/Layout */
 .contact-section {
-    padding: 120px 10px 150px;
-    background-size: cover;
-    background-position: center;
+	padding: 100px 20px;
 }
 
-.contact-section h2 {
-    font-size: 45px;
+.contact-section .container {
+	border-radius: 15px;
+	background-color: #1a2b4f;
+	padding: 70px 40px 80px;
 }
 
-.contact-section h5 {
-    font-size: 20px;
+.contact-details-cont {
+	row-gap: 90px;
+}
+
+.jovi-contact-row {
+	grid-template-columns: 1fr 1fr;
+}
+
+.jovi-contact-block {
+	border-radius: 12px;
+	align-items: stretch;
+}
+
+.jovi-map-container {
+	min-height: 350px;
+	flex: 1;
+}
+
+.jovi-map-container iframe {
+	border-radius: 15px;
+	width: 100%;
+	height: 100%;
+}
+
+/* Typography */
+.jovi-subhead {
+	font-size: 20px;
+	font-weight: 500;
+	letter-spacing: 1px;
+	margin-bottom: 10px;
 }
 
 .contact-section p {
-    font-size: 18px;
-    max-width: 520px;
-    letter-spacing: 0.9px;
+	font-size: 20px;
+	letter-spacing: 0.9px;
+	line-height: 1.5;
+	margin: 15px 0 80px 0;
 }
 
-.contact-section .row {
-    padding: 50px 0px 0px 40px;
+.jovi-location-title {
+	font-size: 28px;
+	font-weight: 600;
+	margin-bottom: 20px;
+	color: #1a2b4f;
 }
 
-.contact-section .row:before {
-    content: "";
-    position: absolute;
-    height: 100%;
-    top: 0px;
-    left: 0px;
-    border-radius: 10px;
-    width: calc(100% - 110px);
-    background-color: var(--primary-color);
+.jovi-info-title {
+	font-size: 18px;
+	font-weight: 600;
+	margin-bottom: 5px;
 }
 
-.contact-details-frame {
-    column-gap: 60px;
-    grid-template-columns: 1fr 1fr;
+.jovi-info-content {
+	color: #333;
 }
 
-.contact-section .col {
-    z-index: 1;
+/* Components */
+.jovi-contact-details {
+	padding: 60px 40px;
+	background-color: #ffffff;
+	border-radius: 15px;
 }
 
-.cont-map-col {
-    padding-bottom: 30px;
+.jovi-info-item {
+	gap: 20px;
+	margin-bottom: 20px;
+	align-items: center;
 }
 
-.contact-section iframe {
-    border-radius: 10px;
+.jovi-icon-box img {
+	width: 40px;
+	height: 40px;
 }
 
-.cont-details-col {
-    border-radius: 10px;
-    background: #FFF;
-    transform: translatey(30px);
-    padding: 70px 45px;
-    box-shadow: 0px 9px 10px 0px rgba(0, 0, 0, 0.05);
+/* Interactive Elements */
+.jovi-info-link {
+	text-decoration: none;
+	color: #1a2b4f;
+	font-size: 16px;
 }
 
-.cont-info-box {
-    font-size: 20px;
-    line-height: 1.2em;
-}
-
-.cont-info-box h5 {
-    font-weight: 600;
-}
-
-.cont-info-box a {
-    text-decoration: none;
-    color: inherit;
-}
-
-.cont-icon {
-    min-width: max-content;
-}
-
-.cont-icon img {
-    width: 50px;
+.jovi-info-link:hover {
+	text-decoration: underline;
 }
 
 /* =============================================
     Responsive
     ============================================= */
 @media (max-width: 991px) {
-    .contact-section {
-        padding: 80px 10px 100px;
-    }
+	.contact-section {
+		padding: 90px 20px;
+	}
 
-    .contact-section .row {
-        padding-left: 30px;
-    }
+	.contact-section .container {
+		padding: 60px 30px;
+	}
 
-    .contact-section h5 {
-        font-size: 18px;
-    }
+	.contact-section.jovi-subhead {
+		font-size: 18px;
+	}
 
-    .contact-section h2 {
-        font-size: 35px;
-    }
+	.contact-section.main-h2 {
+		font-size: 36px;
+	}
 
-    .contact-section p {
-        font-size: 16px;
-    }
+	.contact-section p {
+		font-size: 18px;
+		margin: 10px 0 60px 0;
+	}
 
-    .cont-details-col {
-        padding: 70px 35px;
-    }
+	.contact-details-cont {
+		row-gap: 50px;
+	}
 
-    .contact-details-frame {
-        column-gap: 40px;
-    }
+	.jovi-contact-row {
+		grid-template-columns: 1fr 1fr;
+		gap: 30px;
+	}
 
-    .cont-info-box {
-        font-size: 16px;
-        line-height: 1.2em;
-    }
+	.jovi-contact-details {
+		padding: 35px 25px;
+	}
 
-    .cont-icon img {
-        width: 40px;
-    }
+	.jovi-location-title {
+		font-size: 24px;
+	}
+
+	.jovi-info-title {
+		font-size: 16px;
+	}
+
+	.jovi-info-link {
+		font-size: 14px;
+	}
+
+	.jovi-icon-box img {
+		width: 35px;
+		height: 35px;
+	}
+
+	.jovi-map-container {
+		min-height: 300px;
+	}
 }
 
 @media (max-width: 767px) {
-    .contact-section {
-        padding: 70px 10px 90px;
-    }
+	.jovi-subhead {
+		font-size: 18px;
+	}
+	
+	.contact-section {
+		padding: 60px 20px;
+	}
 
-    .contact-details-frame {
-        grid-template-columns: 100%;
-    }
+	.contact-section .container {
+		padding: 50px 25px;
+	}
 
-    .contact-section .row {
-        padding: 50px 25px 0px;
-    }
+	.contact-section .main-h2 {
+		font-size: 25px;
+	}
 
-    .contact-section .row:before {
-        width: 100%;
-    }
+	.contact-section p {
+		font-size: 12px;
+		margin: 15px 0 40px 0;
+	}
 
-    .cont-details-col {
-        padding: 40px 30px;
-    }
+	.contact-details-cont {
+		row-gap: 50px;
+	}
+
+	.contact-details-cont .jovi-contact-row {
+		grid-template-columns: 1fr;
+		gap: 30px;
+	}
+
+	.jovi-contact-details {
+		order: 0 !important;
+	}
+
+	.jovi-map-container {
+		min-height: 250px;
+		order: 1 !important;
+	}
+
+	.jovi-location-title {
+		font-size: 22px;
+	}
+
+	.jovi-info-title {
+		font-size: 14px;
+	}
+
+	.jovi-info-link {
+		font-size: 13px;
+	}
+
+	.jovi-icon-box img {
+		width: 30px;
+		height: 30px;
+	}
 }

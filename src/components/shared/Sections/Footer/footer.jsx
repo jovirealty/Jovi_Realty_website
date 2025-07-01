@@ -1,7 +1,7 @@
 import React from 'react';
 import './footer.css';
 import { Link, NavLink } from 'react-router-dom';
-import footerLogo from "./../../../../assets/Images/jovi-reality-logo-foo.png";
+import footerLogo from "./../../../../assets/Images/jovi reality logo 1.svg";
 import facebookIcon from "./../../../../assets/Images/facebook-icon.png";
 import instaIcon from "./../../../../assets/Images/instagram-icon.png";
 import ticktockIcon from "./../../../../assets/Images/ticktok-icon.png";
@@ -34,7 +34,6 @@ const Footer = () => {
     { name: 'Buy Property', path: '/property-listing/buy' },
     { name: 'Sell Property', path: '/sell' },
     { name: 'Rental Property', path: '/property-listing/rent' },
-    { name: 'Highlights', path: '/highlights' },
   ];
 
   // Define footer bottom links
@@ -54,8 +53,8 @@ const Footer = () => {
             <div className="footer-row d-grid">
               {/* Logo & Description */}
               <div className="col-lg-10 ft-links sm-text-center pr-md-5">
-                <NavLink to="/" className={({ isActive }) => isActive ? "logo mb-4 active" : "logo mb-4"}>
-                  <img src={footerLogo} alt="Jovi Logo" />
+                <NavLink to="/" className="mb-4">
+                  <img src={footerLogo} alt="Jovi Logo" className="logo" />
                 </NavLink>
                 <p className="mt-2 mb-4">
                   Jovi Realty simplifies real estate for buyers, sellers, and renters. With decades of expertise, personalized service, and a transparent process, we help you find, sell, or manage properties with confidence. Your dream property starts here.
@@ -102,6 +101,10 @@ const Footer = () => {
                   <a href="tel:6042022929">604.202.2929</a>
                   <a href="mailto:hello@jovirealty.com">hello@jovirealty.com</a>
                   <a href="https://maps.app.goo.gl/aQbfJsbgFcHvgJAJA" target="_blank">201-2010 E 48th Ave Vancouver, BC V5P 1R8</a>
+
+                  <Link to="/contact" className='jovi-loc-link'>
+                    More locations<i className="bi bi-arrow-right-short"></i>
+                  </Link>
                 </div>
                 <div className="icons">
                   {socialLinks.map((link) => (

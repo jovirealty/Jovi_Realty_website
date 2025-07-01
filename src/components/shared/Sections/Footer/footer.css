@@ -4,13 +4,16 @@
 .footer-sec {
     color: #0D1835;
     padding-top: 50px;
+    background-color: white;
 }
 
 .footer-row {
     grid-template-columns: 2.5fr 1.05fr 1.05fr 1.05fr;
     gap: 50px;
 }
-
+.footer-row .logo {
+    width: 175px;
+}
 .footer-sec a {
     text-decoration: none;
     color: #0D1835;
@@ -108,6 +111,15 @@
 
 .ft-bottom-links a.active {
     font-weight: 600;
+}
+.ft-links .jovi-loc-link{
+    font-size: 17px;
+    color: var(--accent-color);
+    text-decoration: underline;
+}
+.ft-links .jovi-loc-link:hover{
+    text-decoration: none;
+    color: #1365fe;
 }
 
 /* =============================================

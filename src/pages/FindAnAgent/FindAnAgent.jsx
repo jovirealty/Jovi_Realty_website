@@ -15,7 +15,7 @@ const FindAnAgent = () => {
                 backgroundImage={agentBannerImg}
                 title="Find an Agent"
             />
-            <AgentsSection showSearch={true} title="Featured Agents" subHead="Our Team" />
+            <AgentsSection officeMlsId="V005048" showSearch={true} title="Featured Agents" subHead="Our Team" />
             <InquiryForm />
             <Footer />
         </div>

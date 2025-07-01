@@ -8,7 +8,7 @@ import { TfiEmail } from "react-icons/tfi";
 import { FiPhone } from "react-icons/fi";
 import { SlGlobe } from "react-icons/sl";
 
-const AgentDetails = () => {
+const AgentDetails = ({ agent }) => {
     return (
         <section className="agent-details-sec position-relative">
             <div className="container">
@@ -25,7 +25,7 @@ const AgentDetails = () => {
                                 <div className="col-lg-8 col-md-7">
                                     <div className="agent-details-box-content">
                                         <div className="d-flex align-items-lg-center justify-content-between flex-lg-row flex-column mb-4 gap-20">
-                                            <h1 className="main-h1">AJ Mohamed</h1>
+                                            <h1 className="main-h1">{agent.MemberFullName}</h1>
                                             <div className="social-icons d-flex column-gap-30">
                                                 <a href="#" target="_blank" rel="noopener noreferrer">
                                                     <img src={instaImage} />
@@ -45,17 +45,20 @@ const AgentDetails = () => {
                                         <div className="d-flex flex-wrap align-items-center mt-4 column-gap-30 row-gap-20">
                                             <div className="d-flex align-items-center gap-3">
                                                 <TfiEmail size={24} color="#000" />
-                                                <a href="mailto:aj@jovirealty.com" rel="noopener noreferrer" className='text-black text-decoration-none'>aj@jovirealty.com
+                                                <a href={`mailto:${agent.MemberEmail}`} rel="noopener noreferrer" className='text-black text-decoration-none'>
+                                                    {agent.MemberEmail}
                                                 </a>
                                             </div>
                                             <div className="d-flex align-items-center gap-2">
                                                 <FiPhone size={24} color="#000" />
-                                                <a href="tel:6047824633" rel="noopener noreferrer" className='text-black text-decoration-none'>604-782-4633
+                                                <a href={`tel:${agent.MemberPreferredPhone}`} rel="noopener noreferrer" className='text-black text-decoration-none'>
+                                                    {agent.MemberPreferredPhone}
                                                 </a>
                                             </div>
                                             <div className="d-flex align-items-center gap-2">
                                                 <SlGlobe size={24} color="#000" />
-                                                <a href="tel:6047824633" rel="noopener noreferrer" className='text-black text-decoration-none'>604-782-4633
+                                                <a rel="noopener noreferrer" className='text-black text-decoration-none'>
+                                                    {"(604) 202-2929"}
                                                 </a>
                                             </div>
                                         </div>
