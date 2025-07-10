@@ -4,7 +4,7 @@ const FAQ = ({ faqs, className = '' }) => {
   return (
     <section className={`faq-sec ${className}`}>
       <div className="container faq-con">
-        <h2 className="main-h2 text-center mb-5">FAQs</h2>
+        <h2 className="main-h2 text-center mb-5">Frequently Asked Questions</h2>
         
         <div className="accordion" id="faqAccordion">
           {faqs.map((faq, index) => (

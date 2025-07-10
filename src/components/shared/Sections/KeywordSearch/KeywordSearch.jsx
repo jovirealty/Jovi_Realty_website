@@ -21,7 +21,7 @@ const KeywordSearch = () => {
   return (
     <section className="keyword-search-sec">
       <div className="container">
-        <h2 className="main-h2 text-center">Search by Key-Words</h2>
+        <h2 className="main-h2 text-center">Quick Search Links</h2>
         <div className="keywords-con mt-5">
           {keywords.map((keyword, index) => (
             <a href="#" key={index}>

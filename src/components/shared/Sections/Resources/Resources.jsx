@@ -9,25 +9,25 @@ import resourceAdd from './../../../../assets/Images/resources-add.png';
 
 const resources = [
   {
-    title: 'Buy Smart',
+    title: 'Market Trends',
     mainImage: resourceCard1,
     addImage: resourceAdd,
     link: '#'
   },
   {
-    title: 'Selling Success',
+    title: 'Buyer Guide',
     mainImage: resourceCard2,
     addImage: resourceAdd,
     link: '#'
   },
   {
-    title: 'Effortless Management',
+    title: 'Seller Tips',
     mainImage: resourceCard3,
     addImage: resourceAdd,
     link: '#'
   },
   {
-    title: 'Agent Advantage',
+    title: 'Agent Resources',
     mainImage: resourceCard4,
     addImage: resourceAdd,
     link: '#'
@@ -38,7 +38,7 @@ const Resources = ({ className = '' }) => {
   return (
     <section className={`resources-sec ${className}`}>
       <div className="container">
-        <h2 className="main-h2 text-center mb-5">Resources</h2>
+        <h2 className="main-h2 text-center mb-5">Helpful Tools to Guide Your Next Step</h2>
         <div className="row row-gap-30 m-0">
           {resources.map((resource, index) => (
             <div key={index} className="col-12 col-md-6 col-lg-3 p-0">
