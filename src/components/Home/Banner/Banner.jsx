@@ -6,10 +6,9 @@ const Banner = () => {
   return (
     <section className="home-banner-section position-relative text-center d-flex flex-column justify-content-center align-items-center">
       <div className="container text-white">
-        <h1 className="main-h1">Find Your Dream Home with Jovi Realty</h1>
+        <h1 className="main-h1">Real Estate, Real People, Real Results - Across Greater Vancouver</h1>
         <p className="banner-subtitle">
-          Whether you're looking to upgrade, relocate, or invest, our agents are
-          here to help
+          Buying your first home, selling your property, managing investments, or building your career in real estate? Jovi Realty is where expertise meets support, every step of the way.
         </p>
       </div>
       <SearchBar isHomepage={true} />

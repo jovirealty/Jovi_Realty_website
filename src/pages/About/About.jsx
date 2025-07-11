@@ -18,34 +18,34 @@ import businessIcon from "./../../assets/Images/business-icon.png";
 const About = () => {
   const expertiseItems = [
     {
-      description: "Residential & commercial buying/selling: Helping clients navigate buying and selling properties effectively."
+      description: "We provide tailored guidance and real-time market insights for seamless transactions."
     },
     {
-      description: "Investment property advising: Providing insightful advice on profitable investment property opportunities."
+      description: "Our realtors access top-tier training and innovative tools to excel."
     },
     {
-      description: "Pre-sale & assignment sales: Expertly managing pre-sale and assignment real estate transactions."
+      description: "From Vancouver to Richmond, we handle all property types expertly."
     },
     {
-      description: "Luxury real estate: Assisting with high-end properties, ensuring exceptional quality and value."
+      description: "Clients and agents achieve outstanding results with our strategic approach."
     }
   ];
 
   const agentToolsItems = [
     {
       icon: technologyIcon,
-      title: "Technology",
-      description: "Stay ahead with cutting-edge real estate tools, CRM systems, and AI-driven analytics to streamline your workflow, manage leads efficiently, and close deals faster."
+      title: "Excellence",
+      description: "Our brokerage sets the standard with innovative tools, strategic marketing, and a dedication to surpassing expectations."
     },
     {
       icon: marketingIcon,
-      title: "Marketing",
-      description: "Boost your brand with high-impact marketing strategies, including social media promotion, professional listing presentations, and targeted advertising to attract more clients."
+      title: "Connection",
+      description: "Rooted in Greater Vancouver, we foster strong ties with our community, helping clients and agents build their futures."
     },
     {
       icon: businessIcon,
-      title: "Business",
-      description: "Grow your real estate business with expert coaching, personalized mentorship, and proven strategies to increase sales, build strong client relationships, and achieve long-term success."
+      title: "Innovation",
+      description: "We leverage cutting-edge technology and data-driven strategies to stay ahead in the ever-evolving real estate landscape."
     }
   ];
 
@@ -54,23 +54,23 @@ const About = () => {
       <Header />
       <Banner />
       <BoxedContentImage
-        subtitle="Empowering Your Real Estate Journey"
-        title="Our Story"
-        description="At Jovi Realty, real estate is more than transactions — it's about creating lasting value for every client we serve. Founded in Vancouver, we've grown to become one of the region's most trusted real estate brokerages. Whether you're buying, selling, or investing, we make the process transparent, stress-free, and rewarding. Our story is built on innovation, market expertise, and a relentless focus on helping people build their futures."
+        subtitle=""
+        title="Who We Are"
+        description="Jovi Realty Inc. is a dynamic real estate brokerage proudly serving Greater Vancouver, from Vancouver to Burnaby, Richmond, and beyond. As a client-focused firm, we specialize in connecting buyers, sellers, property owners, and real estate agents with unparalleled support and resources. Our team combines deep market expertise with a passion for delivering exceptional service, ensuring every transaction—whether residential, commercial, pre-sales, or rentals—is seamless and successful. With innovative technology, strategic marketing, and a commitment to being there whenever you need us, Jovi Realty stands out as the brokerage of choice for navigating Greater Vancouver’s vibrant real estate market."
         image={ourStoryImg}
       />
       <ImageContentSection
-        title="Our Brand Story"
-        description="At Jovi Realty, we believe that owning property should be rewarding, not stressful. Whether you're a homeowner, investor, or landlord, our full-service property management ensures your real estate works for you—maximizing returns, minimizing hassle, and keeping tenants happy. With years of expertise in South Florida's dynamic market, we combine local insight with cutting-edge technology to handle everything—from tenant screening and rent collection to maintenance and legal compliance. Our transparent, proactive approach means you enjoy passive income without the headaches, while tenants experience seamless living."
+        title="Empowering Your Real Estate Success"
+        description="At Jovi Realty, our mission is to elevate the real estate experience for clients and agents alike. We empower buyers to find their ideal property, guide sellers to achieve maximum value, streamline property management for owners, and provide agents with industry-leading tools and training to thrive. Our advanced resources, including cutting-edge market analytics and tailored marketing strategies, ensure informed decisions and outstanding results. Available whenever you need us, our dedicated team delivers personalized support across Greater Vancouver, making us the brokerage you can trust for all your real estate needs."
         image={agentsImg}
         useH2={true}
       />
       <ExpertiseSection 
-        title="Comprehensive Real Estate Expertise"
+        title="Why Jovi Realty?"
         items={expertiseItems}
       />
       <IconBoxSection
-        title="Agent Tools & Resources"
+        title="Our Core Values"
         items={agentToolsItems}
         showButton={false}
         className="p-0"

@@ -54,8 +54,8 @@ const SignupSteps = ({ title, showButton, buttonText, buttonLink, className = ''
 
             <div className="signup-steps-grid d-flex justify-content-between gap-40">
               <div className="signup-step-card">
-                <img src={addAddress} alt="Submit Address" className="signup-step-icon" />
-                <p className="mb-0">Submit Address</p>
+                <img src={addAddress} alt="Property Assessment" className="signup-step-icon" />
+                <p className="mb-0">Property Assessment</p>
               </div>
 
               <div className="signup-arrow">
@@ -63,8 +63,8 @@ const SignupSteps = ({ title, showButton, buttonText, buttonLink, className = ''
               </div>
 
               <div className="signup-step-card">
-                <img src={addSigners} alt="Add Signers" className="signup-step-icon" />
-                <p className="mb-0">Add Signers</p>
+                <img src={addSigners} alt="Strategic Marketing Plan" className="signup-step-icon" />
+                <p className="mb-0">Strategic Marketing Plan</p>
               </div>
 
               <div className="signup-arrow">
@@ -72,8 +72,8 @@ const SignupSteps = ({ title, showButton, buttonText, buttonLink, className = ''
               </div>
 
               <div className="signup-step-card">
-                <img src={signContract} alt="Sign Contract" className="signup-step-icon" />
-                <p className="mb-0">Sign Contract</p>
+                <img src={signContract} alt="Rigorous Tenant Screening" className="signup-step-icon" />
+                <p className="mb-0">Rigorous Tenant Screening</p>
               </div>
 
               <div className="signup-arrow">
@@ -81,8 +81,8 @@ const SignupSteps = ({ title, showButton, buttonText, buttonLink, className = ''
               </div>
 
               <div className="signup-step-card">
-                <img src={getListed} alt="Get Listed" className="signup-step-icon" />
-                <p className="mb-0">Get Listed</p>
+                <img src={getListed} alt="Ongoing Management & Support" className="signup-step-icon" />
+                <p className="mb-0">Ongoing Management & Support</p>
               </div>
             </div>
 

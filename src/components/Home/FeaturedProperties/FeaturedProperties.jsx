@@ -43,10 +43,9 @@ const FeaturedProperties = () => {
     <section className="featured-properties text-center">
       <div className="container">
         <div className="d-flex flex-column align-items-center">
-          <h2 className="main-h2 mb-3">Featured Properties</h2>
+          <h2 className="main-h2 mb-3">Find a Place That Feels Like Home</h2>
           <p className="section-subtitle">
-            Explore Top Properties for Sale & Rent – Find Your Perfect Home
-            Today with Jovi Realty.
+            Search through hand-picked listings across Greater Vancouver – whether you’re looking to buy or rent, we’ve got you covered.
           </p>
         </div>
         <div className="btn-con mb-5 mt-4">
