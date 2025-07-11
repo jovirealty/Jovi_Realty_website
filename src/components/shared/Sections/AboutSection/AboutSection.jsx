@@ -18,7 +18,7 @@ const AboutSection = () => {
               </p>
               <div className="stats">
                 <div className="each">
-                  <span className="nums">5k+</span>
+                  <span className="nums">5+</span>
                   <span className="border-between"></span>
                   <span className="text">Properties Closed with Care</span>
                 </div>
