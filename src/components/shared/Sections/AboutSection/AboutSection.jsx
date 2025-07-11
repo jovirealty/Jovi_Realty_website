@@ -11,26 +11,26 @@ const AboutSection = () => {
             <div className="about-con">
               <h4 className="main-h4 mb-3">About Jovi Realty</h4>
               <p className="main">
-                The Trusted Name in Real Estate – Your Partner in Finding the Perfect Property
+                Locally Grown. Regionally Trusted. Results That Speak.
               </p>
               <p className='mb-5'>
-                At Jovi Realty, we specialize in helping you buy, rent, and sell properties with ease. With years of experience and a commitment to excellence, we're here to make your real estate journey seamless and successful.
+                We’re an independent brokerage serving the entire Greater Vancouver region. At Jovi Realty, we’re focused on clarity, service, and results. Whether you’re a homeowner, buyer, investor, or agent, you’ll find thoughtful guidance, responsive support, and a team that values relationships over transactions.
               </p>
               <div className="stats">
                 <div className="each">
-                  <span className="nums">20+</span>
+                  <span className="nums">5K+</span>
                   <span className="border-between"></span>
-                  <span className="text">Years of Combined Experience</span>
+                  <span className="text">Properties Closed with Care</span>
                 </div>
                 <div className="each">
-                  <span className="nums">93%</span>
+                  <span className="nums">130+</span>
                   <span className="border-between"></span>
-                  <span className="text">Unmatched expertise in Off-Plan investments</span>
+                  <span className="text">Agents Thriving With Us</span>
                 </div>
                 <div className="each">
-                  <span className="nums">23</span>
+                  <span className="nums">99%</span>
                   <span className="border-between"></span>
-                  <span className="text">Comprehensive solutions for investors & property owners</span>
+                  <span className="text">Client Satisfaction</span>
                 </div>
               </div>
             </div>

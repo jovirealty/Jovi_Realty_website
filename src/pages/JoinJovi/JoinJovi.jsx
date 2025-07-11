@@ -30,90 +30,90 @@ const JoinJovi = () => {
     const benefitsItems = [
         {
             icon: compIcon,
-            title: "Competitive Commission Structures",
-            description: "Maximize your earnings with industry-leading, transparent commission plans tailored for high performers."
+            title: "Quality Leads & Real Opportunity",
+            description: "We don’t make empty promises. Get access to serious leads, referrals, and a pipeline that helps you close more, faster."
         },
         {
             icon: supportIcon,
-            title: "Unmatched Support & Resources",
-            description: "Access dedicated onboarding, marketing tools, and 24/7 back-office support to help you close deals faster."
+            title: "Real Support, Not Just Access",
+            description: "From deal coordination to marketing and training—we’re hands-on, not hands-off. You’ll never be left figuring it out alone."
         },
         {
             icon: listIcon,
-            title: "Premium Listings & Lead Generation",
+            title: "Custom Website with CRM & Automation",
             description: "Boost your portfolio with high-value listings and qualified leads delivered directly to you."
         },
         {
             icon: doorIcon,
-            title: "Reputation That Opens Doors",
-            description: "Join a respected brand that enhances your credibility and makes client acquisition smoother."
+            title: "Flexible Commission Structure",
+            description: "Choose a plan that fits your business goals—including options to keep 100% of your commission earned."
         }
     ];
     const featureCardsItems = [
         {
             image: buySmartImg,
-            title: "Competitive Commission Splits",
-            description: "Earn more with our industry-leading commission structures designed to reward your hard work and success."
+            title: "Targeted Lead Systems",
+            description: "We don’t hand out generic leads. We generate high-quality buyer and seller opportunities based on your market focus."
         },
         {
             image: sellFastImg,
-            title: "Unmatched Support, Anytime",
-            description: "From onboarding to ongoing support, we're here—no question unanswered, anytime you need."
+            title: "Personal Brand Development",
+            description: "Go beyond a logo—build a full identity. From listing visuals to agent promos, we’ll help you stand out."
         },
         {
             image: managedRightImg,
-            title: "Personalized Training",
-            description: "Develop your skills with hands-on training, expert coaching, and a clear roadmap for success."
+            title: "Deal & Compliance Coordination",
+            description: "Let our team handle backend logistics—from paperwork and deadlines to license compliance and broker sign-offs."
         },
         {
             image: agentGrowthImg,
-            title: "Advanced Real Estate Tools",
-            description: "Outpace competitors with next-gen CRM and marketing tools that streamline daily workflows."
+            title: "Marketing Strategy & Execution",
+            description: "From digital ads to print campaigns, we give you tactical help—not just templates or suggestions."
         },
         {
             image: localExpertImg,
-            title: "Custom Agent Websites",
-            description: "Elevate your brand—capture leads and highlight excellence with a tailored, professional website."
+            title: "Community + Culture",
+            description: "We’ve built a culture where agents share wins, learn together, and actually know who they’re working with."
         },
         {
             image: marketingEdgeImg,
-            title: "Flexible Management Plans",
-            description: "Tailored services for your property—maximize returns and enjoy hassle-free ownership."
+            title: "In-Market Training & Peer Learning",
+            description: "Practical, ongoing workshops that reflect real trends in your market—not just theory or canned modules."
         }
     ];
     const futureItems = [
         {
             icon: technologyIcon,
-            title: "Onboarding & Mentorship",
-            description: "Start with confidence, guided by a mentor who knows how to help you achieve your unique goals."
+            title: "Agent Voice",
+            description: "We listen, adapt, and involve our agents in decisions that shape the way we operate."
         },
         {
             icon: marketingIcon,
-            title: "Professional Development",
-            description: "Access in-depth training programs and certifications to elevate your expertise at every level."
+            title: "Leadership Access",
+            description: "Get direct access to decision-makers, mentors, and support—without layers of red tape."
         },
         {
             icon: businessIcon,
-            title: "Streamlined Transaction Management",
-            description: "Streamline your workflow with templates that simplify contracts, offers, and closings effortlessly."
+            title: "Professional Growth",
+            description: "Beyond transactions—we help agents evolve into well-rounded, long-term industry professionals."
         }
     ];
     const faqs = [
         {
-            question: "What support do you provide for new agents?",
-            answer: "Joining Jovi Realty offers numerous benefits, including competitive commission structures, unmatched support and resources, premium listings and lead generation, and a reputation that opens doors. We also provide personalized training, professional development, and streamlined transaction management to help you succeed in the real estate industry."
+            question: "How quickly can I onboard and start transacting?",
+            answer: "Our onboarding process is streamlined—you can be fully set up, trained, and ready within a few business days."
         },
         {
-            question: "How does Jovi Realty differ from other brokerages?",
-            answer: "Joining Jovi Realty offers numerous benefits, including competitive commission structures, unmatched support and resources, premium listings and lead generation, and a reputation that opens doors. We also provide personalized training, professional development, and streamlined transaction management to help you succeed in the real estate industry."
+            question: "Will I have access to office space or can I work remotely?",
+            answer: "We offer both: physical office space when needed and full tools for agents who prefer a mobile workflow."
         },
         {
-            question: "What kind of leads and tools will I have access to?",
-            answer: "Joining Jovi Realty offers numerous benefits, including competitive commission structures, unmatched support and resources, premium listings and lead generation, and a reputation that opens doors. We also provide personalized training, professional development, and streamlined transaction management to help you succeed in the real estate industry."
+            question: "Is there a mentorship program for new agents?",
+            answer: "Yes, we offer one-on-one mentorship to help new agents ramp up confidently and close deals sooner."
         },
         {
-            question: "How does Jovi Realty ensure my rental property stays profitable?",
-            answer: "Joining Jovi Realty offers numerous benefits, including competitive commission structures, unmatched support and resources, premium listings and lead generation, and a reputation that opens doors. We also provide personalized training, professional development, and streamlined transaction management to help you succeed in the real estate industry."
+            question: "Can I bring my own brand or team to Jovi?",
+            answer: "Absolutely. We support agent branding and offer flexible models for individuals, teams, and partnerships."
         }
     ];
     return (
@@ -121,25 +121,28 @@ const JoinJovi = () => {
             <Header />
             <BannerTwo
                 backgroundImage={bannerImage}
-                title="Join Jovi Realty"
-                bannerText="Join Jovi Realty and grow with a dynamic, supportive team. Unlock your potential with expert guidance, innovative tools, and endless opportunities in real estate success"
+                title="Your Brokerage Partner in Real Estate Success"
+                bannerText="Join a brokerage that prioritizes your growth, offering unparalleled support, advanced tools, and a collaborative environment to help you thrive in Greater Vancouver's dynamic real estate market."
                 buttonText1="Get In Touch"
                 buttonLink1="/contact"
                 buttonText2="Our services"
                 buttonLink2="/property-management"
             />
-            <IconBoxSectionTwo title="Why Join Jovi Realty?" items={benefitsItems} />
+            <IconBoxSectionTwo title="Not Perks—Just the Right Way to Operate" items={benefitsItems} />
             <BoxedContentImage
-                title="Why Choose Jovi Reality"
-                description="At Jovi Realty, we provide full-service property management designed to give you peace of mind and maximum returns. From tenant screening and rent collection to maintenance and legal compliance, our expert team handles every detail with professionalism and care. With a focus on optimizing your investment, we use market insights and proactive strategies to ensure your property performs at its best. Our commitment to transparency, reliability, and seamless service makes us the trusted choice for property owners who want hassle-free management and exceptional results—because your property deserves nothing less."
+                title="Why Join Jovi Realty"
+                description={`
+                At Jovi Realty, we’ve created a brokerage that puts agents first—through structure, support, and real opportunity. You won’t find micromanagement here, but you will find systems that work, tools that make your job easier, and a leadership team that’s actually available when you need them.
+                
+                We offer more than just leads or software—we offer a platform where agents can grow sustainable businesses. With consistent deal support, marketing help, and access to ongoing training, you can focus on what matters most: building relationships and closing deals.`}
                 image={whyChooseImage}
                 reverseOrder={true}
             />
             <VideoTestimonial className="pt-0" />
-            <FeatureCards title="Discover What Sets Jovi Realty Apart" cards={featureCardsItems} />
+            <FeatureCards title="Empowering Agents with Comprehensive Support" cards={featureCardsItems} />
             <AboutSectionTwo />
             <IconBoxSection
-                title="Your Future is Bright at Jovi Realty"
+                title="What Sets Our Culture Apart"
                 items={futureItems}
                 showButton={true}
                 buttonText="Get a Free Consultation"

@@ -44,8 +44,8 @@ const InquiryForm = () => {
           {/* Right Side Form */}
           <div className="col-md-6 d-flex align-items-center">
             <div className="inquiry-sec-form w-100">
-              <h3 className="main-h3 mb-4">Real Estate Inquiry Form</h3>
-              <p className="mb-lg-5 mb-4">Reach out today and let us help you find your perfect property.</p>
+              <h3 className="main-h3 mb-4">Have a Question or Ready to Chat?</h3>
+              <p className="mb-lg-5 mb-4">Let us know how we can help—buying, selling, managing, or just exploring your options.</p>
 
               <form onSubmit={handleSubmit} noValidate>
                 <div className="inquiry-form">
@@ -77,6 +77,7 @@ const InquiryForm = () => {
                         <option value="buy">Buy</option>
                         <option value="sell">Sell</option>
                         <option value="rent">Rent</option>
+                        <option value="rent">Join as an agent</option>
                       </select>
                     </div>
                   </div>

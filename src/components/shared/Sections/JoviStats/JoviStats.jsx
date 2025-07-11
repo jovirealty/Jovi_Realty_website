@@ -4,9 +4,9 @@ import joviLogo from './../../../../assets/Images/jovi-property-logo.png';
 
 const JoviStatsSection = () => {
 	const [counts, setCounts] = useState([
-		{ value: 0, target: 98, prefix: '', suffix: '%', label: 'Tenant Retention' },
-		{ value: 0, target: 1000000, prefix: '$', suffix: 'M+', label: 'Repairs Managed Annually' },
-		{ value: 0, target: 100, prefix: '', suffix: '+', label: 'Properties Under Care' },
+		{ value: 0, target: 500, prefix: '', suffix: '+', label: 'Properties Managed' },
+		{ value: 0, target: 98, prefix: '', suffix: '%', label: 'Tenant Satisfaction' },
+		{ value: 0, target: 100, prefix: '', suffix: '%', label: 'Client Support' },
 	]);
 	const sectionRef = useRef(null);
 	const [hasAnimated, setHasAnimated] = useState(false);

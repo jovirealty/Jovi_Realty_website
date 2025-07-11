@@ -59,11 +59,11 @@ const Footer = () => {
                 <p className="mt-2 mb-4">
                   Jovi Realty simplifies real estate for buyers, sellers, and renters. With decades of expertise, personalized service, and a transparent process, we help you find, sell, or manage properties with confidence. Your dream property starts here.
                 </p>
-                <NavLink to="/login" className={({ isActive }) => isActive ? "active" : ""}>
+                {/* <NavLink to="/login" className={({ isActive }) => isActive ? "active" : ""}>
                   <button className="btn btn-primary">
                     Login <i className="bi bi-arrow-right-short"></i>
                   </button>
-                </NavLink>
+                </NavLink> */}
               </div>
 
               {/* Quick Links */}
@@ -102,9 +102,9 @@ const Footer = () => {
                   <a href="mailto:hello@jovirealty.com">hello@jovirealty.com</a>
                   <a href="https://maps.app.goo.gl/aQbfJsbgFcHvgJAJA" target="_blank">201-2010 E 48th Ave Vancouver, BC V5P 1R8</a>
 
-                  <Link to="/contact" className='jovi-loc-link'>
+                  {/* <Link to="/contact" className='jovi-loc-link'>
                     More locations<i className="bi bi-arrow-right-short"></i>
-                  </Link>
+                  </Link> */}
                 </div>
                 <div className="icons">
                   {socialLinks.map((link) => (

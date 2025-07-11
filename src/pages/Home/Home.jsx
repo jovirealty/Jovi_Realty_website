@@ -23,62 +23,62 @@ import meetAgentsImg from "./../../assets/Images/meet-agents.png";
 const homeHighlights = [
   {
     image: buySmartImg,
-    title: "Buy Smart",
+    title: "Regional Expertise",
     description:
-      "Make informed property investments with expert guidance and market insights",
+      "Serving all of Greater Vancouver with detailed knowledge of each city's housing and investment landscape.",
   },
   {
     image: sellFastImg,
-    title: "Sell Fast",
+    title: "Comprehensive Services",
     description:
-      "Get the best deals and sell your property quickly, hassle-free",
+      "Providing real estate sales, rentals, property management, and brokerage support—all within a single trusted firm.",
   },
   {
     image: managedRightImg,
-    title: "Managed Right",
+    title: "Responsive Communication",
     description:
-      "Expertly handled investments ensuring growth, security, and long-term success",
+      "Timely, transparent updates and direct support throughout every stage of your real estate journey.",
   },
   {
     image: agentGrowthImg,
-    title: "Agent Growth",
+    title: "Streamlined Technology",
     description:
-      "Empowering agents with tools, training, and strategies for success",
+      "Utilizing reliable tools to simplify listings, communication, and transaction management across all service areas.",
   },
   {
     image: localExpertImg,
-    title: "Local Expert",
+    title: "Process Transparency",
     description:
-      "Providing trusted guidance and insights for smart local property investments",
+      "Clear guidance at every step, ensuring clients understand decisions, timelines, and expected outcomes.",
   },
   {
     image: marketingEdgeImg,
-    title: "Marketing Edge",
+    title: "Experienced Professionals",
     description:
-      "Boost visibility, drive engagement, and maximize growth with strategic marketing",
+      "Skilled, knowledgeable agents committed to high standards of service, accuracy, and ethical representation.",
   },
 ];
 
 const faqItems = [
   {
-    question: "What services do you offer for real estate clients?",
+    question: "What support does Jovi Realty provide to its agents?",
     answer:
-      "We provide comprehensive services. including market analysis. property valuation. tailored marketing strategies. and legal docurnentation assistance to ensure a smooth buying or selling process,",
+      "Jovi Realty offers comprehensive support, including mentorship programs, marketing resources, lead generation tools, and administrative assistance to help agents succeed in their careers.",
   },
   {
-    question: "How can I get started with your services?",
+    question: "Can I maintain my personal branding while working with Jovi Realty?",
     answer:
-      "We provide comprehensive services. including market analysis. property valuation. tailored marketing strategies. and legal docurnentation assistance to ensure a smooth buying or selling process,",
+      "Absolutely. We encourage agents to develop and maintain their personal brand, providing the flexibility to market themselves effectively while benefiting from our brokerage's resources.",
   },
   {
-    question: "How do you assist with legal documentation?",
+    question: "What training opportunities are available for agents?",
     answer:
-      "We provide comprehensive services. including market analysis. property valuation. tailored marketing strategies. and legal docurnentation assistance to ensure a smooth buying or selling process,",
+      "We provide ongoing training sessions, workshops, and access to industry-leading tools to ensure our agents stay updated with market trends and best practices.",
   },
   {
-    question: "Can you help me find the right property?",
+    question: "How does Jovi Realty assist with lead generation?",
     answer:
-      "We provide comprehensive services. including market analysis. property valuation. tailored marketing strategies. and legal docurnentation assistance to ensure a smooth buying or selling process,",
+      "Our brokerage invests in marketing strategies and platforms that generate quality leads, which are then distributed to our agents to help grow their client base.",
   },
 ];
 
@@ -89,14 +89,14 @@ const Home = () => {
       <Banner />
       <FeaturedProperties />
       <ImageContentSection
-        title="Meet Our Expert Agents"
-        description="Our team of experienced agents is here to help you navigate the market with ease."
+        title="People Make the Difference – Meet Our Agents"
+        description="Behind every property is a person with a goal. And behind every successful transaction is a real estate agent who cares. Our agents aren't just professionals—they’re locals who live and breathe Greater Vancouver real estate, and they’re ready to help you move forward."
         image={meetAgentsImg}
-        buttonText="Find Your Agent"
+        buttonText="Meet the Team"
         buttonLink="/find-an-agent"
       />
       <About />
-      <FeatureCards title="Highlights" cards={homeHighlights} />
+      <FeatureCards title="What Sets Jovi Realty Apart" cards={homeHighlights} />
       <Resources />
       <Testimonials className="p-0" />
       <FAQ className="pb-0" faqs={faqItems} />
