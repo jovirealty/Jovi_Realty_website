@@ -10,7 +10,7 @@ import squareFeetIcon from "./../../../../assets/Images/square-ft-icon.png";
 const PropertyCard = ({ property, status }) => {
   const officeMlsId = property.ListOfficeMlsId;
   const officeName = useOfficeNameCached(officeMlsId);
-  console.log("property card: ", property)
+  // console.log("property card: ", property)
 
   const buildAddress = (property) => {
     const sanitize = (value) => {

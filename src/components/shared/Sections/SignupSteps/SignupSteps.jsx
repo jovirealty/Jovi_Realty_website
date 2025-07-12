@@ -29,7 +29,7 @@ const SignupSteps = ({ title, showButton, buttonText, buttonLink, className = ''
     // If form is valid, proceed with submission
     setErrorMessage(''); // Clear any existing error message
     setIsSubmitted(true); // Set state to show success message
-    console.log('Form submitted:', { address }); // Replace with API call or other logic
+    // console.log('Form submitted:', { address }); // Replace with API call or other logic
 
     // Reset form after submission
     form.reset();

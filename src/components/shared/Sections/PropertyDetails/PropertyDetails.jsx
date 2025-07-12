@@ -30,7 +30,7 @@ const PropertyDetails = ({ propertyInfo }) => {
     error: agentError,
   } = useBridgeApi(agentKey ? `/Member(${agentKey})` : null, {}, false);
 
-  console.log("agentData: ", agentData);
+  // console.log("agentData: ", agentData);
   
   // Office API: /Offices(<OfficeKey>)
 
@@ -43,7 +43,7 @@ const PropertyDetails = ({ propertyInfo }) => {
     {},
     false
   );
-  console.log("office data", officeData);
+  // console.log("office data", officeData);
 
   const handleShareClick = (e) => {
     e.preventDefault();
