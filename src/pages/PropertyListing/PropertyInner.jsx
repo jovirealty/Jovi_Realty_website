@@ -19,7 +19,7 @@ const PropertyInner = () => {
     {},
     false,
   );
-  console.log("property value: ", property);
+  // console.log("property value: ", property);
   return (
     <div className="property-listing property-listing-rent">
       <Header />
