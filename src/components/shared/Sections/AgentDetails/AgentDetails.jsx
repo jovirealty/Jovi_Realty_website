@@ -7,8 +7,11 @@ import linkdImage from './../../../../assets/Images/linkd-icon.svg';
 import { TfiEmail } from "react-icons/tfi";
 import { FiPhone } from "react-icons/fi";
 import { SlGlobe } from "react-icons/sl";
+import getInitials from '../../../../utils/getInitials';
 
 const AgentDetails = ({ agent }) => {
+    const initials = getInitials(agent);
+    
     return (
         <section className="agent-details-sec position-relative">
             <div className="container">
@@ -17,8 +20,9 @@ const AgentDetails = ({ agent }) => {
                         <div className="agent-details-box position-relative">
                             <div className="row g-md-5 row-gap-40">
                                 <div className="col-lg-4 col-md-5">
-                                    <div className="agent-details-box-img">
-                                        <img src={agentImage} alt="AJ Mohamed" />
+                                    <div className="agent-details-box-img" >
+                                        {/* <img src={agentImage} alt="" /> */}
+                                        <p>{initials}</p>
                                     </div>
                                 </div>
 
