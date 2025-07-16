@@ -366,11 +366,11 @@ const PropertyDetails = ({ propertyInfo }) => {
                     </tr>
                     <tr>
                       <th scope="row">Living Area</th>
-                      <td>{propertyInfo.LivingArea.toLocaleString()} sqrft</td>
+                      <td>{propertyInfo.LivingArea?.toLocaleString()} sqrft</td>
                     </tr>
                     <tr>
                       <th scope="row">Floor Area</th>
-                      <td>{propertyInfo.BCRES_MainFloorFinishedArea.toLocaleString()} sqrft</td>
+                      <td>{propertyInfo.BCRES_MainFloorFinishedArea?.toLocaleString()} sqrft</td>
                     </tr>
                     <tr>
                       <th scope="row">Interior Features</th>
