@@ -1,34 +1,74 @@
 import React, { useState } from 'react';
 import './InquiryForm.css';
 import inquirySecImg from './../../../../assets/Images/inquiry-sec.png';
+import useFormApi from '../../../../hooks/useFormApi';
 
-const InquiryForm = () => {
+const INITIAL_STATE = {
+  fullName: '',
+  mobileNumber: '',
+  emailAddress: '',
+  iAm: '',
+  message: '',
+}
+
+function validate(form) {
+  // for the Full Name
+  if (!form.fullName.trim() || !/^[A-Za-z]+(\s[A-Za-z]+)+$/.test(form.fullName.trim())) {
+    return 'Please enter your complete name (first and last name, letters only).';
+  }
+
+  // Mobile: digits only, at least 7 numbers (update for your rules)
+  if (!/^\d{10,12}$/.test(form.mobileNumber)) {
+    return 'Please enter a valid mobile number (numbers only, at 10 digits).';
+  }
+
+  // Email: HTML5 handles type="email", but let's double-check
+  if (!form.emailAddress.trim() || !/^[\w-.]+@([\w-]+\.)+[\w-]{2,}$/.test(form.emailAddress)) {
+    return 'Please enter a valid email address.';
+  }
+
+  if (!form.iAm) {
+    return 'Please choose an option for Inquiry For.';
+  }
+
+  return null;
+}
+
+const InquiryForm = ({ inquiry="" }) => {
+  const {title, subTitle} = inquiry;
+
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [formData, setFormData] = useState(INITIAL_STATE);
 
-  const handleSubmit = (e) => {
+  const { loading, error, response, submitForm } = useFormApi('homepage');
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((f) => ({...f, [name]: value}));
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent default form submission
+    setErrorMessage('');
 
-    const form = e.target;
-
-    if (!form.checkValidity()) {
-      // Handle empty required fields
-      setErrorMessage('Please fill out all required fields.');
-      form.reportValidity();
+    const formError = validate(formData);
+    if(formError) {
+      setErrorMessage(formError);
       return;
     }
-
-    // If form is valid, proceed with submission
-    setErrorMessage(''); // Clear any existing error message
-    setIsSubmitted(true); // Set state to show success message
-
-    // Reset form after submission
-    form.reset();
-
-    // Hide success message after a few seconds
-    setTimeout(() => {
-      setIsSubmitted(false);
-    }, 3000); // Message disappears after 3 seconds
+    const HomePageFormObj = {
+      ...formData,
+      contactDetail: {
+        countryCode: "+1",
+        contactNumber: formData.mobileNumber
+      },
+    }
+    await submitForm(HomePageFormObj);
+    console.log(HomePageFormObj);
+    setIsSubmitted(true);
+    setFormData(INITIAL_STATE);
+    setTimeout(() => setIsSubmitted(false), 3000);
   };
 
   return (
@@ -52,7 +92,15 @@ const InquiryForm = () => {
                   <div className="field-row">
                     <div className="field-group">
                       <label className="form-label" htmlFor="name">Full Name <span className="text-danger">*</span></label>
-                      <input type="text" className="form-control" placeholder="Enter Full Name" required />
+                      <input 
+                        type="text"
+                        className="form-control"
+                        placeholder="Enter Full Name"
+                        name="fullName"
+                        value={formData.fullName}
+                        onChange={handleChange}
+                        required
+                      />
                     </div>
                     <div className="field-group">
                       <label className="form-label" htmlFor="mobile-number">Mobile Number <span className="text-danger">*</span></label>
@@ -60,19 +108,41 @@ const InquiryForm = () => {
                         type="text"
                         className="form-control"
                         placeholder="Enter Mobile Number"
+                        name="mobileNumber"
+                        value={formData.mobileNumber}
+                        onChange={handleChange}
                         required
-                        name="mobile-number"
+                        autoComplete="tel"
+                        inputMode="numeric"
+                        pattern='\d*'
+                        maxLength={12}
                       />
                     </div>
                   </div>
                   <div className="field-row">
                     <div className="field-group">
                       <label className="form-label" htmlFor="email">Email Address <span className="text-danger">*</span></label>
-                      <input type="email" className="form-control" placeholder="Enter Email Address" required />
+                      <input 
+                        type="email" 
+                        className="form-control" 
+                        placeholder="Enter Email Address" 
+                        required 
+                        name="emailAddress"
+                        value={formData.emailAddress}
+                        onChange={handleChange}
+                        autoComplete='emailAddress'
+                      />
                     </div>
                     <div className="field-group">
                       <label className="form-label" htmlFor="inquiry">Inquiry For <span className="text-danger">*</span></label>
-                      <select className="form-control form-select" defaultValue="" required>
+                      <select 
+                        className="form-control form-select" 
+                        defaultValue="" 
+                        required
+                        name='iAm'
+                        value={formData.iAm}
+                        onChange={handleChange}
+                      >
                         <option value="" disabled>Please Choose an Option</option>
                         <option value="buy">Buy</option>
                         <option value="sell">Sell</option>
@@ -83,11 +153,20 @@ const InquiryForm = () => {
                   </div>
                   <div className="field-group">
                     <label className="form-label" htmlFor="description">Description</label>
-                    <textarea className="form-control" rows="4" placeholder="Enter a Brief Description"></textarea>
+                    <textarea 
+                      className="form-control" 
+                      rows="4" 
+                      placeholder="Enter a Brief Description"
+                      name="message"
+                      value={formData.message}
+                      onChange={handleChange}
+                      ></textarea>
                   </div>
 
                   <div className="field-group">
-                    <button type="submit" className="btn btn-primary w-100">Submit</button>
+                    <button type="submit" className="btn btn-primary w-100" disabled={loading}>
+                      {loading ? "Submitting..." : "Submit"}
+                    </button>
                   </div>
                 </div>
               </form>
@@ -103,9 +182,15 @@ const InquiryForm = () => {
                   )}
 
                   {/* Error Message */}
-                  {errorMessage && (
+                  {(errorMessage || error) && (
                     <div className="alert alert-danger" role="alert">
-                      {errorMessage}
+                      {errorMessage || error}
+                    </div>
+                  )}
+                  {/* Show backend response message */}
+                  {response && !isSubmitted && (
+                    <div className="alert alert-success" role="alert">
+                      {typeof response === "string" ? response : "Submitted successfully!"}
                     </div>
                   )}
                 </div>

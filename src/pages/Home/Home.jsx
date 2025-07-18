@@ -82,6 +82,11 @@ const faqItems = [
   },
 ];
 
+const indexInquiry = {
+  title: "Have a Question or Ready to Chat?",
+  subTitle: "Let us know how we can help—buying, selling, managing, or just exploring your options.",
+};
+
 const Home = () => {
   return (
     <div className="home">
@@ -101,7 +106,7 @@ const Home = () => {
       <Testimonials className="p-0" />
       <FAQ className="pb-0" faqs={faqItems} />
       <KeywordSearch />
-      <InquiryForm />
+      <InquiryForm inquiry={indexInquiry} />
       <Footer />
     </div>
   );
