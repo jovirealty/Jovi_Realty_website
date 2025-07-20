@@ -106,7 +106,7 @@ const Home = () => {
       <Testimonials className="p-0" />
       <FAQ className="pb-0" faqs={faqItems} />
       <KeywordSearch />
-      <InquiryForm inquiry={indexInquiry} />
+      <InquiryForm inquiry={indexInquiry} APIRoute={"homepage"} />
       <Footer />
     </div>
   );

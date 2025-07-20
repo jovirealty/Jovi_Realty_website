@@ -34,14 +34,14 @@ function validate(form) {
   return null;
 }
 
-const InquiryForm = ({ inquiry="" }) => {
+const InquiryForm = ({ inquiry="", APIRoute="" }) => {
   const {title, subTitle} = inquiry;
 
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [formData, setFormData] = useState(INITIAL_STATE);
 
-  const { loading, error, response, submitForm } = useFormApi('homepage');
+  const { loading, error, response, submitForm } = useFormApi(APIRoute);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
