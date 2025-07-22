@@ -82,6 +82,36 @@ const faqItems = [
   },
 ];
 
+const indexInquiry = {
+  title: "Have a Question or Ready to Chat?",
+  subTitle: "Let us know how we can help—buying, selling, managing, or just exploring your options.",
+};
+
+const homeInquiryFields = [
+  { name: "fullName", label: "Full Name", required: true, type: "text", placeholder: "Enter Full Name" },
+  { name: "mobileNumber", label: "Mobile Number", required: true, type: "text", placeholder: "Enter Mobile Number" },
+  { name: "emailAddress", label: "Email Address", required: true, type: "email", placeholder: "Enter Email Address" },
+  { name: "iAm", label: "Inquiry For", as: "select", required: true, options: [
+      { value: "buy", label: "Buy" },
+      { value: "sell", label: "Sell" },
+      { value: "rent", label: "Rent" },
+      { value: "agent", label: "Join as an agent" }
+    ]
+  },
+  { name: "message", label: "Description", as: "textarea", placeholder: "Enter a Brief Description" },
+];
+
+const indexTransform = (data) => {
+  const res = {
+    ...data,
+    contactDetail: {
+      countryCode: "+1",
+      contactNumber: data.mobileNumber
+    },
+  }
+  return res;
+};
+
 const Home = () => {
   return (
     <div className="home">
@@ -101,7 +131,12 @@ const Home = () => {
       <Testimonials className="p-0" />
       <FAQ className="pb-0" faqs={faqItems} />
       <KeywordSearch />
-      <InquiryForm />
+      <InquiryForm 
+        inquiryHeading={indexInquiry} 
+        APIRoute={"homepage"} 
+        inquiryFields={homeInquiryFields} 
+        transformFormData={indexTransform}
+      />
       <Footer />
     </div>
   );

@@ -1,35 +1,73 @@
 import React, { useState } from 'react';
 import './InquiryForm.css';
 import inquirySecImg from './../../../../assets/Images/inquiry-sec.png';
+import useFormApi from '../../../../hooks/useFormApi';
+import chunkArray from '../../../../utils/chunkArray';
+import FormField from '../../../FormFields/FormField';
 
-const InquiryForm = () => {
+const INITIAL_STATE = {
+  fullName: '',
+  mobileNumber: '',
+  emailAddress: '',
+  iAm: '',
+  message: '',
+};
+
+function validate(form, fields) {
+  for (const field of fields) {
+    if (field.required) {
+      if (!form[field.name] || form[field.name].toString().trim() === "") {
+        return `Please enter ${field.label || field.name}.`;
+      }
+    }
+    // Custom rules for certain fields
+    if (field.name === "fullName" && form.fullName && !/^[A-Za-z]+(\s[A-Za-z]+)+$/.test(form.fullName.trim())) {
+      return "Please enter your complete name (first and last name, letters only).";
+    }
+    if (field.name === "mobileNumber" && form.mobileNumber && !/^\d{10,12}$/.test(form.mobileNumber)) {
+      return "Please enter a valid mobile number (numbers only, at 10 digits).";
+    }
+    if (field.name === "emailAddress" && form.emailAddress && !/^[\w-.]+@([\w-]+\.)+[\w-]{2,}$/.test(form.emailAddress)) {
+      return "Please enter a valid email address.";
+    }
+  }
+  return null;
+}
+
+const InquiryForm = ({ inquiryHeading="", APIRoute="", inquiryFields, transformFormData }) => {
+  const {title, subTitle} = inquiryHeading;
+
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [formData, setFormData] = useState(INITIAL_STATE);
 
-  const handleSubmit = (e) => {
+  const { loading, error, response, submitForm } = useFormApi(APIRoute);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((f) => ({...f, [name]: value}));
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent default form submission
+    setErrorMessage('');
 
-    const form = e.target;
-
-    if (!form.checkValidity()) {
-      // Handle empty required fields
-      setErrorMessage('Please fill out all required fields.');
-      form.reportValidity();
+    const formError = validate(formData, inquiryFields);
+    if(formError) {
+      setErrorMessage(formError);
       return;
     }
-
-    // If form is valid, proceed with submission
-    setErrorMessage(''); // Clear any existing error message
-    setIsSubmitted(true); // Set state to show success message
-
-    // Reset form after submission
-    form.reset();
-
-    // Hide success message after a few seconds
-    setTimeout(() => {
-      setIsSubmitted(false);
-    }, 3000); // Message disappears after 3 seconds
+    const HomePageFormObj = transformFormData(formData);
+    await submitForm(HomePageFormObj);
+    setIsSubmitted(true);
+    setFormData(INITIAL_STATE);
+    setTimeout(() => setIsSubmitted(false), 3000);
   };
+
+  const fieldRows = chunkArray(
+    inquiryFields.filter(f => f.name !== "message"), // message field goes in its own row
+    2
+  );
 
   return (
     <section className="inquiry-sec position-relative">
@@ -49,45 +87,33 @@ const InquiryForm = () => {
 
               <form onSubmit={handleSubmit} noValidate>
                 <div className="inquiry-form">
-                  <div className="field-row">
-                    <div className="field-group">
-                      <label className="form-label" htmlFor="name">Full Name <span className="text-danger">*</span></label>
-                      <input type="text" className="form-control" placeholder="Enter Full Name" required />
+                  {fieldRows.map((rowFields, idx) => (
+                    <div className="field-row" key={idx}>
+                      {rowFields.map((field) => (
+                        <FormField
+                          key={field.name}
+                          {...field}
+                          value={formData[field.name]}
+                          onChange={handleChange}
+                        />
+                      ))}
                     </div>
-                    <div className="field-group">
-                      <label className="form-label" htmlFor="mobile-number">Mobile Number <span className="text-danger">*</span></label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        placeholder="Enter Mobile Number"
-                        required
-                        name="mobile-number"
+                  ))}
+
+                   {/* Render the textarea/message in a full row */}
+                    <div className="field-row">
+                      <FormField
+                        {...inquiryFields.find(f => f.name === "message")}
+                        value={formData["message"]}
+                        onChange={handleChange}
                       />
                     </div>
-                  </div>
-                  <div className="field-row">
-                    <div className="field-group">
-                      <label className="form-label" htmlFor="email">Email Address <span className="text-danger">*</span></label>
-                      <input type="email" className="form-control" placeholder="Enter Email Address" required />
-                    </div>
-                    <div className="field-group">
-                      <label className="form-label" htmlFor="inquiry">Inquiry For <span className="text-danger">*</span></label>
-                      <select className="form-control form-select" defaultValue="" required>
-                        <option value="" disabled>Please Choose an Option</option>
-                        <option value="buy">Buy</option>
-                        <option value="sell">Sell</option>
-                        <option value="rent">Rent</option>
-                        <option value="rent">Join as an agent</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div className="field-group">
-                    <label className="form-label" htmlFor="description">Description</label>
-                    <textarea className="form-control" rows="4" placeholder="Enter a Brief Description"></textarea>
-                  </div>
+                    
 
                   <div className="field-group">
-                    <button type="submit" className="btn btn-primary w-100">Submit</button>
+                    <button type="submit" className="btn btn-primary w-100" disabled={loading}>
+                      {loading ? "Submitting..." : "Submit"}
+                    </button>
                   </div>
                 </div>
               </form>
@@ -103,9 +129,15 @@ const InquiryForm = () => {
                   )}
 
                   {/* Error Message */}
-                  {errorMessage && (
+                  {(errorMessage || error) && (
                     <div className="alert alert-danger" role="alert">
-                      {errorMessage}
+                      {errorMessage || error}
+                    </div>
+                  )}
+                  {/* Show backend response message */}
+                  {response && !isSubmitted && (
+                    <div className="alert alert-success" role="alert">
+                      {typeof response === "string" ? response : "Submitted successfully!"}
                     </div>
                   )}
                 </div>

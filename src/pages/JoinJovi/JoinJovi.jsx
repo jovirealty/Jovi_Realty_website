@@ -10,6 +10,7 @@ import AboutSectionTwo from "../../components/shared/Sections/AboutSectionTwo/Ab
 import IconBoxSection from "../../components/shared/Sections/IconBoxSection/IconBoxSection";
 import FAQTwo from "../../components/shared/Sections/FAQTwo/FAQTwo";
 import InquiryFormTwo from "../../components/shared/Sections/InquiryFormTwo/InquiryFormTwo";
+import InquiryForm from "../../components/shared/Sections/InquiryForm/InquiryForm";
 
 import bannerImage from "../../assets/Images/join-banner.png";
 import compIcon from "../../assets/Images/comp-icon.svg";
@@ -26,6 +27,7 @@ import marketingEdgeImg from "./../../assets/Images/marketing-edge.svg";
 import technologyIcon from "./../../assets/Images/technology-icon.png";
 import marketingIcon from "./../../assets/Images/marketing-icon.png";
 import businessIcon from "./../../assets/Images/business-icon.png";
+
 const JoinJovi = () => {
     const benefitsItems = [
         {
@@ -49,6 +51,7 @@ const JoinJovi = () => {
             description: "Choose a plan that fits your business goals—including options to keep 100% of your commission earned."
         }
     ];
+
     const featureCardsItems = [
         {
             image: buySmartImg,
@@ -81,6 +84,7 @@ const JoinJovi = () => {
             description: "Practical, ongoing workshops that reflect real trends in your market—not just theory or canned modules."
         }
     ];
+
     const futureItems = [
         {
             icon: technologyIcon,
@@ -98,6 +102,7 @@ const JoinJovi = () => {
             description: "Beyond transactions—we help agents evolve into well-rounded, long-term industry professionals."
         }
     ];
+
     const faqs = [
         {
             question: "How quickly can I onboard and start transacting?",
@@ -116,6 +121,36 @@ const JoinJovi = () => {
             answer: "Absolutely. We support agent branding and offer flexible models for individuals, teams, and partnerships."
         }
     ];
+
+    const joinJoviInquiryHeadings = {
+        title: "Have a Question or Ready to Chat?",
+        subTitle: "Let us know how we can help—buying, selling, managing, or just exploring your options.",
+    };
+
+    const joinJoviInquiryFields = [
+        { name: "fullName", label: "Full Name", required: true, type: "text", placeholder: "Enter Full Name" },
+        { name: "mobileNumber", label: "Mobile Number", required: true, type: "text", placeholder: "Enter Mobile Number" },
+        { name: "emailAddress", label: "Email Address", required: true, type: "email", placeholder: "Enter Email Address" },
+        { name: "licenceStatus", label: "licence Status", as: "select", required: true, options: [
+            { value: "Yes", label: "Yes" },
+            { value: "No", label: "No" },
+            { value: "In Progress", label: "In Progress" },
+            ]
+        },
+        { name: "message", label: "Description", as: "textarea", placeholder: "Enter a Brief Description" },
+    ];
+
+    const joinJoviTransform = (data) => {
+        const res = {
+            ...data,
+            contactDetail: {
+                countryCode: "+1",
+                contactNumber: data.mobileNumber
+            },
+        };
+        return res;
+    };
+
     return (
         <div className="join-jovi">
             <Header />
@@ -150,7 +185,13 @@ const JoinJovi = () => {
                 className="p-0"
             />
             <FAQTwo faqs={faqs} />
-            <InquiryFormTwo />
+            <InquiryForm 
+                inquiryHeading={joinJoviInquiryHeadings} 
+                APIRoute={"join-jovi"} 
+                inquiryFields={joinJoviInquiryFields} 
+                transformFormData={joinJoviTransform}
+            />
+            {/* <InquiryFormTwo /> */}
             <Footer />
         </div>
     );

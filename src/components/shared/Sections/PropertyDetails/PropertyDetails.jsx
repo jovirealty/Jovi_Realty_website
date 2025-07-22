@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import useBridgeApi from "../../../../hooks/useBridgeApi";
 import "./PropertyDetails.css";
+import PropertyInquiryForm from "../InquiryFormTwo/PropertyInquiryForm";
+import EmptySection from "../EmptySection/EmptySection";
 
 import bedIcon from "./../../../../assets/Images/bed-icon.svg";
 import tubIcon from "./../../../../assets/Images/bathtub-icon.svg";
@@ -614,70 +616,12 @@ const PropertyDetails = ({ propertyInfo }) => {
                   </div>
                 </div>
               </div>
-              <div className="agent-form-box text-white">
-                <h5 className="mb-3">Inquiry Form</h5>
-                <p className="mb-3">
-                  Reach out today and let us help you find your perfect
-                  property.
-                </p>
-                <form>
-                  <div className="agent-inquiry-form d-flex flex-column">
-                    <div className="field-group">
-                      <label className="form-label" htmlFor="name">
-                        Full Name
-                      </label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        placeholder="Enter Full Name"
-                        required
-                      />
-                    </div>
-                    <div className="field-group">
-                      <label className="form-label" htmlFor="email">
-                        Mobile Number
-                      </label>
-                      <input
-                        type="email"
-                        className="form-control"
-                        placeholder="Enter Mobile Number"
-                        required
-                      />
-                    </div>
-                    <div className="field-group">
-                      <label className="form-label" htmlFor="email">
-                        Email Address
-                      </label>
-                      <input
-                        type="email"
-                        className="form-control"
-                        placeholder="Enter Email Address"
-                        required
-                      />
-                    </div>
-                    <div className="field-group">
-                      <label className="form-label" htmlFor="description">
-                        Description
-                      </label>
-                      <textarea
-                        className="form-control"
-                        rows="4"
-                        placeholder="Enter a Brief Description"
-                      ></textarea>
-                    </div>
-
-                    <div className="field-group">
-                      <button type="submit" className="btn btn-primary w-100">
-                        Submit
-                      </button>
-                    </div>
-                  </div>
-                </form>
-              </div>
+              <PropertyInquiryForm propertyInfo={propertyInfo} />
             </div>
           </div>
         </div>
       </div>
+      <EmptySection />
     </div>
   );
 };

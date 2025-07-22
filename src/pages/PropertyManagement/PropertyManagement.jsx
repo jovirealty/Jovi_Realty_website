@@ -44,46 +44,42 @@ const PropertyManagement = () => {
               title: "Full Compliance & Maintenance",
               description: "We stay ahead of legal requirements and maintenance issues so your property stays protected and profitable."
           },
-      ];
-// const steps = [
-//   { icon: addAddress, title: "Submit Address" },
-//   { icon: addSigners, title: "Add Signers" },
-//   { icon: signContract, title: "Sign Contract" },
-//   { icon: getListed, title: "Get Listed" }
-// ];
-    const featureCardsItems = [
-        {
-            image: RecordImg,
-            title: "Tenant Placement",
-            description: "We find and screen reliable tenants for your Greater Vancouver property, ensuring a smooth leasing process."
-        },
-        {
-            image: InvestImg,
-            title: "Rent Collection",
-            description: "Our team handles timely rent collection and provides detailed financial reports for transparency."
-        },
-        {
-            image: ConnectedImg,
-            title: "Property Maintenance",
-            description: "We coordinate repairs and maintenance with vetted vendors to keep your property in top shape."
-        },
-        {
-            image: FocusImg,
-            title: "Lease Management",
-            description: "We draft and manage leases, ensuring compliance with Greater Vancouver regulations."
-        },
-        {
-            image: SpeedImg,
-            title: "Regular Inspections",
-            description: "Our bi-annual inspections ensure your property remains in excellent condition, minimizing risks."
-        },
-        {
-            image: MarketingImg,
-            title: "Tenant Communication",
-            description: "We manage tenant inquiries and concerns promptly, fostering positive relationships and satisfaction."
-        }
-    ];
-    const faqItems = [
+  ];
+
+  const featureCardsItems = [
+      {
+          image: RecordImg,
+          title: "Tenant Placement",
+          description: "We find and screen reliable tenants for your Greater Vancouver property, ensuring a smooth leasing process."
+      },
+      {
+          image: InvestImg,
+          title: "Rent Collection",
+          description: "Our team handles timely rent collection and provides detailed financial reports for transparency."
+      },
+      {
+          image: ConnectedImg,
+          title: "Property Maintenance",
+          description: "We coordinate repairs and maintenance with vetted vendors to keep your property in top shape."
+      },
+      {
+          image: FocusImg,
+          title: "Lease Management",
+          description: "We draft and manage leases, ensuring compliance with Greater Vancouver regulations."
+      },
+      {
+          image: SpeedImg,
+          title: "Regular Inspections",
+          description: "Our bi-annual inspections ensure your property remains in excellent condition, minimizing risks."
+      },
+      {
+          image: MarketingImg,
+          title: "Tenant Communication",
+          description: "We manage tenant inquiries and concerns promptly, fostering positive relationships and satisfaction."
+      }
+  ];
+
+  const faqItems = [
   {
     question: "When will I receive my rental income each month?",
     answer:
@@ -119,7 +115,40 @@ const PropertyManagement = () => {
     answer:
       "Absolutely. We manage a range of property types including condos, townhomes, and single-family houses.",
   },
-];
+  ];
+
+  const rentalServiceInquiryHeading = {
+    title: "Have a Question or Ready to Chat?",
+    subTitle: "Let us know how we can help—buying, selling, managing, or just exploring your options.",
+  };
+
+  const rentalServiceInquiryFields = [
+    { name: "fullName", label: "Full Name", required: true, type: "text", placeholder: "Enter Full Name" },
+    { name: "mobileNumber", label: "Mobile Number", required: true, type: "text", placeholder: "Enter Mobile Number" },
+    { name: "emailAddress", label: "Email Address", required: true, type: "email", placeholder: "Enter Email Address" },
+    { name: "propertyAddress", label: "Property Address", required: true, type: "text", placeholder: "Enter Property Address" },
+    { name: "serviceRequested", label: "Service Request ", as: "select", required: true, options: [
+        { value: "Full Property Management", label: "Full Property Management" },
+        { value: "Tenant Placement", label: "Tenant Placement" },
+      ],
+    },
+    { name: "message", label: "Description", as: "textarea", placeholder: "Enter a Brief Description" },
+  ];
+
+  const rentalServiceTransform = (data) => {
+    const res = {
+      ...data,
+      contactDetail: {
+        countryCode: "+1",
+        contactNumber: data.mobileNumber
+      },
+      propertyDetail: {
+        completeAddress: data.propertyAddress,
+      },
+    };
+    return res;
+  };
+
   return (
     <div className='property-management'>
     <Header/>
@@ -156,7 +185,12 @@ const PropertyManagement = () => {
       />
       <JoviStatsSection/>
       <FAQ faqs={faqItems} />
-      <InquiryForm />
+      <InquiryForm 
+        inquiryHeading={rentalServiceInquiryHeading} 
+        APIRoute={"rental-service"} 
+        inquiryFields={rentalServiceInquiryFields} 
+        transformFormData={rentalServiceTransform}
+      />
       <Footer />
 
     </div>
