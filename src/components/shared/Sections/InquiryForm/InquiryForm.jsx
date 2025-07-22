@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import './InquiryForm.css';
 import inquirySecImg from './../../../../assets/Images/inquiry-sec.png';
 import useFormApi from '../../../../hooks/useFormApi';
+import chunkArray from '../../../../utils/chunkArray';
+import FormField from '../../../FormFields/FormField';
 
 const INITIAL_STATE = {
   fullName: '',
@@ -9,33 +11,31 @@ const INITIAL_STATE = {
   emailAddress: '',
   iAm: '',
   message: '',
-}
+};
 
-function validate(form) {
-  // for the Full Name
-  if (!form.fullName.trim() || !/^[A-Za-z]+(\s[A-Za-z]+)+$/.test(form.fullName.trim())) {
-    return 'Please enter your complete name (first and last name, letters only).';
+function validate(form, fields) {
+  for (const field of fields) {
+    if (field.required) {
+      if (!form[field.name] || form[field.name].toString().trim() === "") {
+        return `Please enter ${field.label || field.name}.`;
+      }
+    }
+    // Custom rules for certain fields
+    if (field.name === "fullName" && form.fullName && !/^[A-Za-z]+(\s[A-Za-z]+)+$/.test(form.fullName.trim())) {
+      return "Please enter your complete name (first and last name, letters only).";
+    }
+    if (field.name === "mobileNumber" && form.mobileNumber && !/^\d{10,12}$/.test(form.mobileNumber)) {
+      return "Please enter a valid mobile number (numbers only, at 10 digits).";
+    }
+    if (field.name === "emailAddress" && form.emailAddress && !/^[\w-.]+@([\w-]+\.)+[\w-]{2,}$/.test(form.emailAddress)) {
+      return "Please enter a valid email address.";
+    }
   }
-
-  // Mobile: digits only, at least 7 numbers (update for your rules)
-  if (!/^\d{10,12}$/.test(form.mobileNumber)) {
-    return 'Please enter a valid mobile number (numbers only, at 10 digits).';
-  }
-
-  // Email: HTML5 handles type="email", but let's double-check
-  if (!form.emailAddress.trim() || !/^[\w-.]+@([\w-]+\.)+[\w-]{2,}$/.test(form.emailAddress)) {
-    return 'Please enter a valid email address.';
-  }
-
-  if (!form.iAm) {
-    return 'Please choose an option for Inquiry For.';
-  }
-
   return null;
 }
 
-const InquiryForm = ({ inquiry="", APIRoute="" }) => {
-  const {title, subTitle} = inquiry;
+const InquiryForm = ({ inquiryHeading="", APIRoute="", inquiryFields, transformFormData }) => {
+  const {title, subTitle} = inquiryHeading;
 
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
@@ -52,24 +52,22 @@ const InquiryForm = ({ inquiry="", APIRoute="" }) => {
     e.preventDefault(); // Prevent default form submission
     setErrorMessage('');
 
-    const formError = validate(formData);
+    const formError = validate(formData, inquiryFields);
     if(formError) {
       setErrorMessage(formError);
       return;
     }
-    const HomePageFormObj = {
-      ...formData,
-      contactDetail: {
-        countryCode: "+1",
-        contactNumber: formData.mobileNumber
-      },
-    }
+    const HomePageFormObj = transformFormData(formData);
     await submitForm(HomePageFormObj);
-    console.log(HomePageFormObj);
     setIsSubmitted(true);
     setFormData(INITIAL_STATE);
     setTimeout(() => setIsSubmitted(false), 3000);
   };
+
+  const fieldRows = chunkArray(
+    inquiryFields.filter(f => f.name !== "message"), // message field goes in its own row
+    2
+  );
 
   return (
     <section className="inquiry-sec position-relative">
@@ -89,79 +87,28 @@ const InquiryForm = ({ inquiry="", APIRoute="" }) => {
 
               <form onSubmit={handleSubmit} noValidate>
                 <div className="inquiry-form">
-                  <div className="field-row">
-                    <div className="field-group">
-                      <label className="form-label" htmlFor="name">Full Name <span className="text-danger">*</span></label>
-                      <input 
-                        type="text"
-                        className="form-control"
-                        placeholder="Enter Full Name"
-                        name="fullName"
-                        value={formData.fullName}
+                  {fieldRows.map((rowFields, idx) => (
+                    <div className="field-row" key={idx}>
+                      {rowFields.map((field) => (
+                        <FormField
+                          key={field.name}
+                          {...field}
+                          value={formData[field.name]}
+                          onChange={handleChange}
+                        />
+                      ))}
+                    </div>
+                  ))}
+
+                   {/* Render the textarea/message in a full row */}
+                    <div className="field-row">
+                      <FormField
+                        {...inquiryFields.find(f => f.name === "message")}
+                        value={formData["message"]}
                         onChange={handleChange}
-                        required
                       />
                     </div>
-                    <div className="field-group">
-                      <label className="form-label" htmlFor="mobile-number">Mobile Number <span className="text-danger">*</span></label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        placeholder="Enter Mobile Number"
-                        name="mobileNumber"
-                        value={formData.mobileNumber}
-                        onChange={handleChange}
-                        required
-                        autoComplete="tel"
-                        inputMode="numeric"
-                        pattern='\d*'
-                        maxLength={12}
-                      />
-                    </div>
-                  </div>
-                  <div className="field-row">
-                    <div className="field-group">
-                      <label className="form-label" htmlFor="email">Email Address <span className="text-danger">*</span></label>
-                      <input 
-                        type="email" 
-                        className="form-control" 
-                        placeholder="Enter Email Address" 
-                        required 
-                        name="emailAddress"
-                        value={formData.emailAddress}
-                        onChange={handleChange}
-                        autoComplete='emailAddress'
-                      />
-                    </div>
-                    <div className="field-group">
-                      <label className="form-label" htmlFor="inquiry">Inquiry For <span className="text-danger">*</span></label>
-                      <select 
-                        className="form-control form-select" 
-                        defaultValue="" 
-                        required
-                        name='iAm'
-                        value={formData.iAm}
-                        onChange={handleChange}
-                      >
-                        <option value="" disabled>Please Choose an Option</option>
-                        <option value="buy">Buy</option>
-                        <option value="sell">Sell</option>
-                        <option value="rent">Rent</option>
-                        <option value="rent">Join as an agent</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div className="field-group">
-                    <label className="form-label" htmlFor="description">Description</label>
-                    <textarea 
-                      className="form-control" 
-                      rows="4" 
-                      placeholder="Enter a Brief Description"
-                      name="message"
-                      value={formData.message}
-                      onChange={handleChange}
-                      ></textarea>
-                  </div>
+                    
 
                   <div className="field-group">
                     <button type="submit" className="btn btn-primary w-100" disabled={loading}>
