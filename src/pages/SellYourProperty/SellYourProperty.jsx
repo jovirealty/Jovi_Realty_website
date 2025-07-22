@@ -21,6 +21,8 @@ import dedicateIcon from "./../../assets/Images/dedicate-icon.svg";
 import homeIcon from "./../../assets/Images/home-icon.png";
 import cameraIcon from "./../../assets/Images/camera-icon.png";
 import formIcon from "./../../assets/Images/form-icon.png";
+import InquiryForm from "../../components/shared/Sections/InquiryForm/InquiryForm";
+import EmptySection from "../../components/shared/Sections/EmptySection/EmptySection";
 
 const SellYourProperty = () => {
   const benefitsItems = [
@@ -101,6 +103,40 @@ const SellYourProperty = () => {
     },
   ];
 
+  const sellYourPropertyInquiryTitle = {
+    title: "Have a Question or Ready to Chat?",
+    subTitle: "Let us know how we can help—buying, selling, managing, or just exploring your options.",
+  };
+
+  const sellInquiryFields = [
+    { name: "fullName", label: "Full Name", required: true, type: "text", placeholder: "Enter Full Name" },
+    { name: "mobileNumber", label: "Mobile Number", required: true, type: "text", placeholder: "Enter Mobile Number" },
+    { name: "emailAddress", label: "Email Address", required: true, type: "email", placeholder: "Enter Email Address" },
+    { name: "propertyAddress", label: "Property Address", required: true, type: "text", placeholder: "Enter Property Address" },
+    { name: "iAm", label: "Inquiry For", as: "select", required: true, options: [
+      { value: "buy", label: "Buy" },
+      { value: "sell", label: "Sell" },
+      { value: "rent", label: "Rent" },
+      { value: "agent", label: "Join as an agent" }
+    ]
+  },
+    { name: "message", label: "Additional Details", as: "textarea", placeholder: "Enter a Brief Description" },
+  ];
+
+  const sellTranform = (data) => {
+    const res = {
+      ...data,
+      contactDetail: {
+        countryCode: "+1",
+        contactNumber: data.mobileNumber,
+      },
+      propertyDetail: {
+        completeAddress: data.propertyAddress,
+      },
+    };
+    return res;
+  };
+
   return (
     <div className="sell-your-property">
       <Header />
@@ -130,6 +166,12 @@ const SellYourProperty = () => {
         buttonText="View More"
       />
       <FAQ faqs={faqItems} />
+      <InquiryForm 
+        inquiryHeading={sellYourPropertyInquiryTitle} 
+        APIRoute={"selling-inquiry"} 
+        inquiryFields={sellInquiryFields} 
+        transformFormData={sellTranform}
+      />
       <CTASection />
       <Footer />
     </div>
