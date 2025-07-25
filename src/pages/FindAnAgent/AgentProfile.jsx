@@ -40,7 +40,6 @@ const AgentProfiles = () => {
                     <AgentTabs agent={memberData} />
                 </>
             )}
-            <InquiryForm />         
             <Footer />
         </div>
     );
