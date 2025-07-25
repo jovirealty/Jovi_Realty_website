@@ -16,7 +16,6 @@ const FindAnAgent = () => {
                 title="Find an Agent"
             />
             <AgentsSection officeMlsId="V005048" showSearch={true} title="Featured Agents" subHead="Our Team" />
-            <InquiryForm />
             <Footer />
         </div>
     );

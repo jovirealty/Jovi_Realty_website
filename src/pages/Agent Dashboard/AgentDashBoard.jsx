@@ -60,7 +60,6 @@ const AgentDashBoard = () => {
         <div>
             <Header />
             <AgentDashboardSection enquiryData={enquiryData} />
-            <InquiryForm />
             <Footer />
         </div>
     )
