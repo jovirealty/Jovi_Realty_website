@@ -26,7 +26,6 @@ function validate(form) {
 }
 
 const PropertyInquiryForm = ({ propertyInfo }) => {
-    console.log(propertyInfo);
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
     const [propertyFormData, setPropertyFormData] = useState(INITIAL_STATE);
