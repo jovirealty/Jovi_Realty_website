@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './InquiryForm.css';
 import inquirySecImg from './../../../../assets/Images/inquiry-sec.png';
 import useFormApi from '../../../../hooks/useFormApi';
+import useRecaptcha from '../../../../hooks/useRecaptcha';
 import chunkArray from '../../../../utils/chunkArray';
 import FormField from '../../../FormFields/FormField';
 
@@ -43,6 +44,10 @@ const InquiryForm = ({ inquiryHeading="", APIRoute="", inquiryFields, transformF
 
   const { loading, error, response, submitForm } = useFormApi(APIRoute);
 
+  // captcha
+  const getRecaptchaToken = useRecaptcha(import.meta.env.VITE_RECAPTCHA_SITE_KEY);
+
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((f) => ({...f, [name]: value}));
@@ -57,11 +62,19 @@ const InquiryForm = ({ inquiryHeading="", APIRoute="", inquiryFields, transformF
       setErrorMessage(formError);
       return;
     }
-    const HomePageFormObj = transformFormData(formData);
-    await submitForm(HomePageFormObj);
-    setIsSubmitted(true);
-    setFormData(INITIAL_STATE);
-    setTimeout(() => setIsSubmitted(false), 3000);
+    try {
+      const token = await getRecaptchaToken('inquiry_submit');
+      const FormObj = transformFormData({
+        ...formData, 
+        'g-recaptcha-token': token,
+      });
+      await submitForm(FormObj);
+      setIsSubmitted(true);
+      setFormData(INITIAL_STATE);
+      setTimeout(() => setIsSubmitted(false), 3000);
+    } catch (err) {
+      setErrorMessage('CAPTCHA verification failed');
+    }
   };
 
   const fieldRows = chunkArray(
