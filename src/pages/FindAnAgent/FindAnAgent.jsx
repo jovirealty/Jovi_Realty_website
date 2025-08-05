@@ -3,7 +3,7 @@ import Header from "../../components/shared/Sections/Header/header";
 import Footer from "../../components/shared/Sections/Footer/footer";
 import Banner from "../../components/shared/Sections/Banner/Banner";
 import AgentsSection from "../../components/shared/Sections/AgentsSection/AgentsSection";
-import InquiryForm from "../../components/shared/Sections/InquiryForm/InquiryForm";
+
 
 import agentBannerImg from './../../assets/Images/agent-banner.png';
 
