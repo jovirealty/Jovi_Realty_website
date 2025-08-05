@@ -1,0 +1,26 @@
+.tab-skeleton {
+  width: 160px;
+  height: 46px;
+  border-radius: 6px;
+  background: #e9ecef;
+  margin-bottom: 16px;
+}
+.agent-tabs-skeleton-animated {
+  animation: tabs-skeleton-shimmer 1.3s linear infinite;
+  background: linear-gradient(90deg,#e9ecef 25%,#f8fafc 37%,#e9ecef 63%);
+  background-size: 400% 100%;
+}
+.skeleton-line {
+  background: #e9ecef;
+  border-radius: 5px;
+}
+.listing-skeleton-card {
+  width: 100%;
+  height: 230px;
+  border-radius: 20px;
+  background: #e9ecef;
+}
+@keyframes tabs-skeleton-shimmer {
+  0% { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
