@@ -1,6 +1,6 @@
 import React from 'react';
 import './AboutSection.css';
-import aboutImg from './../../../../assets/Images/about.png';
+import aboutImg from './../../../../assets/Images/vancouver.jpg';
 
 const AboutSection = () => {
   return (
@@ -37,7 +37,6 @@ const AboutSection = () => {
           </div>
           <div className="col-lg-6 right-col">
             <div className="about-img-cont position-relative">
-              <div className="about-img-text position-absolute">Your Gateway to Real Estate Success</div>
               <img src={aboutImg} alt="About" className='w-100' />
             </div>
           </div>
