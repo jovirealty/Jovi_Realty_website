@@ -14,8 +14,9 @@ import './AgentDetails.css';
 
 const AgentDetails = ({ agentData }) => {
     const { success, agent } = agentData;
-    const initials = getInitials(agent);
-    
+    const agentName = agent.knownAs && agent.knownAs.trim() !== '' ? agent.knownAs : agent.fullName
+    const initials = getInitials(agentName);
+
     return (
         <section className="agent-details-sec position-relative">
             <div className="container">
@@ -25,15 +26,15 @@ const AgentDetails = ({ agentData }) => {
                             <div className="row g-md-5 row-gap-40">
                                 <div className="col-lg-4 col-md-5">
                                     <div className="agent-details-box-img" >
-                                        <img src={agentImage} alt="" />
-                                        {/* <p>{initials}</p> */}
+                                        {/* <img src={agentImage} alt="" /> */}
+                                        <p>{initials}</p>
                                     </div>
                                 </div>
 
                                 <div className="col-lg-8 col-md-7">
                                     <div className="agent-details-box-content">
                                         <div className="d-flex align-items-lg-center justify-content-between flex-lg-row flex-column gap-20">
-                                            <h1 className="main-h1">{agent.knownAs && agent.knownAs.trim() !== '' ? agent.knownAs : agent.fullName}</h1>
+                                            <h1 className="main-h1">{}</h1>
                                             <div className="d-flex column-gap-30">
                                                 <span>License no. - #{agent?.licenseNumber}</span>
                                             </div>

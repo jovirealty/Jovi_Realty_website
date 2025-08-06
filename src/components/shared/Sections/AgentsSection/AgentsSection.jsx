@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { lazy, useEffect, useState } from "react";
 import "./AgentsSection.css";
 import AgentCard from "../../Elements/AgentCard/AgentCard";
 import agentsData from "../../../Data/AgentsData";
@@ -16,10 +16,14 @@ const AgentsSection = ({
   subHead,
 }) => {
   const [searchQuery, setSearchQuery] = useState("");
+  console.log("search query: ", searchQuery);
 
   const { data, loading, error, refetch, setParams } = useApis(
     '/agents',
-    { lazy: false }
+    { 
+      search: searchQuery,
+      lazy: false,
+    }
   );
 
   // Map API data (with safety for nulls)
@@ -29,6 +33,11 @@ const AgentsSection = ({
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
   };
+
+  useEffect(() => {
+    setParams({ search: searchQuery, lazy: false });
+    refetch();
+  }, [searchQuery]);
 
   return (
     <>
