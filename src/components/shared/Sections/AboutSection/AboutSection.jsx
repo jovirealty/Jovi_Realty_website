@@ -18,12 +18,12 @@ const AboutSection = () => {
               </p>
               <div className="stats">
                 <div className="each">
-                  <span className="nums">5K+</span>
+                  <span className="nums">10K+</span>
                   <span className="border-between"></span>
                   <span className="text">Properties Closed with Care</span>
                 </div>
                 <div className="each">
-                  <span className="nums">130+</span>
+                  <span className="nums">180+</span>
                   <span className="border-between"></span>
                   <span className="text">Agents Thriving With Us</span>
                 </div>
