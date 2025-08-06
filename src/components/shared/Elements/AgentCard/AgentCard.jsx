@@ -3,22 +3,27 @@ import { Link } from 'react-router-dom';
 import { FiMapPin } from "react-icons/fi";
 import getInitials from "../../../../utils/getInitials";
 import ajMohamedImage from "../../../../assets/Images/aj-mohamed.png"
+import './AgentCard.css';
 
 // CSS
 import "./AgentCard.css";
 
 const AgentCard = ({ agent }) => {
-    const initials = getInitials(agent);
-    
+    const agentName = agent.knownAs && agent.knownAs.trim() !== '' ? agent.knownAs : agent.fullName
+    const initials = getInitials(agentName);
+    console.log("Initials: ", initials);
     return (
         <div className="agent-card position-relative d-flex flex-column justify-content-end">
-            <div className="agent-image-initials position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center" >
+            {/* <div className="agent-image-initials position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center" >
+                <p className="agent-image position-absolute top-0 start-0 w-100 h-100">{initials}</p>
                 <img 
                     src={ajMohamedImage}
                     className="agent-image position-absolute top-0 start-0 w-100 h-100" 
                 />
+            </div> */}
+            <div className="agent-image-initials d-flex align-items-center justify-content-center top-0 start-0 w-100 h-100">
+                <span className="agent-initials-text">{initials}</span>
             </div>
-
             <div className="agent-details bg-white position-relative">
                 <div className="d-flex justify-content-between">
                     <div className="agent-firm d-flex gap-1 align-items-center">
@@ -29,7 +34,7 @@ const AgentCard = ({ agent }) => {
                         <p className="text-decoration-none mb-0">Location</p>
                     </div>
                 </div>
-                <h4 className="agent-name mt-3">{agent.knownAs && agent.knownAs.trim() !== '' ? agent.knownAs : agent.fullName}</h4>
+                <h4 className="agent-name mt-3">{agentName}</h4>
                 <div className="d-flex justify-content-between align-items-center">
                     <p className="agent-designation mb-0">Sales {agent.licensedAs}</p>
                     <span className="agent-license-id">#{agent.licenseNumber}</span>  
