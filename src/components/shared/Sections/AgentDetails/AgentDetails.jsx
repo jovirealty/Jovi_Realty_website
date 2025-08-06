@@ -1,17 +1,22 @@
 import React from 'react';
-import './AgentDetails.css';
 import agentImage from './../../../../assets/Images/agent-img.png';
 import instaImage from './../../../../assets/Images/insta-icon.svg';
 import fbImage from './../../../../assets/Images/fb-icon.svg';
 import linkdImage from './../../../../assets/Images/linkd-icon.svg';
 import { TfiEmail } from "react-icons/tfi";
-import { FiPhone } from "react-icons/fi";
+import { FiSmartphone } from "react-icons/fi";
+import { TbDeviceLandlinePhone } from "react-icons/tb";
+import { FiMapPin } from "react-icons/fi";
 import { SlGlobe } from "react-icons/sl";
 import getInitials from '../../../../utils/getInitials';
 
-const AgentDetails = ({ agent }) => {
-    const initials = getInitials(agent);
-    
+import './AgentDetails.css';
+
+const AgentDetails = ({ agentData }) => {
+    const { success, agent } = agentData;
+    const agentName = agent.knownAs && agent.knownAs.trim() !== '' ? agent.knownAs : agent.fullName
+    const initials = getInitials(agentName);
+
     return (
         <section className="agent-details-sec position-relative">
             <div className="container">
@@ -28,41 +33,44 @@ const AgentDetails = ({ agent }) => {
 
                                 <div className="col-lg-8 col-md-7">
                                     <div className="agent-details-box-content">
-                                        <div className="d-flex align-items-lg-center justify-content-between flex-lg-row flex-column mb-4 gap-20">
-                                            <h1 className="main-h1">{agent.MemberFullName}</h1>
-                                            <div className="social-icons d-flex column-gap-30">
-                                                <a href="#" target="_blank" rel="noopener noreferrer">
-                                                    <img src={instaImage} />
-                                                </a>
-                                                <a href="#" target="_blank" rel="noopener noreferrer">
-                                                <img src={fbImage} />
-                                                </a>
-                                                <a href="#" target="_blank" rel="noopener noreferrer">
-                                                <img src={linkdImage} />
-                                                </a>
+                                        <div className="d-flex align-items-lg-center justify-content-between flex-lg-row flex-column gap-20">
+                                            <h1 className="main-h1">{}</h1>
+                                            <div className="d-flex column-gap-30">
+                                                <span>License no. - #{agent?.licenseNumber}</span>
                                             </div>
                                         </div>
-                                        <p>Personal Real Estate Corporation</p>
-                                        <p>Residential, Commercial</p>
+                                        <div className=''>
+                                            <span className='text-primary'>Sales {agent.licensedAs}</span>
+                                            <div className='agent-card-section'>
+                                                <p className='mt-2 mb-0'>{agent.personalRecCorpName && agent.personalRecCorpName.trim() !== '' ? agent.personalRecCorpName : 'Realtor®'}</p>
+                                                <p className='m-0'>License: {agent.licensedFor}</p>
+                                            </div>
+                                        </div>
 
                                         {/* Contact Details */}
                                         <div className="d-flex flex-wrap align-items-center mt-4 column-gap-30 row-gap-20">
                                             <div className="d-flex align-items-center gap-3">
                                                 <TfiEmail size={24} color="#000" />
-                                                <a href={`mailto:${agent.MemberEmail}`} rel="noopener noreferrer" className='text-black text-decoration-none'>
-                                                    {agent.MemberEmail}
+                                                <a href={`mailto:${agent.email}`} rel="noopener noreferrer" className='text-black text-decoration-none'>
+                                                    {agent.email}
                                                 </a>
                                             </div>
                                             <div className="d-flex align-items-center gap-2">
-                                                <FiPhone size={24} color="#000" />
-                                                <a href={`tel:${agent.MemberPreferredPhone}`} rel="noopener noreferrer" className='text-black text-decoration-none'>
-                                                    {agent.MemberPreferredPhone}
+                                                <FiSmartphone size={24} color="#000" />
+                                                <a href={`tel:${agent.phoneNumber}`} rel="noopener noreferrer" className='text-black text-decoration-none'>
+                                                    {agent.phoneNumber}
                                                 </a>
                                             </div>
                                             <div className="d-flex align-items-center gap-2">
-                                                <SlGlobe size={24} color="#000" />
+                                                <TbDeviceLandlinePhone size={24} color="#000" />
                                                 <a rel="noopener noreferrer" className='text-black text-decoration-none'>
-                                                    {"(604) 202-2929"}
+                                                    {agent.officePhone}
+                                                </a>
+                                            </div>
+                                            <div className="d-flex align-items-center gap-2">
+                                                <FiMapPin />
+                                                <a rel="noopener noreferrer" className='text-black text-decoration-none'>
+                                                    location
                                                 </a>
                                             </div>
                                         </div>

@@ -1,0 +1,51 @@
+.skeleton-agent-card {
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 4px 24px rgba(20,40,80,0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 0 16px 0;
+  margin-bottom: 30px;
+  min-width: 240px;
+  min-height: 380px;
+  position: relative;
+}
+.agent-img-skeleton {
+  width: 100%;
+  height: 220px;
+  background: #e9ecef;
+  border-radius: 20px 20px 0 0;
+  margin-bottom: 18px;
+}
+.agent-card-body {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.skeleton-line {
+  background: #e9ecef;
+  border-radius: 4px;
+}
+.skeleton-btn {
+  width: 100%;
+  height: 38px;
+  border-radius: 8px;
+  background: #e9ecef;
+  margin-top: 16px;
+}
+.skeleton-animated {
+  animation: shimmer 1.3s linear infinite;
+  background: linear-gradient(90deg, #e9ecef 25%, #f8fafc 37%, #e9ecef 63%);
+  background-size: 400% 100%;
+}
+@keyframes shimmer {
+  0% { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+.agents-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill,minmax(260px,1fr));
+  gap: 32px 24px;
+}

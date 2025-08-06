@@ -1,23 +1,27 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import './AgentTabs.css';
+import { useParams } from 'react-router-dom';
 import PropertyCard from '../../shared/Elements/PropertyCard/PropertyCard';
+import useBridgeApi from '../../../hooks/useBridgeApi';
 // import PropertiesData from '../../Data/PropertiesData';
+
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation } from 'swiper/modules';
+
+import './AgentTabs.css';
+
 import 'swiper/css';
 import 'swiper/css/navigation';
-import useBridgeApi from '../../../hooks/useBridgeApi';
+import { Navigation } from 'swiper/modules';
 
-const AgentTabs = ({ agent }) => {
+const AgentTabs = ({ agentData }) => {
+    const { MemberKey } = useParams();
     const [activeTab, setActiveTab] = useState('about');
-    const agentKey = agent?.MemberKey;
 
     // Use a stable params object
     const propertyParams = useMemo(() => ({
-        $filter: agentKey ? `ListAgentKey eq '${agentKey}' and StandardStatus eq 'Active'` : "",
+        $filter: MemberKey ? `ListAgentMlsId eq '${MemberKey}' and StandardStatus eq 'Active'` : "",
         $top: 20,
         $orderby: "ListPrice desc"
-    }), [agentKey]);
+    }), [MemberKey]);
 
     const {data: PropertiesData, loading, error} = useBridgeApi(
         '/Property',
@@ -60,11 +64,7 @@ const AgentTabs = ({ agent }) => {
                                 style={{ display: activeTab === 'about' ? 'block' : 'none' }}
                             >
                                 <div className="main-h2 mb-4">About Me</div>
-                                <p>
-                                    For over a decade, I assisted many families and individuals in making the proper choices, whether looking for a place to retire, investing in real estate to build wealth, or buying their first home and creating memories with their loved ones.<br />
-                                    I can assist you in buying or selling your property with my tremendous knowledge in the market conditions and tools that he uses to get you the best evolutions by specific products and areas that you are looking for and in a timely manner that fits your goals.
-                                    I have a major in economics and accounting backed by experience as an accountant for large companies and was raised in a house of real estate traders and entrepreneurs.
-                                </p>
+                                <p>{agentData?.agent.aboutUs}</p>
                             </div>
 
                             {/* Active Listing Tab with Slider */}
@@ -89,6 +89,9 @@ const AgentTabs = ({ agent }) => {
                                             1200: { slidesPerView: 3 }, // Large Desktop
                                         }}
                                     >
+                                        {!agentProperties.length && (
+                                            <h3>No Property found</h3>
+                                        )}
                                         {agentProperties?.map((property) => (
                                             <SwiperSlide key={property.id}>
                                                 <div className="d-flex justify-content-center">
