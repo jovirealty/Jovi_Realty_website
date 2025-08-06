@@ -40,7 +40,7 @@ const AgentDetails = ({ agentData }) => {
                                             </div>
                                         </div>
                                         <div className=''>
-                                            <span className='text-primary'>Sales {agent.licensedAs}</span>
+                                            <span className='text-primary'>{agent.licensedAs === "Representative" ? `Sales ${agent.licensedAs}`: agent.licensedAs}</span>
                                             <div className='agent-card-section'>
                                                 <p className='mt-2 mb-0'>{agent.personalRecCorpName && agent.personalRecCorpName.trim() !== '' ? agent.personalRecCorpName : 'Realtor®'}</p>
                                                 <p className='m-0'>License: {agent.licensedFor}</p>
@@ -70,7 +70,7 @@ const AgentDetails = ({ agentData }) => {
                                             <div className="d-flex align-items-center gap-2">
                                                 <FiMapPin />
                                                 <a rel="noopener noreferrer" className='text-black text-decoration-none'>
-                                                    location
+                                                    Greater Vancouver
                                                 </a>
                                             </div>
                                         </div>

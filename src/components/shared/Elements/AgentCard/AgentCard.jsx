@@ -31,12 +31,12 @@ const AgentCard = ({ agent }) => {
                     </div>
                     <div className="agent-location d-flex gap-1 align-items-center">
                         <FiMapPin />
-                        <p className="text-decoration-none mb-0">Location</p>
+                        <p className="text-decoration-none mb-0">Greater Vancouver</p>
                     </div>
                 </div>
                 <h4 className="agent-name mt-3">{agentName}</h4>
                 <div className="d-flex justify-content-between align-items-center">
-                    <p className="agent-designation mb-0">Sales {agent.licensedAs}</p>
+                    <p className="agent-designation mb-0">{agent.licensedAs === "Representative" ? `Sales ${agent.licensedAs}`: agent.licensedAs}</p>
                     <span className="agent-license-id">#{agent.licenseNumber}</span>  
                 </div>
             </div>
