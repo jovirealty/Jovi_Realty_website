@@ -34,7 +34,7 @@ const AgentDetails = ({ agentData }) => {
                                 <div className="col-lg-8 col-md-7">
                                     <div className="agent-details-box-content">
                                         <div className="d-flex align-items-lg-center justify-content-between flex-lg-row flex-column gap-20">
-                                            <h1 className="main-h1">{}</h1>
+                                            <h1 className="main-h1">{agentName}</h1>
                                             <div className="d-flex column-gap-30">
                                                 <span>License no. - #{agent?.licenseNumber}</span>
                                             </div>
