@@ -46,15 +46,6 @@
     text-transform: capitalize;
 }
 
-.about-img-text {
-    bottom: 25px;
-    left: 40px;
-    color: #FFF;
-    font-size: 22px;
-    font-weight: 700;
-    max-width: 300px;
-    text-transform: capitalize;
-}
 
 .about-img-cont img {
     border-radius: 32px;
