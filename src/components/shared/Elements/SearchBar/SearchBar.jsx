@@ -1,6 +1,8 @@
 
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import LocationCombobox from "../../../LocationCombobox/LocationCombobox";
+
 import "./SearchBar.css";
 
 const SearchBar = ({ 
@@ -149,22 +151,14 @@ const SearchBar = ({
         <div className="tab-content">
           <div className={`tab-pane fade ${buyTabActive ? "show active" : ""}`} id="buy-tab" role="tabpanel">
             <div className="search-bar-row d-grid justify-content-center justify-content-md-start align-items-center">
+              {/* Updated code for search bar */}
               <div className="search-filter border-end mb-md-0">
                 <label className="form-label">Location</label>
-                <div className="dropdown">
-                  <button type="button" className="dropdown-toggle text-muted" data-bs-toggle="dropdown">
-                    {selectedLocation || "Select Location"}
-                  </button>
-                  <ul className="dropdown-menu">
-                    {locations.map((loc) => (
-                      <li key={loc}>
-                        <button className="dropdown-item" onClick={() => setSelectedLocation(loc)}>
-                          {loc}
-                        </button>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                <LocationCombobox
+                  value={selectedLocation}
+                  onSelect={setSelectedLocation}
+                  activeTab={activeTab}
+                />
               </div>
               <div className="search-filter border-end mb-md-0">
                 <label className="form-label">Bedrooms</label>
@@ -230,22 +224,14 @@ const SearchBar = ({
 
           <div className={`tab-pane fade ${rentTabActive ? "show active" : ""}`} id="rent-tab" role="tabpanel">
             <div className="search-bar-row d-grid justify-content-center justify-content-md-start align-items-center">
+              {/* Updated code for search bar */}
               <div className="search-filter border-end mb-md-0">
                 <label className="form-label">Location</label>
-                <div className="dropdown">
-                  <button type="button" className="dropdown-toggle text-muted" data-bs-toggle="dropdown">
-                    {selectedLocation || "Select Location"}
-                  </button>
-                  <ul className="dropdown-menu">
-                    {locations.map((loc) => (
-                      <li key={loc}>
-                        <button className="dropdown-item" onClick={() => setSelectedLocation(loc)}>
-                          {loc}
-                        </button>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                <LocationCombobox
+                  value={selectedLocation}
+                  onSelect={setSelectedLocation}
+                  activeTab={activeTab}
+                />
               </div>
               <div className="search-filter border-end mb-md-0">
                 <label className="form-label">Bedrooms</label>
