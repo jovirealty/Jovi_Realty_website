@@ -1,0 +1,36 @@
+.location-combobox .autocomplete-panel {
+  position: absolute; 
+  z-index: 20;
+  background: #fff; 
+  border: 1px solid #e5e7eb; 
+  border-radius: 8px;
+  margin-top: 8px; 
+  max-height: 320px; 
+  overflow: auto; 
+  padding: 8px;
+  box-shadow: 0 8px 24px rgba(0,0,0,.08);
+}
+.location-combobox .panel-label { 
+    width: 30vw;
+    font-size: 12px; 
+    color: #6b7280; 
+    padding: 4px 8px;
+}
+.location-combobox input {
+    height: 50px;
+}
+.location-combobox .option { 
+    width: 100%; 
+    text-align: left; 
+    padding: 10px 12px; 
+    border: 0; 
+    background: transparent; 
+    border-radius: 8px;
+}
+.location-combobox .option.active { 
+    background: #f3f4f6; 
+}
+.location-combobox .empty { 
+    padding: 10px 12px; 
+    color: #6b7280;
+}
