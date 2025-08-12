@@ -11,9 +11,13 @@
   box-shadow: 0 8px 24px rgba(0,0,0,.08);
 }
 .location-combobox .panel-label { 
+    width: 30vw;
     font-size: 12px; 
     color: #6b7280; 
     padding: 4px 8px;
+}
+.location-combobox input {
+    height: 50px;
 }
 .location-combobox .option { 
     width: 100%; 
