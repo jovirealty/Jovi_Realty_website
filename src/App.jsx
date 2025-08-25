@@ -22,6 +22,7 @@ import NewsInnerPage from './pages/NewsAndResources/NewsInnerPage';
 import AgentDashBoard from './pages/Agent Dashboard/AgentDashBoard';
 import LoginPage from './pages/LoginPage/LoginPage';
 import { OfficeNameProvider } from './context/OfficeNameContext';
+import NotFound from './pages/NotFound/NotFound';
 
 const App = () => {
 	return (
@@ -49,6 +50,8 @@ const App = () => {
 						<Route path="/news-and-resources/news-inner-page" element={<NewsInnerPage />} />
 						<Route path="/agent-dashboard" element={<AgentDashBoard />} />
 						<Route path="/login" element={<LoginPage />} />
+
+						<Route path="*" element={<NotFound />} />
 					</Routes>
 				</div>
 			</OfficeNameProvider>
