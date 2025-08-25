@@ -2,20 +2,18 @@ import React from 'react';
 import './KeywordSearch.css';
 
 const keywords = [
-  'Sold Prices',
-  'Condos for Sale',
-  'Home Appraisal',
-  'Houses',
-  '2-Bed Condos',
-  'Condos for Rent',
-  'Condos Under $500K',
-  'Houses for Sale',
-  'Townhouses for Sale',
-  'Find an Agent',
-  '3-Bed Houses',
-  '1-Bed Condos',
-  'Houses for Rent'
-];
+  "Condos for Sale",
+  "Townhouses for Sale",
+  "Find an Agent",
+  "Homes Under $500k",
+  "Vancouver Homes Under $1M",
+  "Burnaby Condos Under $500k",
+  "New Listings",
+  "Townhomes Under $800k",
+  "Langley Townhouses",
+  "Coquitlam Condos",
+  "Richmond Houses"
+]
 
 const KeywordSearch = () => {
   return (
