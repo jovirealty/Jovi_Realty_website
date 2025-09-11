@@ -15,10 +15,10 @@ import { Navigation } from 'swiper/modules';
 const AgentTabs = ({ agentData }) => {
     const { MemberKey } = useParams();
     const [activeTab, setActiveTab] = useState('about');
-
+    const {agent} = agentData; 
     // Use a stable params object
     const propertyParams = useMemo(() => ({
-        $filter: MemberKey ? `ListAgentMlsId eq '${MemberKey}' and StandardStatus eq 'Active'` : "",
+        $filter: MemberKey ? `ListAgentMlsId eq '${agent?.mlsId}' and StandardStatus eq 'Active'` : "",
         $top: 20,
         $orderby: "ListPrice desc"
     }), [MemberKey]);
@@ -28,7 +28,6 @@ const AgentTabs = ({ agentData }) => {
         propertyParams,
         false,
     );
-
     const agentProperties = PropertiesData?.value || [];
 
     return (
