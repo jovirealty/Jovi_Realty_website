@@ -6,25 +6,41 @@
     box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.14);
 }
 
-.agent-details-box-img img {
-    border-radius: 13px;
-    margin-top: -120px;
-}
-.agent-details-box-img p{
-  /* width: 350px; */
-  height: 400px;
+.agent-details-box-img {
+  position: relative;
+  /* Responsive width; tweak the clamp values to taste */
+  width: clamp(220px, 28vw, 360px);
+  /* Portrait shape for headshots */
+  aspect-ratio: 3 / 4;
   border-radius: 13px;
+  overflow: hidden;
+  /* Pull it up into the hero, like your current layout */
   margin-top: -120px;
-  background: linear-gradient(135deg, #0D1835 60%, #0d6efd 100%);
-  color: #fff;
-  font-size: 4rem;
-  font-weight: 600;
+  box-shadow: 0 8px 28px rgba(34, 40, 100, 0.10);
+  background: #f2f4f7; /* subtle fallback if image missing */
+}
+
+.agent-details-box-img img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;          /* crop to the box, no distortion */
+  object-position: 50% 20%;   /* slightly top-biased framing for portraits */
+}
+
+.agent-details-box-img p {
+  position: absolute;
+  inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  text-transform: uppercase;
+  margin: 0;
+  font-weight: 700;
   letter-spacing: 1px;
-  box-shadow: 0 2px 8px rgba(34, 40, 100, 0.08);
+  text-transform: uppercase;
+  color: #fff;
+  font-size: clamp(2rem, 6vw, 3rem);
+  background: linear-gradient(135deg, #0D1835 60%, #0d6efd 100%);
 }
 
 .agent-details-sec h1 {
@@ -38,10 +54,6 @@
     font-size: 20px;
 }
 
-/* .social-icons svg {
-    width: 24px;
-    height: 24px;
-} */
 
 /* =============================================
    Responsive
@@ -69,4 +81,13 @@
     .agent-details-box-content p {
         font-size: 18px;
     }
+}
+@media (max-width: 576px) {
+  .agent-details-box {
+    padding: 20px;
+  }
+  .agent-details-box-img {
+    margin-top: -80px;
+    width: clamp(200px, 60vw, 260px);
+  }
 }

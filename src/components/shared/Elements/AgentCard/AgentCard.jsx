@@ -11,19 +11,20 @@ import "./AgentCard.css";
 const AgentCard = ({ agent }) => {
     const agentName = agent.knownAs && agent.knownAs.trim() !== '' ? agent.knownAs : agent.fullName
     const initials = getInitials(agentName);
-    console.log("Initials: ", initials);
     return (
         <div className="agent-card position-relative d-flex flex-column justify-content-end">
-            {/* <div className="agent-image-initials position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center" >
-                <p className="agent-image position-absolute top-0 start-0 w-100 h-100">{initials}</p>
-                <img 
-                    src={ajMohamedImage}
-                    className="agent-image position-absolute top-0 start-0 w-100 h-100" 
-                />
-            </div> */}
-            <div className="agent-image-initials d-flex align-items-center justify-content-center top-0 start-0 w-100 h-100">
-                <span className="agent-initials-text">{initials}</span>
-            </div>
+            {agent && agent?.photoUrl ? (
+                <div className="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center" >
+                    <img 
+                        src={agent.photoUrl}
+                        className="agent-image position-absolute top-0 start-0 w-100 h-100" 
+                    />
+                </div>
+            ) : (
+                <div className="agent-image-initials d-flex align-items-center justify-content-center top-0 start-0 w-100 h-100">
+                    <span className="agent-initials-text">{initials}</span>
+                </div>
+            )}
             <div className="agent-details bg-white position-relative">
                 <div className="d-flex justify-content-between">
                     <div className="agent-firm d-flex gap-1 align-items-center">
@@ -42,7 +43,7 @@ const AgentCard = ({ agent }) => {
             </div>
 
             <Link
-                to={`/find-an-agent/agent-profile/${agent.mlsId}`} 
+                to={`/find-an-agent/agent-profile/${agent.licenseNumber}`} 
                 className="agent-view-profile-button btn-primary w-100 m-0 text-decoration-none text-center" 
             >
                 View Profile
