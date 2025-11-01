@@ -18,6 +18,8 @@ import ContactUs from './pages/ContactUs/ContactUs';
 import JoinJovi from './pages/JoinJovi/JoinJovi';
 import SellYourProperty from './pages/SellYourProperty/SellYourProperty';
 import PropertyManagement from './pages/PropertyManagement/PropertyManagement';
+import OffMarketListings from './pages/PropertyListing/OffMarketListings/OffMarketListings';
+import OffMarketListingsInner from './pages/PropertyListing/OffMarketListings/OffMarketListingsInner';
 import NewsInnerPage from './pages/NewsAndResources/NewsInnerPage';
 import AgentDashBoard from './pages/Agent Dashboard/AgentDashBoard';
 import LoginPage from './pages/LoginPage/LoginPage';
@@ -47,6 +49,8 @@ const App = () => {
 						<Route path="/join-jovi" element={<JoinJovi />} />
 						<Route path="/sell" element={<SellYourProperty />} />
 						<Route path="/property-management" element={<PropertyManagement />} />
+						<Route path="/off-market-listings" element={<OffMarketListings />} />
+						<Route path="/off-market-listings/:address/:listingKey" element={<OffMarketListingsInner />} />
 						<Route path="/news-and-resources/news-inner-page" element={<NewsInnerPage />} />
 						<Route path="/agent-dashboard" element={<AgentDashBoard />} />
 						<Route path="/login" element={<LoginPage />} />

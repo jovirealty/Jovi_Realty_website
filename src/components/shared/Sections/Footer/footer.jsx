@@ -27,6 +27,7 @@ const Footer = () => {
     { name: 'Find an Agent', path: '/find-an-agent' },
     { name: 'Resources', path: '/news-and-resources' },
     { name: 'Property Management', path: '/property-management' },
+    { name: 'Off Market Listings', path: '/off-market-listings' },
   ];
 
   // Define services links
