@@ -4,8 +4,8 @@
 
 .news-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Bigger cards, auto-fit for responsiveness */
+    gap: 30px; /* Increased gap for bigger layout */
 }
 
 .filter-box {
@@ -13,41 +13,26 @@
     border-radius: 10px;
     background: #FFF;
     box-shadow: 0px 0px 11px 2px rgba(0, 0, 0, 0.13);
-    padding: 17px 20px 25px;
+    padding: 20px;
 }
 
 .filter-heading {
     font-family: var(--secondary-font);
-    font-size: 24px;
+    font-size: 20px; /* Slightly smaller for sections */
     font-weight: 700;
     line-height: 1.2em;
+    color: #0D1835;
 }
 
 .search-box .form-control {
     border-radius: 25px;
-    padding: 10px 60px 10px 20px;
+    padding: 12px 60px 12px 20px;
     font-size: 1rem;
     border: none;
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.06);
 }
 
-.form-check-input {
-    margin-top: 0.3rem;
-}
-
-.form-check-label {
-    color: #0d1835cc;
-    font-size: 18px;
-    transition: all 0.3s ease;
-}
-
-.form-check-label.active,
-.form-check-label:hover {
-    font-weight: 600;
-    color: var(--primary-color);
-}
-
-.news-section .search-icon {
+.search-icon {
     width: 33px;
     aspect-ratio: 1;
     padding: 7px;
@@ -59,27 +44,72 @@
     background-color: var(--primary-color);
 }
 
-/* =============================================
-   Responsive
-   ============================================= */
+.category-btn:hover {
+    background-color: rgba(2, 68, 192, 0.1) !important;
+    color: var(--primary-color) !important;
+}
+
+/* Borders for sections */
+.search-section, .category-section {
+    border-bottom: 1px solid #E9ECEF; /* Underline style */
+}
+
+/* Pagination styles (ensure cursor) */
+.pagination .page-link {
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.pagination .page-link:hover:not(.disabled) {
+    background-color: rgba(2, 68, 192, 0.1);
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+.page-arr .page-link {
+    padding: 0.5rem 0.75rem;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Wider container */
+@media (min-width: 1200px) {
+    .container-fluid {
+        max-width: 1400px; /* More width for larger screens */
+    }
+}
+
+/* Responsive */
 @media (max-width: 1199px) {
     .news-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 25px;
     }
 }
 
 @media (max-width: 991px) {
     .news-grid {
-        grid-template-columns: repeat(1, 1fr);
+        grid-template-columns: 1fr;
+        gap: 20px;
     }
-
     .news-section {
         padding: 90px 0px;
+    }
+    .filter-box {
+        position: static; /* Non-sticky on mobile */
     }
 }
 
 @media (max-width: 767px) {
     .news-section {
         padding: 60px 0px;
+    }
+    .container-fluid {
+        padding-left: 15px;
+        padding-right: 15px;
     }
 }
