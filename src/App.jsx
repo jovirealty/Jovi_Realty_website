@@ -37,7 +37,7 @@ const App = () => {
 						<Route path="/about" element={<About />} />
 						<Route path="/property-listing/buy" element={<Buy />} />
 						<Route path="/property-listing/rent" element={<Rent />} />
-						<Route path="propertydetails/:address/:listingKey" element={<PropertyInner />} />
+						<Route path="/propertydetails/:address/:listingKey" element={<PropertyInner />} />
 						<Route path="/find-an-agent" element={<FindAnAgent />} />
 						<Route path="/find-an-agent/agent-profile/:MemberKey" element={<AgentProfile />} />
 						<Route path="/news-and-resources" element={<NewsAndResources />} />
@@ -51,8 +51,8 @@ const App = () => {
 						<Route path="/property-management" element={<PropertyManagement />} />
 						<Route path="/off-market-listings" element={<OffMarketListings />} />
 						<Route path="/off-market-listings/:address/:listingKey" element={<OffMarketListingsInner />} />
-						<Route path="/news-and-resources/news-inner-page" element={<NewsInnerPage />} />
-						<Route path="/agent-dashboard" element={<AgentDashBoard />} />
+						<Route path="/news-and-resources/:id/:title" element={<NewsInnerPage />} />
+						{/* <Route path="/agent-dashboard" element={<AgentDashBoard />} /> */}
 						<Route path="/login" element={<LoginPage />} />
 
 						<Route path="*" element={<NotFound />} />
