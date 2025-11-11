@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from 'react-router-dom';
 import { FiMapPin } from "react-icons/fi";
 import getInitials from "../../../../utils/getInitials";
-import ajMohamedImage from "../../../../assets/Images/aj-mohamed.png"
+// import ajMohamedImage from "../../../../assets/Images/aj-mohamed.png"
 import './AgentCard.css';
 
 // CSS
@@ -14,12 +14,15 @@ const AgentCard = ({ agent }) => {
     return (
         <div className="agent-card position-relative d-flex flex-column justify-content-end">
             {agent && agent?.photoUrl ? (
-                <div className="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center" >
-                    <img 
-                        src={agent.photoUrl}
-                        className="agent-image position-absolute top-0 start-0 w-100 h-100" 
-                    />
+                <div className="agent-image-initials d-flex align-items-center justify-content-center top-0 start-0 w-100 h-100">
+                    <span className="agent-initials-text">{initials}</span>
                 </div>
+                // <div className="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center" >
+                //     <img 
+                //         src={agent.photoUrl}
+                //         className="agent-image position-absolute top-0 start-0 w-100 h-100" 
+                //     />
+                // </div>
             ) : (
                 <div className="agent-image-initials d-flex align-items-center justify-content-center top-0 start-0 w-100 h-100">
                     <span className="agent-initials-text">{initials}</span>
