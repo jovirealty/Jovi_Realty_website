@@ -26,7 +26,12 @@ const AgentDetails = ({ agentData }) => {
                             <div className="row g-md-5 row-gap-40">
                                 <div className="col-lg-4 col-md-5">
                                     <div className="agent-details-box-img" >
-                                        {agent && agent?.photoUrl ? (<img src={agent.photoUrl} alt={agent?.fullName || "Agent photo"} loading="lazy" decoding="async" />) : (<p>{initials}</p>)}
+                                        {agent && agent?.photoUrl ? (
+                                            <p>{initials}</p>
+                                            // <img src={agent.photoUrl} alt={agent?.fullName || "Agent photo"} loading="lazy" decoding="async" />
+                                            ) : (
+                                            <p>{initials}</p>
+                                            )}
                                     </div>
                                 </div>
 
