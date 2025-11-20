@@ -24,7 +24,7 @@ const Footer = () => {
   const quickLinks = [
     { name: 'Home', path: '/' },
     { name: 'About Us', path: '/about' },
-    { name: 'Find an Agent', path: '/find-an-agent' },
+    // { name: 'Find an Agent', path: '/find-an-agent' },
     { name: 'Resources', path: '/news-and-resources' },
     { name: 'Property Management', path: '/property-management' },
     { name: 'Off Market Listings', path: '/off-market-listings' },

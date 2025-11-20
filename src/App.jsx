@@ -38,7 +38,7 @@ const App = () => {
 						<Route path="/property-listing/buy" element={<Buy />} />
 						<Route path="/property-listing/rent" element={<Rent />} />
 						<Route path="/propertydetails/:address/:listingKey" element={<PropertyInner />} />
-						<Route path="/find-an-agent" element={<FindAnAgent />} />
+						{/* <Route path="/find-an-agent" element={<FindAnAgent />} /> */}
 						<Route path="/find-an-agent/agent-profile/:MemberKey" element={<AgentProfile />} />
 						<Route path="/news-and-resources" element={<NewsAndResources />} />
 						<Route path="/terms-and-conditions" element={<TermsAndConditions />} />

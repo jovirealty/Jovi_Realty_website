@@ -9,7 +9,7 @@ const navItems = [
     { to: "/", label: "Home" },
     { to: "/about", label: "About Us" },
     { to: "/property-management", label: "Rental Services" },
-    { to: "/find-an-agent", label: "Find an Agent" },
+    // { to: "/find-an-agent", label: "Find an Agent" },
     { to: "/news-and-resources", label: "Resources" },
     { to: "/contact", label: "Contact" },
 ];
@@ -20,7 +20,7 @@ const mobileNavItems = [
     { to: "/property-listing/buy", label: "Buy" },
     { to: "/sell", label: "Sell" },
     { to: "/property-listing/rent", label: "Rent" },
-    { to: "/find-an-agent", label: "Find an Agent" },
+    // { to: "/find-an-agent", label: "Find an Agent" },
     { to: "/news-and-resources", label: "Resources" },
     { to: "/contact", label: "Contact" },
 ];
