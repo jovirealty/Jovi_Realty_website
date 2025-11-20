@@ -10,10 +10,10 @@ const keywords = [
     "label": "Townhouses for Sale",
     "link": "https://jovirealty.com/property-listing/buy?type=Townhouse"
   },
-  {
-    "label": "Find an Agent",
-    "link": "https://jovirealty.com/find-an-agent"
-  },
+  // {
+  //   "label": "Find an Agent",
+  //   "link": "https://jovirealty.com/find-an-agent"
+  // },
   {
     "label": "Homes Under $500k",
     "link": "https://jovirealty.com/property-listing/buy?priceRange=500000-1000000"
